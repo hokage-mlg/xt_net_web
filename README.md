@@ -1,2 +1,2 @@
-# xt_epam2019
-This repository made for xt_epam tasks
+# xt_net_web
+This repository made for xt_net_web tasks
