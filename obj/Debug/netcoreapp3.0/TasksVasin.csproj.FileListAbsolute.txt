@@ -1,0 +1,11 @@
+D:\Studying\Epam\TasksVasin\bin\Debug\netcoreapp3.0\TasksVasin.exe
+D:\Studying\Epam\TasksVasin\bin\Debug\netcoreapp3.0\TasksVasin.deps.json
+D:\Studying\Epam\TasksVasin\bin\Debug\netcoreapp3.0\TasksVasin.runtimeconfig.json
+D:\Studying\Epam\TasksVasin\bin\Debug\netcoreapp3.0\TasksVasin.runtimeconfig.dev.json
+D:\Studying\Epam\TasksVasin\bin\Debug\netcoreapp3.0\TasksVasin.dll
+D:\Studying\Epam\TasksVasin\bin\Debug\netcoreapp3.0\TasksVasin.pdb
+D:\Studying\Epam\TasksVasin\obj\Debug\netcoreapp3.0\TasksVasin.csprojAssemblyReference.cache
+D:\Studying\Epam\TasksVasin\obj\Debug\netcoreapp3.0\TasksVasin.AssemblyInfoInputs.cache
+D:\Studying\Epam\TasksVasin\obj\Debug\netcoreapp3.0\TasksVasin.AssemblyInfo.cs
+D:\Studying\Epam\TasksVasin\obj\Debug\netcoreapp3.0\TasksVasin.dll
+D:\Studying\Epam\TasksVasin\obj\Debug\netcoreapp3.0\TasksVasin.pdb
