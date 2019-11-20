@@ -22,11 +22,17 @@ namespace Task1
             //Console.WriteLine("Task 1.4 X-MAS TREE:");
             //Task14.Xmas();
             //Console.WriteLine();
-            Console.WriteLine("Task 1.5 SUM OF NUMBERS:");
-            Task15.SumOfNumbers();
-            Console.WriteLine();
-            Console.WriteLine("Task 1.6 FONT ADJUSTMENT:");
-
+            //Console.WriteLine("Task 1.5 SUM OF NUMBERS:");
+            //Task15.SumOfNumbers();
+            //Console.WriteLine();
+            //Console.WriteLine("Task 1.6 FONT ADJUSTMENT:");
+            //Task16.FontAdjustment();
+            //Console.WriteLine();
+            //Console.WriteLine("Task 1.7 ARRAY PROCESSING:");
+            //Task17.ArrayProcessing();
+            //Console.WriteLine();
+            Console.WriteLine("Task 1.8 NO POSITIVE:");
+            Task18.NoPositive();
             Console.WriteLine();
         }
     }
