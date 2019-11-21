@@ -13,16 +13,20 @@ namespace Task1
             Console.WriteLine("Enter the dimension:");
             int n = int.Parse(Console.ReadLine());
             int[,,] nums = new int[n, n, n];
-            Random rnd = new Random();
-            for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++)
-                    for (int k = 0; k < n; k++)
-                        nums[i, j, k] = rnd.Next(-50, 50);
+            FillUpArray(nums);
             Console.WriteLine("Default array:");
             WriteArray(nums);
             ZeroSwitch(nums);
             Console.WriteLine("Transformed array:");
             WriteArray(nums);
+        }
+        public static void FillUpArray(int[,,] arr)
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < arr.GetLength(0); i++)
+                for (int j = 0; j < arr.GetLength(1); j++)
+                    for (int k = 0; k < arr.GetLength(2); k++)
+                        arr[i, j, k] = rnd.Next(-50, 50);
         }
         public static void WriteArray(int[,,] arr)
         {
@@ -46,10 +50,8 @@ namespace Task1
             for (int i = 0; i < arr.GetLength(0); i++)
                 for (int j = 0; j < arr.GetLength(1); j++)
                     for (int k = 0; k < arr.GetLength(2); k++)
-                    {
                         if (arr[i, j, k] < 0)
                             arr[i, j, k] = 0;
-                    }
         }
     }
 }

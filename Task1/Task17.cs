@@ -17,7 +17,7 @@ namespace Task1
             for (int i = 0; i < n; i++)
                 nums[i] = rnd.Next(0, 100);
             Console.WriteLine("Default array:");
-            WriteArray(nums);          
+            WriteArray(nums);
             FindMin(nums);
             FindMax(nums);
             Console.WriteLine("Sorted array:");
@@ -27,9 +27,7 @@ namespace Task1
         public static void WriteArray(int[] arr)
         {
             foreach (int i in arr)
-            {
                 Console.Write(i.ToString() + " ");
-            }
             Console.WriteLine();
         }
         public static int[] SortArray(int[] nums)
@@ -53,20 +51,16 @@ namespace Task1
         {
             int min = nums[0];
             for (int i = 0; i < nums.Length; i++)
-            {
-                if (min > nums[i])              
-                    min = nums[i];               
-            }
-            Console.WriteLine("Min: "+ min);
+                if (min > nums[i])
+                    min = nums[i];
+            Console.WriteLine("Min: " + min);
         }
         public static void FindMax(int[] nums)
         {
             int max = nums[0];
             for (int i = 0; i < nums.Length; i++)
-            {
-                if (max < nums[i])             
-                    max = nums[i];               
-            }
+                if (max < nums[i])
+                    max = nums[i];
             Console.WriteLine("Max: " + max);
         }
     }

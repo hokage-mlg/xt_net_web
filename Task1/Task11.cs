@@ -14,7 +14,9 @@ namespace Task1
             Console.WriteLine("Enter side values:");
             try
             {
+                Console.WriteLine("Input \'a\' size:");
                 a = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input \'b\' size:");
                 b = int.Parse(Console.ReadLine());
             }
             catch
@@ -24,7 +26,8 @@ namespace Task1
             }
             if (a > 0 && b > 0)
                 Console.WriteLine("Area: " + a * b);
-            else Console.WriteLine("Use only positive numbers");
+            else
+                Console.WriteLine("Use only positive numbers");
         }
     }
 }
