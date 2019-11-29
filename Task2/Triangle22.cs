@@ -8,8 +8,14 @@ namespace Task2
 {
     public class Triangle22
     {
-        public double a, b, c;
-        public Triangle22()
+        private double _a, _b, _c;
+        public Triangle22(double _a, double _b, double _c)
+        {
+            A = Check(_a, _b, _c);
+            B = Check(_b, _a, _c);
+            C = Check(_c, _a, _b);
+        }
+        public static Triangle22 InputTriangle()
         {
             Console.WriteLine("Input A:");
             double a = double.Parse(Console.ReadLine());
@@ -17,9 +23,7 @@ namespace Task2
             double b = double.Parse(Console.ReadLine());
             Console.WriteLine("Input C:");
             double c = double.Parse(Console.ReadLine());
-            this.A = Check(a, b, c);
-            this.B = Check(b, a, c);
-            this.C = Check(c, a, b);
+            return new Triangle22(a, b, c);
         }
         public double Check(double side1, double side2, double side3)
         {
@@ -30,41 +34,46 @@ namespace Task2
         }
         public double A
         {
-            get { return a; }
+            get { return _a; }
             set
             {
-                if (value <= 0 && this.b + this.c > value)
+                if (value <= 0 && _b + _c > value)
                     throw new ArgumentException("Error! Check \'A\' argument");
-                a = value;
+                _a = value;
             }
         }
         public double B
         {
-            get { return b; }
+            get { return _b; }
             set
             {
-                if (value <= 0 && a + c > value)
+                if (value <= 0 && _a + _c > value)
                     throw new ArgumentException("Error! Check \'B\' argument");
-                b = value;
+                _b = value;
             }
         }
         public double C
         {
-            get { return c; }
+            get { return _c; }
             set
             {
-                if (value <= 0 && a + b > value)
+                if (value <= 0 && _a + _b > value)
                     throw new ArgumentException("Error! Check \'C\' argument");
-                c = value;
+                _c = value;
             }
         }
         public double Perimeter
         {
-            get { return (a + b + c); }
+            get { return (_a + _b + _c); }
         }
         public double Area
         {
-            get { return (Math.Sqrt(Perimeter / 2 * (Perimeter / 2 - a) * (Perimeter / 2 - b) * (Perimeter / 2 - c))); }
+            get
+            {
+                double PerimeterHalf = Perimeter / 2;
+                return (Math.Sqrt(PerimeterHalf * (PerimeterHalf - _a) *
+                    (PerimeterHalf - _b) * (PerimeterHalf - _c)));
+            }
         }
         public override string ToString()
         {
@@ -73,7 +82,7 @@ namespace Task2
                 "- B: {1}\n" +
                 "- C: {2}\n" +
                 "- Perimeter: {3}\n" +
-                "- Area: {4}", a, b, c, Perimeter, Area));
+                "- Area: {4}", _a, _b, _c, Perimeter, Area));
         }
     }
 }

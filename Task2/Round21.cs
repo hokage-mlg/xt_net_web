@@ -8,44 +8,48 @@ namespace Task2
 {
     class Round21
     {
-        public double x, y, radius;
-        public Round21()
+        public Point Center { get; set; }
+        private double _radius;
+        public Round21(Point Center, double Radius)
+        {
+            this.Center = Center;
+            this.Radius = Radius;
+        }
+        public static Round21 InputRound()
         {
             Console.WriteLine("Input x coordinate:");
-            double x = double.Parse(Console.ReadLine());
-            this.x = x;
+            int x = int.Parse(Console.ReadLine());
             Console.WriteLine("Input y coordinate:");
-            double y = double.Parse(Console.ReadLine());
-            this.y = y;
+            int y = int.Parse(Console.ReadLine());
             Console.WriteLine("Input radius:");
             double Radius = double.Parse(Console.ReadLine());
-            this.Radius = Radius;
+            return new Round21(new Point(x, y), Radius);
         }
         public double Radius
         {
-            get { return radius; }
+            get { return _radius; }
             set
             {
                 if (value <= 0)
                     throw new ArgumentException("Radius must be > 0!");
-                radius = value;
+                _radius = value;
             }
         }
-        public double Length
+        public virtual double Length
         {
-            get { return (2 * Math.PI * radius); }
+            get { return (2 * Math.PI * _radius); }
         }
-        public double Area
+        public virtual double Area
         {
-            get { return (Math.PI * Math.Pow(radius, 2)); }
+            get { return (Math.PI * Math.Pow(_radius, 2)); }
         }
         public override string ToString()
         {
             return (string.Format("Round characteristics:\n" +
-                "- center: ({0},{1})\n" +
-                "- radius: {2}\n" +
-                "- length: {3}\n" +
-                "- area: {4}", x, y, Radius, Length, Area));
+                "- Center: ({0},{1})\n" +
+                "- Radius: {2}\n" +
+                "- Length: {3}\n" +
+                "- Area: {4}", Center.X, Center.Y, Radius, Length, Area));
         }
     }
 }

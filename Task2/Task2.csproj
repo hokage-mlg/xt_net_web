@@ -43,14 +43,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employee25.cs" />
+    <Compile Include="Game28\Apple.cs" />
+    <Compile Include="Game28\Bear.cs" />
+    <Compile Include="Game28\Bonus.cs" />
+    <Compile Include="Game28\Cherry.cs" />
+    <Compile Include="Game28\Game28.cs" />
+    <Compile Include="Game28\GameObject.cs" />
+    <Compile Include="Game28\IHit.cs" />
+    <Compile Include="Game28\IMove.cs" />
+    <Compile Include="Game28\Map.cs" />
+    <Compile Include="Game28\Monster.cs" />
+    <Compile Include="Game28\Obstruction.cs" />
+    <Compile Include="Game28\Player.cs" />
+    <Compile Include="Game28\Stone.cs" />
+    <Compile Include="Game28\Tree.cs" />
+    <Compile Include="Game28\Wolf.cs" />
+    <Compile Include="MyString24.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ring26.cs" />
     <Compile Include="Round21.cs" />
     <Compile Include="Triangle22.cs" />
     <Compile Include="User23.cs" />
+    <Compile Include="VectorGraphEdit27\Circle.cs" />
+    <Compile Include="VectorGraphEdit27\Figure.cs" />
+    <Compile Include="VectorGraphEdit27\Line.cs" />
+    <Compile Include="VectorGraphEdit27\Rectangle.cs" />
+    <Compile Include="VectorGraphEdit27\Ring.cs" />
+    <Compile Include="VectorGraphEdit27\Round.cs" />
+    <Compile Include="VectorGraphEdit27\VectorGraphEdit27.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
