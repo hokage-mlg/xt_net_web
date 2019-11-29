@@ -18,8 +18,9 @@ namespace Task2.VectorGraphEdit27
         public virtual double Length => 2 * Math.PI * Radius;
         public override void ShowInfo()
         {
-            Console.WriteLine("Center of the circle is in coordinates ({0},{1})," +
-                " the outer radius is {2}",
+            Console.WriteLine("Circle characteristics:\n" +
+                "- Center coordinates: ({0},{1})\n" +
+                "- Outer radius: {2}",
                 Center.X, Center.Y, Radius);
         }
     }

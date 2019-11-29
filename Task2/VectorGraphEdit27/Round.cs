@@ -12,15 +12,12 @@ namespace Task2.VectorGraphEdit27
         public double Area => Math.PI * Math.Pow(Radius, 2);
         public override void ShowInfo()
         {
-            Console.WriteLine("Center of the round is in coordinates ({0},{1})," +
-                " the outer radius is {2}, the outer length is {3}, area is {4}",
+            Console.WriteLine("Round characteristics:\n" +
+                "- Center coordinates: ({0},{1})\n" +
+                "- Outer radius: {2}\n" +
+                "- Outer length: {3}\n" +
+                "- Area: {4}",
                 Center.X, Center.Y, Radius, Length, Area);
-        }
-        public override string ToString()
-        {
-            return (string.Format("Center of the round is in coordinates ({0},{1})," +
-                " the outer radius is {2}, the outer length is {3}, area is {4}",
-                Center.X, Center.Y, Radius, Length, Area));
         }
     }
 }

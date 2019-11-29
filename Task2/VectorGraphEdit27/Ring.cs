@@ -21,9 +21,13 @@ namespace Task2.VectorGraphEdit27
         public double Area => (Math.PI * Math.Pow(Radius, 2)) - (Math.PI * Math.Pow(InnerRadius, 2));
         public override void ShowInfo()
         {
-            Console.WriteLine("Center of the ring is in coordinates ({0},{1})," +
-                " the inner radius is {2}, the outer radius is {2}, " +
-                "the inner length is {3}, the outer length is {4}, area is {5}",
+            Console.WriteLine("Ring characteristics:\n" +
+                "- Center coordinates: ({0},{1})\n" +
+                "- Inner radius: {2}\n" +
+                "- Outer radius: {3}\n" +
+                "- Inner length: {4}\n" +
+                "- Outer length: {5}\n" +
+                "- Area: {6}",
                 Center.X, Center.Y, InnerRadius, Radius, InnerLength, Length, Area);
         }
     }

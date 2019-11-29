@@ -21,8 +21,10 @@ namespace Task2.VectorGraphEdit27
         public double Area => Width * Height;
         public override void ShowInfo()
         {
-            Console.WriteLine("Center of the rectangle is in coordinates ({0},{1})," +
-                " the width is {2} and height is {3}",
+            Console.WriteLine("Rectangle characteristics:\n" +
+                "- Center coordinates: ({0},{1})\n" +
+                "- Width: {2}\n" +
+                "- Height: {3}",
                 Center.X, Center.Y, Width, Height);
         }
     }
