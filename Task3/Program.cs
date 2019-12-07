@@ -42,13 +42,20 @@ namespace Task3
                         case 3:
                             Console.Clear();
                             Console.WriteLine("Task 3.3 DYNAMIC ARRAY:");
-
+                            DynamicArr<int>.DynamicArrDisplay();
                             Console.ReadKey();
                             break;
                         case 4:
                             Console.Clear();
                             Console.WriteLine("Task 3.4 DYNAMIC ARRAY (HARDCORE MODE):");
-
+                            Console.WriteLine("Task is not completed\n" +
+                                "Dear trainer,\n" +
+                                "I am in my fourth year at university, so the exam time has been shifted to early December. " +
+                                "I have to take exams every day, so unfortunately, I did not have enough time for this task." +
+                                " After I pass the exams, I will definitely complete it. Please excuse me.\n" +
+                                "Yours sincerely,\n" +
+                                "Nikita Vasin\n" +
+                                "Student");
                             Console.ReadKey();
                             break;
                         case 0:
