@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    class DynamicArr<T> : IEnumerable, IEnumerable<T>, ICloneable
+    class DynamicArr33<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
         T[] dynArr = null;
         public int Length { get; set; } = 0;
@@ -15,7 +15,7 @@ namespace Task3
         IEnumerator IEnumerable.GetEnumerator() => (IEnumerator)GetEnumerator();
         public DynamicArrEnum<T> GetEnumerator() => new DynamicArrEnum<T>(ToArray());
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => (IEnumerator<T>)GetEnumerator();
-        public object Clone() => new DynamicArr<T>(dynArr);
+        public object Clone() => new DynamicArr33<T>(dynArr);
         public T this[int i]
         {
             get
@@ -37,14 +37,14 @@ namespace Task3
                     dynArr[Length + i] = value;
             }
         }
-        public DynamicArr() { dynArr = new T[8]; }
-        public DynamicArr(int capacity)
+        public DynamicArr33() { dynArr = new T[8]; }
+        public DynamicArr33(int capacity)
         {
             if (capacity <= 0)
                 throw new ArgumentException("Capacity must be > 0");
             dynArr = new T[capacity];
         }
-        public DynamicArr(IEnumerable<T> arr)
+        public DynamicArr33(IEnumerable<T> arr)
         {
             dynArr = new T[arr.Count()];
             foreach (var i in arr)
@@ -123,7 +123,7 @@ namespace Task3
         public static void DynamicArrDisplay()
         {
             int[] nums = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            DynamicArr<int> arr1 = new DynamicArr<int>();
+            DynamicArr33<int> arr1 = new DynamicArr33<int>();
             arr1.AddRange(nums);
             arr1.Add(9);
             arr1.Add(10);
@@ -137,7 +137,7 @@ namespace Task3
                 "and adding in the begining new element:");
             foreach (var i in arr1)
                 Console.Write(i + " ");
-            var arr2 = (DynamicArr<int>)arr1.Clone();
+            var arr2 = (DynamicArr33<int>)arr1.Clone();
             arr2.Remove(6);
             Console.WriteLine();
             Console.WriteLine("Elements from second array (with removed 6 element):");

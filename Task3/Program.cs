@@ -42,7 +42,7 @@ namespace Task3
                         case 3:
                             Console.Clear();
                             Console.WriteLine("Task 3.3 DYNAMIC ARRAY:");
-                            DynamicArr<int>.DynamicArrDisplay();
+                            DynamicArr33<int>.DynamicArrDisplay();
                             Console.ReadKey();
                             break;
                         case 4:

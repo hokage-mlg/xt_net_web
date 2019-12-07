@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DynamicArr.cs" />
+    <Compile Include="DynamicArr33.cs" />
     <Compile Include="DynamicArrEnum.cs" />
     <Compile Include="Lost31.cs" />
     <Compile Include="Program.cs" />
