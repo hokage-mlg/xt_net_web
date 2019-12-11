@@ -15,7 +15,8 @@ namespace Task4
                 "Nam aliquam scelerisque sem eget ornare.\n" +
                 "Donec at pharetra nulla, a iaculis ex.";
             Console.WriteLine(str);
-            var words = str.Split(new char[] { ' ', '.', ',', '\n' });
+            var words = str.Split(new char[] { ' ', '.', ',', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
             CustomSort41.SortArray(words, (n1, n2) =>
              {
                  if (n1.Length != n2.Length)
