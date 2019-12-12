@@ -47,8 +47,11 @@
   <ItemGroup>
     <Compile Include="CustomSort41.cs" />
     <Compile Include="CustomSortDemo42.cs" />
+    <Compile Include="NumberArraySum44.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortingUnit43.cs" />
+    <Compile Include="ToIntOrNotToInt45.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

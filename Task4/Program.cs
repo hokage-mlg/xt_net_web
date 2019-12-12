@@ -42,19 +42,19 @@ namespace Task4
                         case 3:
                             Console.Clear();
                             Console.WriteLine("Task 4.3 SORTING UNIT:");
-
+                            SortingUnit43.SortingUnit();
                             Console.ReadKey();
                             break;
                         case 4:
                             Console.Clear();
                             Console.WriteLine("Task 4.4 NUMBER ARRAY SUM:");
-
+                            NumberArraySum44.NumberArraySum();
                             Console.ReadKey();
                             break;
                         case 5:
                             Console.Clear();
                             Console.WriteLine("Task 4.5 TO INT OR NOT TO INT?:");
-
+                            ToIntOrNotToInt45.ToIntOrNotToInt();
                             Console.ReadKey();
                             break;
                         case 6:
