@@ -67,6 +67,7 @@ namespace Task6.PL
                                 Console.WriteLine("User with this ID does not exist.");
                                 break;
                             }
+                            Console.WriteLine("List of awards:");
                             ShowAllAwards();
                             Console.WriteLine("Select award for rewarding.");
                             Award award = _awardLogic.GetById(GetId());
