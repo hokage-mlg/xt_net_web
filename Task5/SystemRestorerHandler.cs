@@ -11,21 +11,21 @@ namespace Task5
     {
         private string _sourceDirectory;
         private string _logDirectory;
-        public SystemRestorerHandler(string sourceDir, string logDir)
+        public SystemRestorerHandler(string SourceDir, string LogDir)
         {
-            _sourceDirectory = sourceDir;
-            _logDirectory = logDir;
+            _sourceDirectory = SourceDir;
+            _logDirectory = LogDir;
         }
         public void Run()
         {
             Console.WriteLine("Please, choose at what point in time you want to return.\n" +
                 "Write in format day.month.year_hours:minutes:seconds\n" +
                 "(for example 23.12.2019_12h13m4s)");
-            DirectoryInfo logDirectory = new DirectoryInfo(_logDirectory + Console.ReadLine());
+            var logDirectory = new DirectoryInfo(_logDirectory + Console.ReadLine());
             if (logDirectory.Exists)
             {
-                DirectoryInfo workDirectory = new DirectoryInfo(_sourceDirectory);
-                foreach (FileInfo file in workDirectory.GetFiles())
+                var workDirectory = new DirectoryInfo(_sourceDirectory);
+                foreach (var file in workDirectory.GetFiles())
                 {
                     try
                     {
@@ -36,7 +36,7 @@ namespace Task5
                         Console.WriteLine(e.Message);
                     }
                 }
-                foreach (DirectoryInfo dir in workDirectory.GetDirectories())
+                foreach (var dir in workDirectory.GetDirectories())
                 {
                     try
                     {
@@ -54,16 +54,16 @@ namespace Task5
         }
         public static void DirectoryCopy(string sourceDir, string targetDir, bool copySubDirs)
         {
-            DirectoryInfo dir = new DirectoryInfo(sourceDir);
+            var dir = new DirectoryInfo(sourceDir);
             if (!dir.Exists)
                 throw new DirectoryNotFoundException("Error, check your source directory!");
-            DirectoryInfo[] dirs = dir.GetDirectories();
+            var dirs = dir.GetDirectories();
             if (!Directory.Exists(targetDir))
                 Directory.CreateDirectory(targetDir);
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
+            var files = dir.GetFiles();
+            foreach (var file in files)
             {
-                string tempPath = Path.Combine(targetDir, file.Name);
+                var tempPath = Path.Combine(targetDir, file.Name);
                 try
                 {
                     file.CopyTo(tempPath, true);
@@ -75,9 +75,9 @@ namespace Task5
             }
             if (copySubDirs)
             {
-                foreach (DirectoryInfo subDir in dirs)
+                foreach (var subDir in dirs)
                 {
-                    string tempPath = Path.Combine(targetDir, subDir.Name);
+                    var tempPath = Path.Combine(targetDir, subDir.Name);
                     DirectoryCopy(subDir.FullName, tempPath, copySubDirs);
                 }
             }

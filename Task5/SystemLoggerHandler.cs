@@ -13,10 +13,10 @@ namespace Task5
         bool enabled = true;
         private string _sourceDirectory;
         private string _logDirectory;
-        public SystemLoggerHandler(string sourceDir, string logDir)
+        public SystemLoggerHandler(string SourceDir, string LogDir)
         {
-            _sourceDirectory = sourceDir;
-            _logDirectory = logDir;
+            _sourceDirectory = SourceDir;
+            _logDirectory = LogDir;
         }
         public void Run()
         {
@@ -39,13 +39,13 @@ namespace Task5
         }
         private void OnHandlerDT(object sender, FileSystemEventArgs e)
         {
-            DateTime date = DateTime.Now;
-            string newDir = _logDirectory + PrintDT(date);
+            var date = DateTime.Now;
+            var newDir = _logDirectory + PrintDT(date);
             SystemRestorerHandler.DirectoryCopy(_sourceDirectory, newDir, true);
         }
         public static string PrintDT(DateTime date)
         {
-            string res = date.Day + "." + date.Month + "." + date.Year + "_"
+            var res = date.Day + "." + date.Month + "." + date.Year + "_"
                 + date.Hour + "h" + date.Minute + "m" + date.Second + "s";
             return res;
         }

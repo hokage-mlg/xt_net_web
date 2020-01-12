@@ -12,15 +12,15 @@ namespace Task5
         public static void BackupSystem()
         {
             Console.WriteLine("Input path to directory with files");
-            string pathF = CheckPath();
+            var pathF = CheckPath();
             Console.WriteLine("Input path to directory in which you whant to save logs");
-            string pathL = CheckPath();
+            var pathL = CheckPath();
             while (true)
             {
                 Console.WriteLine("What you whant to do?\n" +
-                "1. Observe\n" +
-                "2. Restore\n" +
-                "0. Exit");
+                    "1. Observe\n" +
+                    "2. Restore\n" +
+                    "0. Exit");
                 if (!int.TryParse(Console.ReadLine(), out int mode))
                 {
                     Console.WriteLine("Error. Please, try again.");
@@ -36,12 +36,12 @@ namespace Task5
                     case 1:
                         Console.Clear();
                         Console.WriteLine("Observation enabled...");
-                        SystemLoggerHandler observer = new SystemLoggerHandler(pathF, pathL);
+                        var observer = new SystemLoggerHandler(pathF, pathL);
                         observer.Run();
                         break;
                     case 2:
                         Console.WriteLine("Restorer enabled...");
-                        SystemRestorerHandler restorer = new SystemRestorerHandler(pathF, pathL);
+                        var restorer = new SystemRestorerHandler(pathF, pathL);
                         restorer.Run();
                         break;
                     case 0:
@@ -57,7 +57,7 @@ namespace Task5
         {
             while (true)
             {
-                string path = Console.ReadLine();
+                var path = Console.ReadLine();
                 if (Directory.Exists(path))
                     return path;
                 Console.WriteLine("Error, this directory does not exist! Try again.");
