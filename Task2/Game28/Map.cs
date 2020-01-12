@@ -10,10 +10,10 @@ namespace Task2.Game28
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        public Map(int width, int height)
+        public Map(int Width, int Height)
         {
-            Width = width;
-            Height = height;
+            this.Width = Width;
+            this.Height = Height;
         }
     }
 }

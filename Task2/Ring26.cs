@@ -10,33 +10,38 @@ namespace Task2
     class Ring26 : Round21
     {
         public double InnerRadius { get; set; }
-        public Ring26(Point center, double outerRadius, double innerRadius) : base(center, outerRadius)
+        public Ring26(Point Center, double OuterRadius, double InnerRadius) : base(Center, OuterRadius)
         {
-            if (innerRadius <= 0 || outerRadius <= 0)
+            if (InnerRadius <= 0 || OuterRadius <= 0)
                 throw new ArgumentException("Radius must be > 0!");
-            if (innerRadius > outerRadius)
+            if (InnerRadius > OuterRadius)
                 throw new ArgumentException("The inner radius cannot be larger than the outer");
-            InnerRadius = innerRadius;
+            this.InnerRadius = InnerRadius;
         }
         public static Ring26 InputRing()
         {
-            Console.WriteLine("Input x coordinate:");
-            int x = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input y coordinate:");
-            int y = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input outer radius:");
-            double outerRadius = double.Parse(Console.ReadLine());
-            Console.WriteLine("Input inner radius:");
-            double innerRadius = double.Parse(Console.ReadLine());
-            return new Ring26(new Point(x, y), outerRadius, innerRadius);
+            try
+            {
+                Console.WriteLine("Input x coordinate:");
+                int x = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input y coordinate:");
+                int y = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input outer radius:");
+                double outerRadius = double.Parse(Console.ReadLine());
+                Console.WriteLine("Input inner radius:");
+                double innerRadius = double.Parse(Console.ReadLine());
+                return new Ring26(new Point(x, y), outerRadius, innerRadius);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Incorrect input:\n", e.Message);
+            }
         }
         public double LengthRing => base.Length + (2 * Math.PI * InnerRadius);
         public double AreaRing => base.Area - (Math.PI * Math.Pow(InnerRadius, 2));
-        public override string ToString()
-        {
-            return base.ToString() + Environment.NewLine
-                + string.Format("- Inner Radius: {0}\n" + "- Total length: {1}\n"
-                + "- Area of ring: {2}", InnerRadius, LengthRing, AreaRing);
-        }
+        public override string ToString() =>
+            base.ToString() + Environment.NewLine
+                + string.Format($"- Inner Radius: {InnerRadius}\n" + $"- Total length: {LengthRing}\n"
+                + $"- Area of ring: {AreaRing}");
     }
 }

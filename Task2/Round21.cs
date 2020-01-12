@@ -17,17 +17,24 @@ namespace Task2
         }
         public static Round21 InputRound()
         {
-            Console.WriteLine("Input x coordinate:");
-            int x = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input y coordinate:");
-            int y = int.Parse(Console.ReadLine());
-            Console.WriteLine("Input radius:");
-            double Radius = double.Parse(Console.ReadLine());
-            return new Round21(new Point(x, y), Radius);
+            try
+            {
+                Console.WriteLine("Input x coordinate:");
+                var x = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input y coordinate:");
+                var y = int.Parse(Console.ReadLine());
+                Console.WriteLine("Input radius:");
+                var radius = double.Parse(Console.ReadLine());
+                return new Round21(new Point(x, y), radius);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Incorrect input:\n", e.Message);
+            }
         }
         public double Radius
         {
-            get { return _radius; }
+            get => _radius;
             set
             {
                 if (value <= 0)
@@ -37,19 +44,17 @@ namespace Task2
         }
         public virtual double Length
         {
-            get { return (2 * Math.PI * _radius); }
+            get => (2 * Math.PI * _radius);
         }
         public virtual double Area
         {
-            get { return (Math.PI * Math.Pow(_radius, 2)); }
+            get => (Math.PI * Math.Pow(_radius, 2));
         }
-        public override string ToString()
-        {
-            return (string.Format("Round characteristics:\n" +
-                "- Center: ({0},{1})\n" +
-                "- Radius: {2}\n" +
-                "- Length: {3}\n" +
-                "- Area: {4}", Center.X, Center.Y, Radius, Length, Area));
-        }
+        public override string ToString() =>
+            string.Format("Round characteristics:\n" +
+                $"- Center: ({Center.X},{Center.Y})\n" +
+                $"- Radius: {Radius}\n" +
+                $"- Length: {Length}\n" +
+                $"- Area: {Area}");
     }
 }

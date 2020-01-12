@@ -40,7 +40,7 @@ namespace Task2
         {
             if (input.Length != _myStr.Length)
                 return false;
-            for (int i = 0; i < input.Length; i++)
+            for (var i = 0; i < input.Length; i++)
                 if (_myStr[i] != input[i])
                     return false;
             return true;
@@ -50,7 +50,7 @@ namespace Task2
         public MyString24 Concatenation(MyString24 input)
         {
             char[] ch = new char[_myStr.Length + input.Length];
-            for (int i = 0; i < ch.Length; i++)
+            for (var i = 0; i < ch.Length; i++)
             {
                 if (i < _myStr.Length)
                     ch[i] = _myStr[i];
@@ -61,7 +61,7 @@ namespace Task2
         }
         public bool Contains(char input)
         {
-            foreach (char ch in _myStr)
+            foreach (var ch in _myStr)
                 if (ch == input)
                     return true;
             return false;
@@ -70,11 +70,11 @@ namespace Task2
         {
             if (_myStr.Length < input.Length)
                 return false;
-            for (int i = 0; i < _myStr.Length; i++)
+            for (var i = 0; i < _myStr.Length; i++)
             {
                 if (_myStr.Length < input.Length + i)
                     return false;
-                for (int j = 0; j < input.Length; j++)
+                for (var j = 0; j < input.Length; j++)
                 {
                     if (_myStr[i + j] != input[j])
                         break;

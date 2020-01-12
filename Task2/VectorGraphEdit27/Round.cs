@@ -8,16 +8,15 @@ namespace Task2.VectorGraphEdit27
 {
     class Round : Circle
     {
-        public Round(Point center, double radius) : base(center, radius) { }
+        public Round(Point Center, double Radius) : base(Center, Radius) { }
         public double Area => Math.PI * Math.Pow(Radius, 2);
         public override void ShowInfo()
         {
             Console.WriteLine("Round characteristics:\n" +
-                "- Center coordinates: ({0},{1})\n" +
-                "- Outer radius: {2}\n" +
-                "- Outer length: {3}\n" +
-                "- Area: {4}",
-                Center.X, Center.Y, Radius, Length, Area);
+                $"- Center coordinates: ({Center.X},{Center.Y})\n" +
+                $"- Outer radius: {Radius}\n" +
+                $"- Outer length: {Length}\n" +
+                $"- Area: {Area}");
         }
     }
 }

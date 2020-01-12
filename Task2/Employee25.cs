@@ -10,31 +10,38 @@ namespace Task2
     {
         private string _post;
         private int _experience;
-        public Employee25(string surname, string name, string patronymic, DateTime yearOfBirdth, string post, int experience) :
-            base(surname, name, patronymic, yearOfBirdth)
+        public Employee25(string Surname, string Name, string Patronymic, DateTime YearOfBirdth, string Post, int Experience) :
+            base(Surname, Name, Patronymic, YearOfBirdth)
         {
-            Post = post;
-            Experience = experience;
+            this.Post = Post;
+            this.Experience = Experience;
         }
         public static Employee25 InputEmployee()
         {
-            Console.WriteLine("Input surname:");
-            string surname = Console.ReadLine();
-            Console.WriteLine("Input name:");
-            string name = Console.ReadLine();
-            Console.WriteLine("Input patronymic:");
-            string patronymic = Console.ReadLine();
-            Console.WriteLine("Input date of birth:");
-            DateTime yearOfBirdth = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine("Input post:");
-            string post = Console.ReadLine();
-            Console.WriteLine("Input experience:");
-            int experience = int.Parse(Console.ReadLine());
-            return new Employee25(surname, name, patronymic, yearOfBirdth, post, experience);
+            try
+            {
+                Console.WriteLine("Input surname:");
+                string surname = Console.ReadLine();
+                Console.WriteLine("Input name:");
+                string name = Console.ReadLine();
+                Console.WriteLine("Input patronymic:");
+                string patronymic = Console.ReadLine();
+                Console.WriteLine("Input date of birth:");
+                DateTime yearOfBirdth = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Input post:");
+                string post = Console.ReadLine();
+                Console.WriteLine("Input experience:");
+                int experience = int.Parse(Console.ReadLine());
+                return new Employee25(surname, name, patronymic, yearOfBirdth, post, experience);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Incorrect input:\n", e.Message);
+            }
         }
         public string Post
         {
-            get { return _post; }
+            get => _post;
             set
             {
                 if (value == null && value.Length == 0)
@@ -44,7 +51,7 @@ namespace Task2
         }
         public int Experience
         {
-            get { return _experience; }
+            get => _experience;
             set
             {
                 if (value < 0)
@@ -55,10 +62,8 @@ namespace Task2
                     _experience = value;
             }
         }
-        public override string ToString()
-        {
-            return base.ToString() + Environment.NewLine
-                + string.Format("- Post: {0}\n" + "- Experience: {1}", Post, Experience);
-        }
+        public override string ToString() =>
+            base.ToString() + Environment.NewLine
+                + string.Format($"- Post: {Post}\n- Experience: {Experience}");
     }
 }

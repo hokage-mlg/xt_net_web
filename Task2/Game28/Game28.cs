@@ -33,7 +33,7 @@ namespace Task2.Game28
         }
         public void PlayerAttack()
         {
-            foreach (Monster monster in monsters)
+            foreach (var monster in monsters)
             {
                 Console.WriteLine("Player attack {0}", monster.Name);
                 player.Hit(monster);
@@ -41,7 +41,7 @@ namespace Task2.Game28
         }
         public void MonstersAttack()
         {
-            foreach (Monster monster in monsters)
+            foreach (var monster in monsters)
             {
                 Console.WriteLine("{0} attack player", monster.Name);
                 monster.Hit(player);
@@ -49,26 +49,26 @@ namespace Task2.Game28
         }
         public void BonusForPlayer()
         {
-            foreach (Bonus bonus in bonuses)
+            foreach (var bonus in bonuses)
                 bonus.GiveBonus(player);
         }
         public void CollisionWithObstacle()
         {
-            foreach (Obstruction obstruction in obstructions)
+            foreach (var obstruction in obstructions)
                 obstruction.Hit(player);
         }
         public void Moving()
         {
-            List<IMove> movables = new List<IMove>();
+            var movables = new List<IMove>();
             movables.Add(player);
-            foreach (Monster monster in monsters)
+            foreach (var monster in monsters)
                 movables.Add(monster);
-            foreach (IMove movable in movables)
+            foreach (var movable in movables)
                 movable.Move();
         }
         public void GameDisplay()
         {
-            Game28 game = new Game28();
+            var game = new Game28();
             game.GameRun();
             Console.ReadLine();
             Console.WriteLine("Moving:");

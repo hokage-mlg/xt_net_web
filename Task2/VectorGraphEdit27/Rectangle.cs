@@ -10,22 +10,21 @@ namespace Task2.VectorGraphEdit27
     {
         public double Width { get; set; }
         public double Height { get; set; }
-        public Rectangle(Point center, double width, double height) : base(center)
+        public Rectangle(Point Center, double Width, double Height) : base(Center)
         {
-            if (width < 0 || height < 0)
+            if (Width < 0 || Height < 0)
                 throw new ArgumentException("Value must be > 0!");
-            Width = width;
-            Height = height;
+            this.Width = Width;
+            this.Height = Height;
         }
         public double Perimetr => 2 * (Width * Height);
         public double Area => Width * Height;
         public override void ShowInfo()
         {
             Console.WriteLine("Rectangle characteristics:\n" +
-                "- Center coordinates: ({0},{1})\n" +
-                "- Width: {2}\n" +
-                "- Height: {3}",
-                Center.X, Center.Y, Width, Height);
+                $"- Center coordinates: ({Center.X},{Center.Y})\n" +
+                $"- Width: {Width}\n" +
+                $"- Height: {Height}");
         }
     }
 }

@@ -9,9 +9,9 @@ namespace Task2.VectorGraphEdit27
     abstract class Figure
     {
         public Point Center { get; set; }
-        public Figure(Point center)
+        public Figure(Point Center)
         {
-            Center = center;
+            this.Center = Center;
         }
         public abstract void ShowInfo();
     }

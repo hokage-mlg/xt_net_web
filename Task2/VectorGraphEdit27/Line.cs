@@ -9,16 +9,15 @@ namespace Task2.VectorGraphEdit27
     class Line : Figure
     {
         public Point EndPoint { get; set; }
-        public Line(Point center, Point endPoint) : base(center)
+        public Line(Point Center, Point EndPoint) : base(Center)
         {
-            EndPoint = endPoint;
+            this.EndPoint = EndPoint;
         }
         public override void ShowInfo()
         {
             Console.WriteLine("Line characteristics:\n" +
-                "- Start point coordinates: ({0},{1})\n" +
-                "- End point coordinates: ({2},{3})",
-                Center.X, Center.Y, EndPoint.X, EndPoint.Y);
+                $"- Start point coordinates: ({Center.X},{Center.Y})\n" +
+                $"- End point coordinates: ({EndPoint.X},{EndPoint.Y})");
         }
     }
 }

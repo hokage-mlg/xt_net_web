@@ -10,7 +10,7 @@ namespace Task2.VectorGraphEdit27
     {
         public void CreateFigure()
         {
-            List<Figure> figures = new List<Figure>();
+            var figures = new List<Figure>();
             while (true)
             {
                 Console.WriteLine("Choose figure which you want to create:\n" +
@@ -22,7 +22,7 @@ namespace Task2.VectorGraphEdit27
                     "6. Show\n" +
                     "0. Exit");
                 Console.WriteLine("Input number:");
-                int select = int.Parse(Console.ReadLine());
+                var select = int.Parse(Console.ReadLine());
                 switch (select)
                 {
                     case 0:
@@ -59,7 +59,7 @@ namespace Task2.VectorGraphEdit27
                         break;
                     case 6:
                         Console.Clear();
-                        foreach (Figure f in figures)
+                        foreach (var f in figures)
                         {
                             f.ShowInfo();
                             Console.WriteLine();
@@ -74,18 +74,18 @@ namespace Task2.VectorGraphEdit27
         {
             Console.WriteLine("Input coordinates:");
             Console.WriteLine("Input x coordinate:");
-            int x = int.Parse(Console.ReadLine());
+            var x = int.Parse(Console.ReadLine());
             Console.WriteLine("Input y coordinate:");
-            int y = int.Parse(Console.ReadLine());
+            var y = int.Parse(Console.ReadLine());
             return new Point(x, y);
         }
         private Figure CreateLine()
         {
             Console.WriteLine("Line creating...");
             Console.WriteLine("Input start of the line:");
-            Point start = GetCoordinates();
+            var start = GetCoordinates();
             Console.WriteLine("Input end of the line:");
-            Point end = GetCoordinates();
+            var end = GetCoordinates();
             return new Line(start, end);
         }
         private Figure CreateRectangle()
@@ -95,38 +95,38 @@ namespace Task2.VectorGraphEdit27
             var center = GetCoordinates();
             Console.WriteLine("Input sides values:");
             Console.WriteLine("Input width:");
-            double w = double.Parse(Console.ReadLine());
+            var w = double.Parse(Console.ReadLine());
             Console.WriteLine("Input height:");
-            double h = double.Parse(Console.ReadLine());
+            var h = double.Parse(Console.ReadLine());
             return new Rectangle(center, w, h);
         }
         private Figure CreateCircle()
         {
             Console.WriteLine("Circle creating...");
             Console.WriteLine("Input center of the circle:");
-            Point center = GetCoordinates();
+            var center = GetCoordinates();
             Console.WriteLine("Input radius:");
-            double radius = double.Parse(Console.ReadLine());
+            var radius = double.Parse(Console.ReadLine());
             return new Circle(center, radius);
         }
         private Figure CreateRound()
         {
             Console.WriteLine("Round creating...");
             Console.WriteLine("Input center of the round:");
-            Point center = GetCoordinates();
+            var center = GetCoordinates();
             Console.WriteLine("Input radius:");
-            double radius = double.Parse(Console.ReadLine());
+            var radius = double.Parse(Console.ReadLine());
             return new Round(center, radius);
         }
         private Figure CreateRing()
         {
             Console.WriteLine("Ring creating...");
             Console.WriteLine("Input center of the ring:");
-            Point center = GetCoordinates();
+            var center = GetCoordinates();
             Console.WriteLine("Input inner radius:");
-            double innerRadius = double.Parse(Console.ReadLine());
+            var innerRadius = double.Parse(Console.ReadLine());
             Console.WriteLine("Input outer radius:");
-            double outerRadius = double.Parse(Console.ReadLine());
+            var outerRadius = double.Parse(Console.ReadLine());
             return new Ring(center, innerRadius, outerRadius);
         }
     }

@@ -18,11 +18,11 @@ namespace Task2
         public static Triangle22 InputTriangle()
         {
             Console.WriteLine("Input A:");
-            double a = double.Parse(Console.ReadLine());
+            var a = double.Parse(Console.ReadLine());
             Console.WriteLine("Input B:");
-            double b = double.Parse(Console.ReadLine());
+            var b = double.Parse(Console.ReadLine());
             Console.WriteLine("Input C:");
-            double c = double.Parse(Console.ReadLine());
+            var c = double.Parse(Console.ReadLine());
             return new Triangle22(a, b, c);
         }
         public double Check(double side1, double side2, double side3)
@@ -34,7 +34,7 @@ namespace Task2
         }
         public double A
         {
-            get { return _a; }
+            get => _a;
             set
             {
                 if (value <= 0 && _b + _c > value)
@@ -44,7 +44,7 @@ namespace Task2
         }
         public double B
         {
-            get { return _b; }
+            get => _b;
             set
             {
                 if (value <= 0 && _a + _c > value)
@@ -54,7 +54,7 @@ namespace Task2
         }
         public double C
         {
-            get { return _c; }
+            get => _c;
             set
             {
                 if (value <= 0 && _a + _b > value)
@@ -64,25 +64,23 @@ namespace Task2
         }
         public double Perimeter
         {
-            get { return (_a + _b + _c); }
+            get => (_a + _b + _c);
         }
         public double Area
         {
             get
             {
-                double PerimeterHalf = Perimeter / 2;
+                var PerimeterHalf = Perimeter / 2;
                 return (Math.Sqrt(PerimeterHalf * (PerimeterHalf - _a) *
                     (PerimeterHalf - _b) * (PerimeterHalf - _c)));
             }
         }
-        public override string ToString()
-        {
-            return (string.Format("Triangle characteristics:\n" +
-                "- A: {0}\n" +
-                "- B: {1}\n" +
-                "- C: {2}\n" +
-                "- Perimeter: {3}\n" +
-                "- Area: {4}", _a, _b, _c, Perimeter, Area));
-        }
+        public override string ToString() =>
+            string.Format("Triangle characteristics:\n" +
+                $"- A: {_a}\n" +
+                $"- B: {_b}\n" +
+                $"- C: {_c}\n" +
+                $"- Perimeter: {Perimeter}\n" +
+                $"- Area: {Area}");
     }
 }

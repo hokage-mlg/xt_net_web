@@ -10,14 +10,12 @@ namespace Task2
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public Point(int x, int y)
+        public Point(int X, int Y)
         {
-            X = x;
-            Y = y;
+            this.X = X;
+            this.Y = Y;
         }
-        public override string ToString()
-        {
-            return (string.Format("Point is located at the coordinates:({0},{1})", X, Y));
-        }
+        public override string ToString() =>
+             string.Format($"Point is located at the coordinates:({X},{Y})");
     }
 }

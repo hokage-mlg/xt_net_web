@@ -12,25 +12,32 @@ namespace Task2
         public string Name { get; set; }
         public string Patronymic { get; set; }
         public DateTime YearOfBirdth { get; set; }
-        public int UserAge { get { return GetAge(YearOfBirdth); } }
-        public User23(string surname, string name, string patronymic, DateTime yearOfBirdth)
+        public int UserAge { get => GetAge(YearOfBirdth); }
+        public User23(string Surname, string Name, string Patronymic, DateTime YearOfBirdth)
         {
-            Surname = surname;
-            Name = name;
-            Patronymic = patronymic;
-            YearOfBirdth = yearOfBirdth;
+            this.Surname = Surname;
+            this.Name = Name;
+            this.Patronymic = Patronymic;
+            this.YearOfBirdth = YearOfBirdth;
         }
         public static User23 InputUser()
         {
-            Console.WriteLine("Input surname:");
-            string surname = Console.ReadLine();
-            Console.WriteLine("Input name:");
-            string name = Console.ReadLine();
-            Console.WriteLine("Input patronymic:");
-            string patronymic = Console.ReadLine();
-            Console.WriteLine("Input date of birth:");
-            DateTime yearOfBirdth = DateTime.Parse(Console.ReadLine());
-            return new User23(surname, name, patronymic, yearOfBirdth);
+            try
+            {
+                Console.WriteLine("Input surname:");
+                var surname = Console.ReadLine();
+                Console.WriteLine("Input name:");
+                var name = Console.ReadLine();
+                Console.WriteLine("Input patronymic:");
+                var patronymic = Console.ReadLine();
+                Console.WriteLine("Input date of birth:");
+                var yearOfBirdth = DateTime.Parse(Console.ReadLine());
+                return new User23(surname, name, patronymic, yearOfBirdth);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Incorrect input:\n", e.Message);
+            }
         }
         public static int GetAge(DateTime birthDate)
         {
@@ -38,14 +45,12 @@ namespace Task2
             return now.Year - birthDate.Year - 1 +
                 ((now.Month > birthDate.Month || now.Month == birthDate.Month && now.Day >= birthDate.Day) ? 1 : 0);
         }
-        public override string ToString()
-        {
-            return (string.Format("User:\n" +
-                "- Surname: {0}\n" +
-                "- Name: {1}\n" +
-                "- Patronymic: {2}\n" +
-                "- Date of birth: {3}\n" +
-                "- Age: {4}", Surname, Name, Patronymic, YearOfBirdth.ToString("MM/dd/yyyy"), UserAge));
-        }
+        public override string ToString() =>
+            string.Format($"User:\n" +
+                $"- Surname: {Surname}\n" +
+                $"- Name: {Name}\n" +
+                $"- Patronymic: {Patronymic}\n" +
+                $"- Date of birth: {YearOfBirdth.ToString("MM/dd/yyyy")}\n" +
+                $"- Age: {UserAge}");
     }
 }
