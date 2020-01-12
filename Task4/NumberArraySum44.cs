@@ -10,19 +10,19 @@ namespace Task4
     {
         public static void NumberArraySum()
         {
-            int length = 10;
+            var length = 10;
             var rnd = new Random();
             Console.WriteLine("Sum of int array demonstration:");
             var arrInt = new int[length];
-            for (int i = 0; i < arrInt.Length; i++)
+            for (var i = 0; i < arrInt.Length; i++)
                 arrInt[i] = rnd.Next(0, 50);
             Console.WriteLine("Int array:");
             CustomSort41.DisplayArray(arrInt);
             Console.WriteLine();
-            Console.WriteLine("Sum: {0}", arrInt.Sum());
+            Console.WriteLine($"Sum: {arrInt.Sum()}");
             Console.WriteLine("Sum of double array demonstration:");
             var arrDouble = new double[length];
-            for (int i = 0; i < arrDouble.Length; i++)
+            for (var i = 0; i < arrDouble.Length; i++)
                 arrDouble[i] = rnd.NextDouble() * 10;
             Console.WriteLine("Double array:");
             CustomSort41.DisplayArray(arrDouble);

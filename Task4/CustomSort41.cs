@@ -15,7 +15,7 @@ namespace Task4
             var arrInt = new int[length];
             var arrDouble = new double[length];
             Console.WriteLine("Int Array:");
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
                 arrInt[i] = rnd.Next(0, 50);
             DisplayArray(arrInt);
             Console.WriteLine();
@@ -28,7 +28,7 @@ namespace Task4
             DisplayArray(arrInt);
             Console.WriteLine();
             Console.WriteLine("Double array:");
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
                 arrDouble[i] = rnd.NextDouble() * 10;
             DisplayArray(arrDouble);
             Console.WriteLine();
@@ -42,17 +42,17 @@ namespace Task4
         }
         public static void DisplayArray<T>(T[] arr) where T : notnull
         {
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
                 Console.Write("{0:0.#}  ", arr[i]);
         }
         public static void SortArray<T>(T[] arr, Func<T, T, bool> ordering) where T : notnull
         {
             if (arr == null || ordering == null)
                 throw new ArgumentException("Check arguments");
-            for (int i = 0; i < arr.Length - 1; i++)
+            for (var i = 0; i < arr.Length - 1; i++)
             {
-                int swap = i;
-                for (int j = i; j < arr.Length; j++)
+                var swap = i;
+                for (var j = i; j < arr.Length; j++)
                     if (ordering(arr[j], arr[swap]))
                         swap = j;
                 if (swap != i)
@@ -61,7 +61,7 @@ namespace Task4
         }
         public static void Switch<T>(ref T n1, ref T n2) where T : notnull
         {
-            T tmp = n1;
+            var tmp = n1;
             n1 = n2;
             n2 = tmp;
         }

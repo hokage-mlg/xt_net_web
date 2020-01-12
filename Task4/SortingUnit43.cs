@@ -13,8 +13,8 @@ namespace Task4
         public static event Action<string> OnSortFinish = delegate { };
         public static void SortingUnit()
         {
-            int length = 100;
-            int threads = 0;
+            var length = 100;
+            var threads = 0;
             var rnd = new Random();
             var arrInt = new int[length];
             var arrDouble = new double[length];
@@ -23,7 +23,7 @@ namespace Task4
                 Console.WriteLine(element);
                 threads++;
             };
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 arrInt[i] = rnd.Next(0, 50);
                 arrDouble[i] = rnd.NextDouble() * 10;

@@ -11,14 +11,14 @@ namespace Task4
         public static void ToIntOrNotToInt()
         {
             Console.WriteLine("Input number:");
-            string str = Console.ReadLine().Trim();
-            Console.WriteLine("It's positive int: {0}", str.CheckInt());
+            var str = Console.ReadLine().Trim();
+            Console.WriteLine($"It's positive int: {str.CheckInt()}");
         }
         public static bool CheckInt(this string value)
         {
             if (value == null || value.Length == 0)
                 return false;
-            string str = value.Trim();
+            var str = value.Trim();
             if (str.Length == 0)
                 return false;
             if (str.Length == 1 && str[0] == '0')

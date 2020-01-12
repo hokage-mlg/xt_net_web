@@ -11,7 +11,7 @@ namespace Task4
         public static void CustomSortDemo()
         {
             Console.WriteLine("Default text:\n");
-            string str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
+            var str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
                 "Mauris vel purus aliquet, faucibus nisl quis, sollicitudin lectus.\n" +
                 "Nam aliquam scelerisque sem eget ornare.\n" +
                 "Donec at pharetra nulla, a iaculis ex.";
@@ -21,7 +21,7 @@ namespace Task4
              {
                  if (n1.Length != n2.Length)
                      return n1.Length < n2.Length;
-                 for (int i = 0; i < n1.Length; i++)
+                 for (var i = 0; i < n1.Length; i++)
                      if (n1[i] != n2[i])
                          return n1[i] < n2[i];
                  return false;
