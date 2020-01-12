@@ -15,7 +15,7 @@ namespace Task1
             for (var i = 0; i < lim; i++)
                 if (i % 3 == 0 || i % 5 == 0)
                     sum += i;
-            Console.WriteLine("Sum: " + sum);
+            Console.WriteLine($"Sum: {sum}");
         }
     }
 }

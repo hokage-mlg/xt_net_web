@@ -14,13 +14,13 @@ namespace Task1
             byte input;
             do
             {
-                Console.WriteLine("Параметры надписи: " + currentStyle);
+                Console.WriteLine($"Параметры надписи: {currentStyle}");
                 Console.WriteLine("Введите:");
                 Console.WriteLine("\t1: bold");
                 Console.WriteLine("\t2: italic");
                 Console.WriteLine("\t3: underline");
                 Console.WriteLine("\t0: exit");
-                if (Byte.TryParse(Console.ReadLine(), out input))
+                if (byte.TryParse(Console.ReadLine(), out input))
                 {
                     if (input > 3)
                     {

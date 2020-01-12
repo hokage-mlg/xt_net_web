@@ -22,7 +22,7 @@ namespace Task1
                 else if (char.IsPunctuation(c))
                     pun.Add(c);
             }
-            string[] words = str.Split(sep.ToArray());
+            var words = str.Split(sep.ToArray());
             FindAvrLen(words, pun);
         }
         public static void FindAvrLen(string[] words, HashSet<char> pun, int wordsLen = 0)

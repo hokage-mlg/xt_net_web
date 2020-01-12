@@ -13,7 +13,7 @@ namespace Task1
             Console.WriteLine("Enter the dimension:");
             if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
             {
-                int[,] nums = new int[n, n];
+                var nums = new int[n, n];
                 FillUpArray(nums);
                 Console.WriteLine("Default array:");
                 WriteArray(nums);

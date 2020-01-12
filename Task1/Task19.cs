@@ -13,7 +13,7 @@ namespace Task1
             Console.WriteLine("Enter the dimension:");
             if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
             {
-                int[] nums = new int[n];
+                var nums = new int[n];
                 var rnd = new Random();
                 for (var i = 0; i < n; i++)
                     nums[i] = rnd.Next(-50, 50);
