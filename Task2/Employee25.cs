@@ -21,17 +21,17 @@ namespace Task2
             try
             {
                 Console.WriteLine("Input surname:");
-                string surname = Console.ReadLine();
+                var surname = Console.ReadLine();
                 Console.WriteLine("Input name:");
-                string name = Console.ReadLine();
+                var name = Console.ReadLine();
                 Console.WriteLine("Input patronymic:");
-                string patronymic = Console.ReadLine();
+                var patronymic = Console.ReadLine();
                 Console.WriteLine("Input date of birth:");
-                DateTime yearOfBirdth = DateTime.Parse(Console.ReadLine());
+                var yearOfBirdth = DateTime.Parse(Console.ReadLine());
                 Console.WriteLine("Input post:");
-                string post = Console.ReadLine();
+                var post = Console.ReadLine();
                 Console.WriteLine("Input experience:");
-                int experience = int.Parse(Console.ReadLine());
+                var experience = int.Parse(Console.ReadLine());
                 return new Employee25(surname, name, patronymic, yearOfBirdth, post, experience);
             }
             catch (Exception e)
