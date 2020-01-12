@@ -28,14 +28,14 @@ namespace Task3
                         case 1:
                             Console.Clear();
                             Console.WriteLine("Task 3.1 LOST:");
-                            Lost31 lost = new Lost31();
+                            var lost = new Lost31();
                             lost.Lost();
                             Console.ReadKey();
                             break;
                         case 2:
                             Console.Clear();
                             Console.WriteLine("Task 3.2 WORD FREQUENCY:");
-                            WordFrequency32 str = new WordFrequency32();
+                            var str = new WordFrequency32();
                             str.WordFrequency();
                             Console.ReadKey();
                             break;

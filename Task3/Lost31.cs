@@ -11,7 +11,7 @@ namespace Task3
         public void Lost()
         {
             Console.WriteLine("Input max size (N):");
-            if (int.TryParse(Console.ReadLine(), out int input))
+            if (int.TryParse(Console.ReadLine(), out int input) && input > 0)
             {
                 var list = new LinkedList<int>(Enumerable.Range(1, input));
                 var currentItem = list.First;
@@ -26,6 +26,8 @@ namespace Task3
                 Console.WriteLine(list.First.Value);
                 Console.ReadKey();
             }
+            else
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
     }
 }

@@ -11,17 +11,17 @@ namespace Task3
         public void WordFrequency()
         {
             Console.WriteLine("Input text:");
-            string str = Console.ReadLine();
-            Dictionary<string, int> uStr = UniqueWords(str);
-            Console.WriteLine("Number of unique words: {0}", uStr.Count);
+            var str = Console.ReadLine();
+            var uStr = UniqueWords(str);
+            Console.WriteLine($"Number of unique words: {uStr.Count}");
             foreach (var u in uStr)
-                Console.WriteLine("Word - {0} appears in text {1} times", u.Key, u.Value);
+                Console.WriteLine($"Word - {u.Key} appears in text {u.Value} times");
         }
         private static Dictionary<string, int> UniqueWords(string str)
         {
             str = str.ToLower();
             var words = str.Split(new char[] { ' ', '.' }, StringSplitOptions.RemoveEmptyEntries);
-            Dictionary<string, int> res = new Dictionary<string, int>();
+            var res = new Dictionary<string, int>();
             foreach (var w in words)
             {
                 if (res.ContainsKey(w))

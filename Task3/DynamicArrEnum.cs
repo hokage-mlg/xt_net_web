@@ -9,10 +9,10 @@ namespace Task3
 {
     class DynamicArrEnum<T> : IEnumerator<T>
     {
-        public T[] arr;
-        public int pos = -1;
-        public DynamicArrEnum(T[] arr) { this.arr = arr; }
-        public void Reset() { pos = -1; }
+        public T[] Arr;
+        public int Pos = -1;
+        public DynamicArrEnum(T[] Arr) { this.Arr = Arr; }
+        public void Reset() { Pos = -1; }
         public void Dispose() { }
         object IEnumerator.Current => Current;
         public T Current
@@ -21,7 +21,7 @@ namespace Task3
             {
                 try
                 {
-                    return arr[pos];
+                    return Arr[Pos];
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -31,8 +31,8 @@ namespace Task3
         }
         public bool MoveNext()
         {
-            pos++;
-            return (pos < arr.Length);
+            Pos++;
+            return (Pos < Arr.Length);
         }
     }
 }

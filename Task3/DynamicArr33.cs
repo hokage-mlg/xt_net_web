@@ -55,26 +55,22 @@ namespace Task3
         }
         public T[] ToArray()
         {
-            T[] res = new T[Length];
-            for (int i = 0; i < Length; i++)
+            var res = new T[Length];
+            for (var i = 0; i < Length; i++)
                 res[i] = dynArr[i];
             return res;
         }
         public void NewCapacity(int len)
         {
-            int length;
-            T[] tmp = new T[len];
-            if (dynArr.Length > len)
-                length = len;
-            else
-                length = dynArr.Length;
-            for (int i = 0; i < length; i++)
+            var tmp = new T[len];
+            var length = (dynArr.Length > len) ? len : dynArr.Length;
+            for (var i = 0; i < length; i++)
                 tmp[i] = dynArr[i];
             dynArr = tmp;
         }
         public void CapacityChecking(int len)
         {
-            int capacity = Capacity;
+            var capacity = Capacity;
             while (len > capacity)
                 capacity *= 2;
             if (capacity != Capacity)
@@ -97,7 +93,7 @@ namespace Task3
         }
         public bool Remove(T unit)
         {
-            for (int i = 0; i < dynArr.Length; i++)
+            for (var i = 0; i < dynArr.Length; i++)
             {
                 if (dynArr[i].GetHashCode() == unit.GetHashCode())
                 {
@@ -116,14 +112,14 @@ namespace Task3
             CapacityChecking(Length++);
             if (pos < 0)
                 pos = Length + pos;
-            for (int i = Length - 1; i > pos; i--)
+            for (var i = Length - 1; i > pos; i--)
                 dynArr[i + 1] = dynArr[i];
             dynArr[pos] = unit;
         }
         public static void DynamicArrDisplay()
         {
-            int[] nums = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            DynamicArr33<int> arr1 = new DynamicArr33<int>();
+            var nums = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            var arr1 = new DynamicArr33<int>();
             arr1.AddRange(nums);
             arr1.Add(9);
             arr1.Add(10);
