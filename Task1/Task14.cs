@@ -11,15 +11,19 @@ namespace Task1
         public static void Xmas()
         {
             Console.WriteLine("Input number of triangles:");
-            int n = int.Parse(Console.ReadLine());
-            for (int i = 1; i <= n; i++)
+            if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
             {
-                for (int j = 0; j < i; j++)
+                for (var i = 1; i <= n; i++)
                 {
-                    string branch = new String('*', j);
-                    Console.WriteLine(branch.PadLeft(n) + "*" + branch);
+                    for (var j = 0; j < i; j++)
+                    {
+                        var branch = new String('*', j);
+                        Console.WriteLine(branch.PadLeft(n) + "*" + branch);
+                    }
                 }
             }
+            else
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
     }
 }

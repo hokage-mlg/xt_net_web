@@ -11,35 +11,38 @@ namespace Task1
         public static void ArrayProcessing()
         {
             Console.WriteLine("Enter the dimension:");
-            int n = int.Parse(Console.ReadLine());
-            int[] nums = new int[n];
-            Random rnd = new Random();
-            for (int i = 0; i < n; i++)
-                nums[i] = rnd.Next(0, 100);
-            Console.WriteLine("Default array:");
-            WriteArray(nums);
-            FindMin(nums);
-            FindMax(nums);
-            Console.WriteLine("Sorted array:");
-            SortArray(nums);
-            WriteArray(nums);
+            if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
+            {
+                int[] nums = new int[n];
+                var rnd = new Random();
+                for (var i = 0; i < n; i++)
+                    nums[i] = rnd.Next(0, 100);
+                Console.WriteLine("Default array:");
+                WriteArray(nums);
+                FindMin(nums);
+                FindMax(nums);
+                Console.WriteLine("Sorted array:");
+                SortArray(nums);
+                WriteArray(nums);
+            }
+            else
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
         public static void WriteArray(int[] arr)
         {
-            foreach (int i in arr)
+            foreach (var i in arr)
                 Console.Write(i.ToString() + " ");
             Console.WriteLine();
         }
         public static int[] SortArray(int[] nums)
         {
-            int temp;
-            for (int i = 0; i < nums.Length - 1; i++)
+            for (var i = 0; i < nums.Length - 1; i++)
             {
-                for (int j = i + 1; j < nums.Length; j++)
+                for (var j = i + 1; j < nums.Length; j++)
                 {
                     if (nums[i] > nums[j])
                     {
-                        temp = nums[i];
+                        var temp = nums[i];
                         nums[i] = nums[j];
                         nums[j] = temp;
                     }
@@ -49,19 +52,19 @@ namespace Task1
         }
         public static void FindMin(int[] nums)
         {
-            int min = nums[0];
-            for (int i = 0; i < nums.Length; i++)
+            var min = nums[0];
+            for (var i = 0; i < nums.Length; i++)
                 if (min > nums[i])
                     min = nums[i];
-            Console.WriteLine("Min: " + min);
+            Console.WriteLine($"Min: {min}");
         }
         public static void FindMax(int[] nums)
         {
-            int max = nums[0];
-            for (int i = 0; i < nums.Length; i++)
+            var max = nums[0];
+            for (var i = 0; i < nums.Length; i++)
                 if (max < nums[i])
                     max = nums[i];
-            Console.WriteLine("Max: " + max);
+            Console.WriteLine($"Max: {max}");
         }
     }
 }

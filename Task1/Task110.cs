@@ -11,43 +11,41 @@ namespace Task1
         public static void Array2D()
         {
             Console.WriteLine("Enter the dimension:");
-            int n = int.Parse(Console.ReadLine());
-            int[,] nums = new int[n, n];
-            FillUpArray(nums);
-            Console.WriteLine("Default array:");
-            WriteArray(nums);
-            SumArray(nums);
+            if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
+            {
+                int[,] nums = new int[n, n];
+                FillUpArray(nums);
+                Console.WriteLine("Default array:");
+                WriteArray(nums);
+                SumArray(nums);
+            }
+            else
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
         public static void FillUpArray(int[,] arr)
         {
-            Random rnd = new Random();
-            for (int i = 0; i < arr.GetLength(0); i++)
-                for (int j = 0; j < arr.GetLength(1); j++)
+            var rnd = new Random();
+            for (var i = 0; i < arr.GetLength(0); i++)
+                for (var j = 0; j < arr.GetLength(1); j++)
                     arr[i, j] = rnd.Next(0, 50);
         }
         public static void WriteArray(int[,] arr)
         {
-            for (int i = 0; i < arr.GetLength(0); i++)
+            for (var i = 0; i < arr.GetLength(0); i++)
             {
-                for (int j = 0; j < arr.GetLength(1); j++)
-                {
+                for (var j = 0; j < arr.GetLength(1); j++)
                     Console.Write("{0,3}", arr[i, j]);
-                }
                 Console.WriteLine();
             }
         }
         public static void SumArray(int[,] arr)
         {
-            int sum = 0;
-            for (int i = 0; i < arr.GetLength(0); i++)
-            {
-                for (int j = 0; j < arr.GetLength(1); j++)
-                {
+            var sum = 0;
+            for (var i = 0; i < arr.GetLength(0); i++)
+                for (var j = 0; j < arr.GetLength(1); j++)
                     if ((i + j) % 2 == 0)
                         sum += arr[i, j];
-                }
-            }
-            Console.WriteLine("Sum:" + sum);
+            Console.WriteLine($"Sum: {sum}");
         }
     }
 }

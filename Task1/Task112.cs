@@ -11,11 +11,11 @@ namespace Task1
         public static void CharDoubler()
         {
             Console.WriteLine("Input first line:");
-            string str1 = Console.ReadLine();
+            var str1 = Console.ReadLine();
             Console.WriteLine("Input second line:");
-            string str2 = Console.ReadLine();
-            string strRes = "";
-            foreach (char ch in str1)
+            var str2 = Console.ReadLine();
+            var strRes = "";
+            foreach (var ch in str1)
                 if (!str2.Contains(ch))
                     strRes += ch;
                 else
@@ -23,8 +23,7 @@ namespace Task1
                     strRes += ch;
                     strRes += ch;
                 }
-            Console.WriteLine("Result:\n" + strRes);
-            Console.ReadKey();
+            Console.WriteLine($"Result: {strRes}\n");
         }
     }
 }

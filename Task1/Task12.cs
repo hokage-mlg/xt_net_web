@@ -11,11 +11,11 @@ namespace Task1
         public static void Triangle()
         {
             Console.WriteLine("Input number of lines:");
-            int n = int.Parse(Console.ReadLine());
-            for (string i = "*"; i.Length <= n; i += "*")
-            {
-                Console.WriteLine(i);
-            }
+            if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
+                for (var i = "*"; i.Length <= n; i += "*")
+                    Console.WriteLine(i);
+            else
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
     }
 }

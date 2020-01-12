@@ -11,23 +11,21 @@ namespace Task1
         public static void AnotherTriangle()
         {
             Console.WriteLine("Input number of lines:");
-            int n = int.Parse(Console.ReadLine());
-            for (int i = 1; i <= n; i++)
+            if (int.TryParse(Console.ReadLine(), out var n) && n > 0)
             {
-                for (int j = 1; j <= n - i; j++)
+                for (var i = 1; i <= n; i++)
                 {
-                    Console.Write(" ");
+                    for (var j = 1; j <= n - i; j++)
+                        Console.Write(" ");
+                    for (var r = 1; r <= i; r++)
+                        Console.Write("*");
+                    for (var l = i - 1; l >= 1; l--)
+                        Console.Write("*");
+                    Console.WriteLine();
                 }
-                for (int r = 1; r <= i; r++)
-                {
-                    Console.Write("*");
-                }
-                for (int l = i - 1; l >= 1; l--)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine();
             }
+            else
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
     }
 }

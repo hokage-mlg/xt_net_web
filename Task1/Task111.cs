@@ -11,15 +11,15 @@ namespace Task1
         public static void AverageStringLength()
         {
             Console.WriteLine("Input text:");
-            string str = Console.ReadLine();
-            HashSet<char> alp = str.ToHashSet();
-            HashSet<char> sep = new HashSet<char>();
-            HashSet<char> pun = new HashSet<char>();
-            foreach (char c in alp)
+            var str = Console.ReadLine();
+            var alp = str.ToHashSet();
+            var sep = new HashSet<char>();
+            var pun = new HashSet<char>();
+            foreach (var c in alp)
             {
-                if (Char.IsSeparator(c))
+                if (char.IsSeparator(c))
                     sep.Add(c);
-                else if (Char.IsPunctuation(c))
+                else if (char.IsPunctuation(c))
                     pun.Add(c);
             }
             string[] words = str.Split(sep.ToArray());
@@ -27,13 +27,13 @@ namespace Task1
         }
         public static void FindAvrLen(string[] words, HashSet<char> pun, int wordsLen = 0)
         {
-            for (int i = 0; i < words.Length; i++)
+            for (var i = 0; i < words.Length; i++)
             {
                 words[i] = words[i].Trim(pun.ToArray());
                 wordsLen += words[i].Length;
             }
-            double avrLen = (double)wordsLen / words.Length;
-            Console.WriteLine("Average word length is " + avrLen);
+            var avrLen = (double)wordsLen / words.Length;
+            Console.WriteLine($"Average word length is {avrLen}");
         }
     }
 }

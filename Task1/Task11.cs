@@ -10,24 +10,14 @@ namespace Task1
     {
         public static void Rectangle()
         {
-            int a, b;
-            Console.WriteLine("Enter side values:");
-            try
-            {
-                Console.WriteLine("Input \'a\' size:");
-                a = int.Parse(Console.ReadLine());
-                Console.WriteLine("Input \'b\' size:");
-                b = int.Parse(Console.ReadLine());
-            }
-            catch
-            {
-                Console.WriteLine("Invalid argument");
-                return;
-            }
-            if (a > 0 && b > 0)
-                Console.WriteLine("Area: " + a * b);
+            Console.WriteLine("Enter side values (\'a\' and \'b\'):");
+            if (int.TryParse(Console.ReadLine(), out var a)
+                && int.TryParse(Console.ReadLine(), out var b)
+                && a > 0
+                && b > 0)
+                Console.WriteLine($"Area: {a * b}");
             else
-                Console.WriteLine("Use only positive numbers");
+                throw new ArgumentException("Invalid argument. Use only positive numbers");
         }
     }
 }

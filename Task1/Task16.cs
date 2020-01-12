@@ -10,7 +10,7 @@ namespace Task1
     {
         public static void FontAdjustment()
         {
-            FontStyle currentStyle = new FontStyle();
+            var currentStyle = new FontStyle();
             byte input;
             do
             {
@@ -24,7 +24,7 @@ namespace Task1
                 {
                     if (input > 3)
                     {
-                        Console.WriteLine("Incorrect number.");
+                        Console.WriteLine("Incorrect number");
                         continue;
                     }
                     if (currentStyle.HasFlag((FontStyle)Math.Pow(2, input - 1)))
