@@ -12,10 +12,10 @@ namespace Task7
         public static void EmailFinder()
         {
             Console.WriteLine("Input text:");
-            string str = Console.ReadLine();
-            string filter = @"[a-z0-9]+([_\.\-][a-z0-9]+)*@[a-z0-9]+([\.\-][a-z0-9]+)*\.[a-z]{2,6}";
-            Regex regex = new Regex(filter, RegexOptions.Compiled);
-            MatchCollection result = regex.Matches(str);
+            var str = Console.ReadLine();
+            var filter = @"[a-z0-9]+([_\.\-][a-z0-9]+)*@[a-z0-9]+([\.\-][a-z0-9]+)*\.[a-z]{2,6}";
+            var regex = new Regex(filter, RegexOptions.Compiled);
+            var result = regex.Matches(str);
             if (result.Count > 0)
             {
                 Console.WriteLine("Email addresses found in text:");

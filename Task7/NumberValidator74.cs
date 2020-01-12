@@ -12,7 +12,7 @@ namespace Task7
         public static void NumberValidator()
         {
             Console.WriteLine("Input a number:");
-            string str = Console.ReadLine();
+            var str = Console.ReadLine();
             if (IsScientificNotation(str))
                 Console.WriteLine("Scientific notation");
             else if (IsRegularNotation(str))
@@ -22,14 +22,14 @@ namespace Task7
         }
         public static bool IsRegularNotation(string str)
         {
-            string filter = @"^([+|-]?\d+)(.\d*)?$";
-            Regex regex = new Regex(filter, RegexOptions.Compiled);
+            var filter = @"^([+|-]?\d+)(.\d*)?$";
+            var regex = new Regex(filter, RegexOptions.Compiled);
             return regex.IsMatch(str);
         }
         public static bool IsScientificNotation(string str)
         {
-            string filter = @"\b-?[1-9](?:\.\d+)?[Ee][-+]?\d+\b";
-            Regex regex = new Regex(filter, RegexOptions.Compiled);
+            var filter = @"\b-?[1-9](?:\.\d+)?[Ee][-+]?\d+\b";
+            var regex = new Regex(filter, RegexOptions.Compiled);
             return regex.IsMatch(str);
         }
     }

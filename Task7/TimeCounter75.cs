@@ -12,9 +12,9 @@ namespace Task7
         public static void TimeCounter()
         {
             Console.WriteLine("Input text:");
-            string str = Console.ReadLine();
-            string filter = @"\b([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\b";
-            Regex regex = new Regex(filter, RegexOptions.Compiled);
+            var str = Console.ReadLine();
+            var filter = @"\b([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\b";
+            var regex = new Regex(filter, RegexOptions.Compiled);
             var result = regex.Matches(str).Count;
             Console.WriteLine($"Time is present in the text {result} times");
         }

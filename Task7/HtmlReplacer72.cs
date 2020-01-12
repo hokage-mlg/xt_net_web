@@ -12,13 +12,12 @@ namespace Task7
         public static void HtmlReplacer()
         {
             Console.WriteLine("Input text:");
-            string str = Console.ReadLine();
-            string filter = @"<\/?[\w\s]*>|<.+[\W]>";
-            string target = "_";
-            Regex regex = new Regex(filter, RegexOptions.Compiled);
-            string result = regex.Replace(str, target);
-            Console.WriteLine("Result:");
-            Console.WriteLine(result);
+            var str = Console.ReadLine();
+            var filter = @"<\/?[\w\s]*>|<.+[\W]>";
+            var target = "_";
+            var regex = new Regex(filter, RegexOptions.Compiled);
+            var result = regex.Replace(str, target);
+            Console.WriteLine($"Result:\n{result}");
         }
     }
 }
