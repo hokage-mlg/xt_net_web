@@ -1,0 +1,23 @@
+body>div {
+    position: relative;
+    width: 400px;
+}
+
+.header {
+    font-size: 14pt;
+    padding: 10px;
+    color: white;
+    background-color: #008b66;
+}
+
+.content {
+    position: absolute;
+    right: 0;
+    top: 35px;
+    width: 350px;
+    border: white solid 1px;
+    border-right: none;
+    padding: 10px;
+    font-size: 12pt;
+    background-color: #dfe6e1;
+}

@@ -1,0 +1,15 @@
+ul {
+    width: 200px;
+    background-color: #f9e497;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow: 5px 5px maroon;
+}
+
+li {
+    list-style-type: none;
+    color: maroon;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+}

@@ -1,0 +1,55 @@
+body {
+    font: 12px Tahoma, Arial, sans-serif;
+    background: #4e6379;
+}
+
+.hosting {
+    background: #fff;
+    overflow: hidden;
+    width: 602px;
+    background: #fff;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    margin: auto;
+}
+
+.item {
+    float: left;
+    width: 200px;
+    border-left: 1px solid #d9d9d9;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.item:first-child {
+    border: none;
+}
+
+.icon {
+    width: 61px;
+    height: 42px;
+    background: url(hosting.png) no-repeat;
+    margin: auto;
+}
+
+.cloud {
+    background-position: 0 -42px;
+}
+
+.dedicated {
+    background-position: 0 -84px;
+}
+
+h3 {
+    color: #f56332;
+}
+
+.button {
+    background: #f56332;
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}

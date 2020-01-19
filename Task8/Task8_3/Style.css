@@ -1,0 +1,87 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    display: inline-block;
+    padding: 0px 5px;
+    padding-top: 3px;
+    position: relative;
+    height: 28px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+}
+
+li.item {
+    padding-top: 5px;
+    margin-left: 30px;
+}
+
+ul.submenu {
+    display: none;
+    border: 1px solid #555;
+    border-radius: 0 5px 5px 5px;
+    overflow: hidden;
+    box-shadow: 0 0px 3px 2px #888;
+}
+
+li.item:hover {
+    border: 1px solid #555;
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    box-shadow: 0 0 3px 2px #888;
+}
+
+li.item:hover::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: #fff;
+    left: -1px;
+    bottom: -4px;
+    border-left: 1px solid #555;
+    border-right: 1px solid #555;
+}
+
+li.subitem {
+    padding-right: 30px;
+    margin: 3px 3px;
+}
+
+.item>a,
+.item>a:visited {
+    color: #0057F2;
+}
+
+.item:hover a {
+    text-decoration: none;
+    color: black;
+}
+
+.item:hover ul.submenu {
+    display: inline-block;
+    position: absolute;
+    left: -1px;
+    top: 30px;
+    z-index: -1;
+}
+
+.item:hover li {
+    display: block;
+}
+
+.item:hover li.subitem a {
+    color: #0057F2;
+}
+
+.item:hover li.subitem:hover {
+    background: #37ABFF;
+}
+
+.item:hover li.subitem:hover a {
+    color: white;
+}
