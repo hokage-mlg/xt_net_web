@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="/Task3/task9_3.js"></script>
+    <style>
+        select {
+            width: 150px;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        body>div {
+            position: relative;
+            display: inline-block;
+        }
+
+        body> :nth-child(2) {
+            margin: 0 20px 0 20px;
+        }
+
+        button {
+            width: 35px;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="main">Available</div>
+        <select multiple id="left">
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+            <option>Option 4</option>
+            <option>Option 5</option>
+        </select>
+    </div>
+    <div>
+        <button onclick="moveAll(document.getElementById('left'),document.getElementById('right'))">>></button> <br>
+        <button onclick="moveSelected(document.getElementById('left'),document.getElementById('right'))">></button> <br>
+        <button onclick="moveSelected(document.getElementById('right'),document.getElementById('left'))"><</button> <br>
+        <button onclick="moveAll(document.getElementById('right'),document.getElementById('left'))"><<</button> </div> <div>
+        <div class="main">Selected</div>
+        <select multiple id="right"></select>
+    </div>
+</body>
+
+</html>
