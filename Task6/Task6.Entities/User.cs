@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
 
 namespace Task6.Entities
 {
     public class User
     {
+        public User()
+        {
+            using (System.Net.WebClient webClient = new System.Net.WebClient())
+            {
+                UserImage = webClient.DownloadData("https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png");
+            }
+            _awards = new Dictionary<int, Award>();
+        }
         private Dictionary<int, Award> _awards;
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public User()
-        {
-            _awards = new Dictionary<int, Award>();
-        }
+        public byte[] UserImage { get; set; }
+        
         public Dictionary<int, Award> Awards
         {
             get { return _awards; }

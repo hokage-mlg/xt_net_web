@@ -1,0 +1,60 @@
+﻿@using Task10.Models;
+@{
+    Layout = null;
+    string errorMessage = null;
+    int id = 0;
+    string info = null;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["Id"], out id))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            var award = AwardService.ShowAward(id);
+            info = award.ToString();
+            <div class="alert alert-info">@info</div>
+            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(award.AwardImage))">
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show Award</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    @if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <form action="~/Pages/Awards/ShowAward.cshtml" method="post">
+        <div>
+            <label>Id: </label>
+            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Awards/Awards';
+        });
+    </script>
+</body>
+</html>

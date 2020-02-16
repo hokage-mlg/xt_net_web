@@ -13,7 +13,10 @@ namespace Task6.DAL
     public class AwardDao : IAwardDao
     {
         private readonly Dictionary<int, Award> _awards;
-        private static readonly string _fPath = @".awards.json";
+        private static readonly string _fPath = @"D:\Studying\EpamXT\TasksVasin\Task6\Task6.PL\bin\Debug\.awards.json";
+
+        public event Action<int> DeleteAward = delegate { };
+
         public AwardDao()
         {
             if (File.Exists(_fPath))
@@ -52,6 +55,27 @@ namespace Task6.DAL
             using (StreamWriter streamW = new StreamWriter(File.Open(_fPath, FileMode.Create)))
                 streamW.Write(JsonConvert.SerializeObject(_awards));
             File.SetAttributes(_fPath, FileAttributes.Hidden);
+        }
+        public bool RemoveById(int id)
+        {
+            bool removeResult = _awards.Remove(id);
+            if (removeResult)
+                DeleteAward?.Invoke(id);
+            return removeResult;
+        }
+        public void AddUserToAward(int awardId, int userId)
+        {
+            _awards[awardId].Users.Add(userId);
+        }
+        public void RemoveUserFromAward(int awardId, int userId)
+        {
+            _awards[awardId].Users.Remove(userId);
+        }
+        public void OnDeleteUserHandler(int userId)
+        {
+            foreach (var award in _awards)
+                award.Value.Users.Remove(userId);
+            WriteAwards();
         }
         ~AwardDao()
         {

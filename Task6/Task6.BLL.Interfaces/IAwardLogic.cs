@@ -12,5 +12,8 @@ namespace Task6.BLL.Interfaces
         Award Add(Award award);
         Award GetById(int id);
         IEnumerable<Award> GetAll();
+        bool RemoveById(int id);
+        void AddUserToAward(int awardId, int userId);
+        void RemoveUserFromAward(int awardId, int userId);
     }
 }

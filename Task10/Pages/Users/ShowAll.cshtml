@@ -1,0 +1,49 @@
+﻿@using Task10.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show All Users</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    <ul class="list-group list-group-flush">
+        @{
+            var users = UserService.GetAll();
+            if (!users.Any())
+            {
+                <li class="list-group-item">
+                    Users is empty.
+                </li>
+            }
+
+            foreach (var user in users)
+            {
+                <li class="list-group-item">
+                    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToString(user.UserImage))">
+                    @user.ToString()
+                </li>
+            }
+        }
+    </ul>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Users/Users';
+        });
+    </script>
+</body>
+</html>

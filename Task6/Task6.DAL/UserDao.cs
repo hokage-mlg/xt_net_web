@@ -13,7 +13,10 @@ namespace Task6.DAL
     public class UserDao : IUserDao
     {
         private readonly Dictionary<int, User> _users;
-        private static readonly string _fPath = @".users.json";
+        private static string _fPath = @"D:\Studying\EpamXT\TasksVasin\Task6\Task6.PL\bin\Debug\.users.json";
+
+        public event Action<int, int> RemoveAward = delegate { };
+
         public UserDao()
         {
             if (File.Exists(_fPath))
@@ -59,13 +62,26 @@ namespace Task6.DAL
                 WriteUsers();
             return given;
         }
-        private void WriteUsers()
+        public void WriteUsers()
         {
             if (File.Exists(_fPath))
                 File.Delete(_fPath);
             using (StreamWriter streamW = new StreamWriter(File.Open(_fPath, FileMode.Create)))
                 streamW.Write(JsonConvert.SerializeObject(_users));
             File.SetAttributes(_fPath, FileAttributes.Hidden);
+        }
+        public bool TakeAwayAward(int id, int awardId)
+        {
+            bool takeResult = _users[id].Awards.Remove(awardId);
+            if (takeResult)
+                RemoveAward?.Invoke(awardId, id);
+            return takeResult;
+        }
+        public void OnDeleteAwardHandler(int awardId)
+        {
+            foreach (var user in _users)
+                user.Value.Awards.Remove(awardId);
+            WriteUsers();
         }
         ~UserDao()
         {

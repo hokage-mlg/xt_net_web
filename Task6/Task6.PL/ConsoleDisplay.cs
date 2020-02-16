@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task6.PL
 {
-    class ConsoleDisplay
+    public class ConsoleDisplay
     {
         public static void MenuDisplay()
         {
@@ -26,6 +26,7 @@ namespace Task6.PL
             Console.WriteLine("3. Show all users.");
             Console.WriteLine("4. Delete user by ID.");
             Console.WriteLine("5. Reward user.");
+            Console.WriteLine("6. Take award from user.");
             Console.WriteLine("0. Exit.");
         }
         public static void AwardMenuDisplay()

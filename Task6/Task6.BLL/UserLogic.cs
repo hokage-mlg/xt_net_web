@@ -18,5 +18,6 @@ namespace Task6.BLL
         public bool RemoveById(int id) => _userDao.RemoveById(id);
         public IEnumerable<User> GetAll() => _userDao.GetAll();
         public bool GiveAward(int id, Award award) => _userDao.GiveAward(id, award);
+        public bool TakeAwayAward(int id, int awardId) => _userDao.TakeAwayAward(id, awardId);
     }
 }

@@ -9,10 +9,10 @@ using Task6.Common;
 
 namespace Task6.PL
 {
-    class ChoiceMode
+    public class ChoiceMode
     {
-        private static IUserLogic _userLogic = DependencyResolver.UserLogic;
-        private static IAwardLogic _awardLogic = DependencyResolver.AwardLogic;
+        public static IUserLogic _userLogic = DependencyResolver.UserLogic;
+        public static IAwardLogic _awardLogic = DependencyResolver.AwardLogic;
         public static void UserMode()
         {
             while (true)
@@ -83,6 +83,34 @@ namespace Task6.PL
                             Console.ReadLine();
                             break;
                         }
+                    case 6:
+                        {
+                            ShowAllUsers();
+                            Console.WriteLine("Select user to take award from.");
+                            User user = _userLogic.GetById(GetId());
+                            if (user == null)
+                            {
+                                Console.WriteLine("User with this ID does not exist.");
+                                break;
+                            }
+                            ShowAllAwards();
+                            Console.WriteLine("Select award to take from user.");
+                            Award award = _awardLogic.GetById(GetId());
+                            if (award == null)
+                            {
+                                Console.WriteLine("Award with this ID does not exist.");
+                                break;
+                            }
+                            if (_userLogic.TakeAwayAward(user.Id, award.Id))
+                            {
+                                _awardLogic.RemoveUserFromAward(awardId: award.Id, userId: user.Id);
+                                Console.WriteLine("The award {0} has been taken from user {1}.", award.Title, user.Name);
+                            }
+                            else
+                                Console.WriteLine("Can't take award.");
+                            Console.ReadLine();
+                            break;
+                        }
                     case 0:
                         break;
                     default:
@@ -100,7 +128,7 @@ namespace Task6.PL
             else
                 Console.WriteLine(user);
         }
-        private static void ShowAllUsers()
+        public static void ShowAllUsers()
         {
             IEnumerable<User> users = _userLogic.GetAll();
             if (users.Count() == 0)

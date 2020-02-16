@@ -1,0 +1,89 @@
+﻿@using Task6;
+@{
+    Layout = null;
+    string errorMessage = null;
+    string userID = null;
+    string name;
+    DateTime birth;
+    if (IsPost)
+    {
+        HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files[0] : null;
+        byte[] bytes = null;
+        name = Request["Name"];
+        if (!DateTime.TryParse(Request["Birth"], out birth))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            var user = new Task6.Entities.User()
+            {
+                Name = name,
+                DateOfBirth = birth,
+                UserImage = bytes
+            };
+            Task10.Models.UserService.AddUser(user);
+            userID = user.Id.ToString();
+        }
+        if (file.ContentLength != 0)
+        {
+            bytes = new byte[file.ContentLength];
+            file.InputStream.Read(bytes, 0, bytes.Length);
+        }
+        else
+        {
+            bytes = File.ReadAllBytes(@"D:\Downloads\pic1.png");
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add User</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    @if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    @if (userID != null)
+    {
+        <div class="alert alert-info">User added with ID: @userID</div>
+    }
+    <form action="~/Pages/Users/AddUser.cshtml" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Name: </label>
+            <input class="form-control" style="width:200px" type="text" name="Name" id="Name" />
+        </div>
+        <div>
+            <label>Date of birth:</label>
+            <input class="form-control" style="width:200px" type="date" name="Birth" id="Birth" />
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" name="image" id="image" accept=".png">
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Users/Users';
+        });
+    </script>
+</body>
+</html>

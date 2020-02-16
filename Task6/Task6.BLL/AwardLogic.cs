@@ -16,5 +16,14 @@ namespace Task6.BLL
         public Award Add(Award award) => _awardDao.Add(award);
         public Award GetById(int id) => _awardDao.GetById(id);
         public IEnumerable<Award> GetAll() => _awardDao.GetAll();
+        public bool RemoveById(int id) => _awardDao.RemoveById(id);
+        public void AddUserToAward(int awardId, int userId)
+        {
+            _awardDao.AddUserToAward(awardId, userId);
+        }
+        public void RemoveUserFromAward(int awardId, int userId)
+        {
+            _awardDao.RemoveUserFromAward(awardId, userId);
+        }
     }
 }

@@ -1,0 +1,70 @@
+﻿@using Task10.Models;
+@{
+    Layout = null;
+    string awardId = null;
+    string title;
+    if (IsPost)
+    {
+        title = Request["Title"];
+        HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files[0] : null;
+        byte[] bytes = null;
+        if (file.ContentLength != 0)
+        {
+            bytes = new byte[file.ContentLength];
+            file.InputStream.Read(bytes, 0, bytes.Length);
+        }
+        else
+        {
+            bytes = File.ReadAllBytes(@"D:\Downloads\pic1.png");
+        }
+        var award = new Task6.Entities.Award()
+        {
+            Title = title,
+            AwardImage = bytes
+        };
+        AwardService.AddAward(award);
+        awardId = award.Id.ToString();
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Award</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    @if (awardId != null)
+    {
+        <div class="alert alert-info">Award added with ID: @awardId</div>
+    }
+    <form action="~/Pages/Awards/AddAward.cshtml" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Title: </label>
+            <input class="form-control" style="width:200px" type="text" name="Title" id="Title" />
+        </div>
+        <div>
+            <label for="image">Image</label>
+            <input type="file" class="form-control" name="image" id="image" accept=".png">
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Awards/Awards';
+        });
+    </script>
+</body>
+</html>

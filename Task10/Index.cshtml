@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Menu</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    <h1>Menu</h1>
+    <button id="btn_user" class="btn btn-primary" style="width:200px">User mode</button>
+    <button id="btn_award" class="btn btn-primary" style="width:200px">Award mode</button>
+    <script>
+        $('#btn_user').click(function () {
+            location.href = '/Pages/Users/Users';
+        });
+    </script>
+    <script>
+        $('#btn_award').click(function () {
+            location.href = '/Pages/Awards/Awards';
+        });
+    </script>
+</body>
+</html>
