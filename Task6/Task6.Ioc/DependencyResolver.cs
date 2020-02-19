@@ -23,5 +23,9 @@ namespace Task6.Common
             UserLogic = new UserLogic(UserDao);
             AwardLogic = new AwardLogic(AwardDao);
         }
+        private static IUserWebDao _userWebDao;
+        public static IUserWebDao UserWebDao => _userWebDao ?? (_userWebDao = new UserWebDao());
+        private static IUserWebLogic _userWebLogic;
+        public static IUserWebLogic UserWebLogic => _userWebLogic ?? (_userWebLogic = new UserWebLogic(UserWebDao));
     }
 }

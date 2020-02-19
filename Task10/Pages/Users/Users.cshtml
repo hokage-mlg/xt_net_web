@@ -18,13 +18,21 @@
             background: #d1d1d1;
         }
     </style>
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+
+    }
     <h1>Users menu</h1>
-    <button id="btn_add" class="btn btn-primary" style="width:200px"> Add user</button>
-    <button id="btn_show" class="btn btn-primary" style="width:200px">Show user by ID</button>
     <button id="btn_show_all" class="btn btn-primary" style="width:200px"> Show all users</button>
-    <button id="btn_delete" class="btn btn-primary" style="width:200px">Delete user by ID</button>
-    <button id="btn_reward" class="btn btn-primary" style="width:200px"> Reward user</button>
-    <button id="btn_remove_reward" class="btn btn-primary" style="width:200px"> Remove reward</button>
+    @if (User.IsInRole("Admin"))
+    {
+        <button id="btn_add" class="btn btn-primary" style="width:200px"> Add user</button>
+        <button id="btn_show" class="btn btn-primary" style="width:200px">Show user by ID</button>
+        <button id="btn_delete" class="btn btn-primary" style="width:200px">Delete user by ID</button>
+        <button id="btn_reward" class="btn btn-primary" style="width:200px"> Reward user</button>
+        <button id="btn_remove_reward" class="btn btn-primary" style="width:200px"> Remove reward</button>
+    }
     <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
     <script>
         $('#btn_add').click(function () {
@@ -59,6 +67,11 @@
     <script>
         $('#btn_exit').click(function () {
             location.href = '/Index';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
         });
     </script>
 </body>

@@ -18,7 +18,7 @@ namespace Task6.Entities
             }
             _awards = new Dictionary<int, Award>();
         }
-        private Dictionary<int, Award> _awards;
+        public Dictionary<int, Award> _awards;
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }

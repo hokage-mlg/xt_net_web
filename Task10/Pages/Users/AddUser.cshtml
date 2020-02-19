@@ -10,6 +10,15 @@
         HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files[0] : null;
         byte[] bytes = null;
         name = Request["Name"];
+        if (file.ContentLength != 0)
+        {
+            bytes = new byte[file.ContentLength];
+            file.InputStream.Read(bytes, 0, bytes.Length);
+        }
+        else
+        {
+            bytes = File.ReadAllBytes(@"D:\Downloads\pic1.png");
+        }
         if (!DateTime.TryParse(Request["Birth"], out birth))
         {
             errorMessage = "Incorrect values!";
@@ -25,15 +34,6 @@
             };
             Task10.Models.UserService.AddUser(user);
             userID = user.Id.ToString();
-        }
-        if (file.ContentLength != 0)
-        {
-            bytes = new byte[file.ContentLength];
-            file.InputStream.Read(bytes, 0, bytes.Length);
-        }
-        else
-        {
-            bytes = File.ReadAllBytes(@"D:\Downloads\pic1.png");
         }
     }
 }
@@ -54,6 +54,11 @@
             background: #d1d1d1;
         }
     </style>
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+
+    }
     @if (errorMessage != null)
     {
         <div class="alert alert-danger">@errorMessage</div>
@@ -83,6 +88,11 @@
     <script>
         $('#btn_exit').click(function () {
             location.href = '/Pages/Users/Users';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
         });
     </script>
 </body>

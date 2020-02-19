@@ -47,6 +47,7 @@
     <Compile Include="AwardDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDao.cs" />
+    <Compile Include="UserWebDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Task6.DAL.Interfaces\Task6.DAL.Interfaces.csproj">

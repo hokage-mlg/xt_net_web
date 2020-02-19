@@ -191,6 +191,9 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
@@ -257,6 +260,9 @@
     <Content Include="Pages\Awards\ShowAward.cshtml" />
     <Content Include="Pages\Awards\ShowAll.cshtml" />
     <Content Include="Pages\Users\RemoveReward.cshtml" />
+    <Content Include="Pages\Login\Login.cshtml" />
+    <Content Include="Pages\Login\SignOut.cshtml" />
+    <Content Include="Pages\Admin\GiveRole.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -337,7 +343,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AwardService.cs" />
+    <Compile Include="Models\MyRoleProvider.cs" />
     <Compile Include="Models\UserService.cs" />
+    <Compile Include="Models\WebUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

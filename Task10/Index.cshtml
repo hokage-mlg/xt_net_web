@@ -16,9 +16,27 @@
             background: #d1d1d1;
         }
     </style>
+    <div>
+        @if (User.IsInRole("Admin") || User.IsInRole("User"))
+        {
+            <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+
+        }
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="alert alert-light">
+                Панель управления
+                <button id="btn_give_role" class="btn btn-danger" style="width:100px">Give role</button>
+            </div>
+        }
+    </div>
     <h1>Menu</h1>
     <button id="btn_user" class="btn btn-primary" style="width:200px">User mode</button>
-    <button id="btn_award" class="btn btn-primary" style="width:200px">Award mode</button>
+    @if (User.IsInRole("Admin"))
+    {
+        <button id="btn_award" class="btn btn-primary" style="width:200px">Award mode</button>
+    }
+    <button id="btn_login" class="btn btn-primary" style="width:200px">Login</button>
     <script>
         $('#btn_user').click(function () {
             location.href = '/Pages/Users/Users';
@@ -27,6 +45,21 @@
     <script>
         $('#btn_award').click(function () {
             location.href = '/Pages/Awards/Awards';
+        });
+    </script>
+    <script>
+        $('#btn_login').click(function () {
+            location.href = '/Pages/Login/Login';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
+        });
+    </script>
+    <script>
+        $('#btn_give_role').click(function () {
+            location.href = '/Pages/Admin/GiveRole';
         });
     </script>
 </body>

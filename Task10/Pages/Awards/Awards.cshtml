@@ -18,6 +18,11 @@
             background: #d1d1d1;
         }
     </style>
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+
+    }
     <h1>Awards menu</h1>
     <button id="btn_add" class="btn btn-primary" style="width:200px">Add award</button>
     <button id="btn_show" class="btn btn-primary" style="width:200px">Show award by ID</button>
@@ -41,6 +46,11 @@
     <script>
         $('#btn_exit').click(function () {
             location.href = '/Index';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
         });
     </script>
 </body>
