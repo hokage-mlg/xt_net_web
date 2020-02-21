@@ -17,5 +17,8 @@ namespace Task6.DAL.Interfaces
         bool TakeAwayAward(int id, int awardId);
         event Action<int, int> RemoveAward;
         void OnDeleteAwardHandler(int awardId);
+        bool AddUserImage(int idUser, byte[] byteArrayImage);
+        bool RemoveUserImage(int idUser);
+        byte[] GetUserImage(int idUser);
     }
 }

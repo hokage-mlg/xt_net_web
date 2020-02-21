@@ -83,6 +83,25 @@ namespace Task6.DAL
                 user.Value.Awards.Remove(awardId);
             WriteUsers();
         }
+        public bool AddUserImage(int idUser, byte[] byteArrayImage)
+        {
+            _users.TryGetValue(idUser, out User user);
+            user.UserImage = byteArrayImage;
+            WriteUsers();
+            return true;
+        }
+        public bool RemoveUserImage(int idUser)
+        {
+            _users.TryGetValue(idUser, out User user);
+            user.UserImage = new byte[] { };
+            WriteUsers();
+            return true;
+        }
+        public byte[] GetUserImage(int idUser)
+        {
+            _users.TryGetValue(idUser, out User user);
+            return user.UserImage;
+        }
         ~UserDao()
         {
             WriteUsers();

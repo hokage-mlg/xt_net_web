@@ -1,0 +1,65 @@
+﻿@using Task10FastRepair.Models;
+@{
+    string name = null, pass = null;
+    name = Request["name"];
+    pass = Request["pass"];
+    bool verifyResult = false;
+
+    if (IsPost)
+    {
+        verifyResult = MyRoleProvider.VerifyUser(name, pass);
+        if (verifyResult)
+        {
+            FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
+            Response.Redirect("~");
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    <h1>Login</h1>
+    @if (IsPost && !verifyResult)
+    {
+        <div id="my-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            Ошибка входа.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    <form action="~/Pages/Login/Login.cshtml" method="post">
+        <div>
+            <label>Name: </label>
+            <input class="form-control" style="width:200px" type="text" name="name" id="name" value=@name />
+        </div>
+        <div>
+            <label>Password: </label>
+            <input class="form-control" style="width:200px" type="password" aria-label="Search" name="pass" id="pass" value=@pass />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Login</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Index';
+        });
+    </script>
+</body>
+</html>

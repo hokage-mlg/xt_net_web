@@ -15,5 +15,8 @@ namespace Task6.BLL.Interfaces
         bool RemoveById(int id);
         bool GiveAward(int id, Award award);
         bool TakeAwayAward(int id, int awardId);
+        bool AddUserImage(int idUser, byte[] byteArrayImage);
+        bool RemoveUserImage(int idUser);
+        byte[] GetUserImage(int idUser);
     }
 }

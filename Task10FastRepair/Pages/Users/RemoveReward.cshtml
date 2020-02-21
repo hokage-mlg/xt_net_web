@@ -1,0 +1,162 @@
+﻿@using Task10FastRepair.Models;
+@{
+    string errorMessage = null;
+    int UserId = 0;
+    int AwardId = 0;
+    string status = null;
+    bool flag = false;
+    string message = null;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["UserId"], out UserId) || !int.TryParse(Request["AwardId"], out AwardId))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            var user = UserService.ShowUser(UserId);
+            var award = UserService.ShowAward(AwardId);
+            status = UserService.TakeAwayAward(user.Id, award.Id);
+            message = "Operation completed.";
+            if (!bool.TryParse(Request["forall"], out flag))
+            {
+                if (flag == true)
+                {
+                    UserService.RemoveFromAll(AwardId);
+                }
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Remove Reward</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+
+    }
+    @if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    @if (message != null)
+    {
+        <div class="alert alert-info">@message</div>
+    }
+    <label>All Users: </label>
+    <ul class="list-group list-group-flush">
+        @{
+            var users = UserService.GetAll();
+            if (users == null)
+            {
+                <li class="list-group-item">
+                    Users is empty.
+                </li>
+            }
+
+            foreach (var user in users)
+            {
+                byte[] byteImageArray = WebUI.GetUserImage(user.Id.ToString());
+
+                <li class="list-group-item">
+                    @try
+                    {
+                        WebImage photo = new WebImage(byteImageArray);
+                        if (photo != null)
+                        {
+                            <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
+                        }
+                    }
+                    catch
+                    {
+                        <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
+                    }
+                    @user.ToString()
+                </li>
+            }
+        }
+    </ul>
+    <label>All Awards: </label>
+    <ul class="list-group list-group-flush">
+        @{
+            var awards = AwardService.GetAll();
+            if (awards == null)
+            {
+                <li class="list-group-item">
+                    Awards is empty.
+                </li>
+            }
+            foreach (var award in awards)
+            {
+                <li class="list-group-item">
+                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(award.AwardImage))">
+                    @award.ToString()
+                </li>
+            }
+        }
+    </ul>
+    <form action="~/Pages/Users/RemoveReward.cshtml" method="post">
+        <div>
+            <label>Select the user ID from which you want to take the award: </label>
+            <input class="form-control" style="width:200px" type="text" name="UserID" id="UserID" />
+        </div>
+        <br />
+        <div>
+            <label>Select the award ID that you whant to take: </label>
+            <input class="form-control" style="width:200px" type="text" name="AwardId" id="AwardId" />
+        </div>
+        <br />
+        <label for="forall"><input type="checkbox" id="forall" name="forall" value="" onchange="enableSubmission();" /> Delete for all Users?</label>
+        <br />
+        <button type="submit" id="submit" class="btn btn-info" style="width:200px">Submit</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        function enableSubmission() {
+            @flag=!@flag
+            @{
+                if (flag == true)
+                {
+                UserService.RemoveFromAll(AwardId);
+                }
+            }
+        }
+    </script>
+    <script>
+        $("input[type=checkbox]").change(function () {
+            if ($(this).prop("checked")) {
+                $(this).val(true);
+            } else {
+                $(this).val(false);
+            }
+        });
+    </script>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Users/Users';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
+        });
+    </script>
+</body>
+</html>

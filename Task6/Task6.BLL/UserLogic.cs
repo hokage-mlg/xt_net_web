@@ -19,5 +19,8 @@ namespace Task6.BLL
         public IEnumerable<User> GetAll() => _userDao.GetAll();
         public bool GiveAward(int id, Award award) => _userDao.GiveAward(id, award);
         public bool TakeAwayAward(int id, int awardId) => _userDao.TakeAwayAward(id, awardId);
+        public bool AddUserImage(int idUser, byte[] byteArrayImage) => _userDao.AddUserImage(idUser, byteArrayImage);
+        public bool RemoveUserImage(int idUser) => _userDao.RemoveUserImage(idUser);
+        public byte[] GetUserImage(int idUser) => _userDao.GetUserImage(idUser);
     }
 }

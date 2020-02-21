@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Awards</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+    }
+    <h1>Awards menu</h1>
+    <button id="btn_add" class="btn btn-primary" style="width:200px">Add award</button>
+    <button id="btn_show" class="btn btn-primary" style="width:200px">Show award by ID</button>
+    <button id="btn_show_all" class="btn btn-primary" style="width:200px"> Show all awards</button>
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_add').click(function () {
+            location.href = '/Pages/Awards/AddAward';
+        });
+    </script>
+    <script>
+        $('#btn_show').click(function () {
+            location.href = '/Pages/Awards/ShowAward';
+        });
+    </script>
+    <script>
+        $('#btn_show_all').click(function () {
+            location.href = '/Pages/Awards/ShowAll';
+        });
+    </script>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Index';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
+        });
+    </script>
+</body>
+</html>

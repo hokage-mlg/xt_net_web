@@ -1,0 +1,84 @@
+﻿@using Task10FastRepair.Models;
+@{
+    if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+    }
+    string errorMessage = null;
+    int id = 0;
+    string info = null;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["Id"], out id))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            var user = UserService.ShowUser(id);
+            info = user.ToString();
+            byte[] byteImageArray = WebUI.GetUserImage(user.Id.ToString());
+            try
+            {
+                WebImage photo = new WebImage(byteImageArray);
+                if (photo != null)
+                {
+                    <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
+                    <div class="alert alert-info">@info</div>
+
+                }
+            }
+            catch
+            {
+                <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
+                <div class="alert alert-info">@info</div>
+            }
+
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show User</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+
+    @if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <form action="~/Pages/Users/ShowUser.cshtml" method="post">
+        <div>
+            <label>Id: </label>
+            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Users/Users';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
+        });
+    </script>
+</body>
+</html>

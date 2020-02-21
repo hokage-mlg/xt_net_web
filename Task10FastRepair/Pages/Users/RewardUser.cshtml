@@ -1,0 +1,134 @@
+﻿@using Task10FastRepair.Models;
+@{
+    string errorMessage = null;
+    int UserId = 0;
+    int AwardId = 0;
+    string status = null;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["UserId"], out UserId) || !int.TryParse(Request["AwardId"], out AwardId))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            var user = UserService.ShowUser(UserId);
+            var award = UserService.ShowAward(AwardId);
+            if (UserService.GiveAward(user.Id, award))
+            {
+                status = "The award was successfully presented.";
+            }
+            else
+            {
+                status = "An error occurred during the presentation of award.";
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reward Users</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background: #d1d1d1;
+        }
+    </style>
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    {
+        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
+    }
+    @if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    @if (status != null)
+    {
+        <div class="alert alert-info">@status</div>
+    }
+    <label>All Users: </label>
+    <ul class="list-group list-group-flush">
+        @{
+            var users = UserService.GetAll();
+            if (!users.Any())
+            {
+                <li class="list-group-item">
+                    Users is empty.
+                </li>
+            }
+            foreach (var user in users)
+            {
+                byte[] byteImageArray = WebUI.GetUserImage(user.Id.ToString());
+                <li class="list-group-item">
+                    @try
+                    {
+                        WebImage photo = new WebImage(byteImageArray);
+                        if (photo != null)
+                        {
+                            <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
+                        }
+                    }
+                    catch
+                    {
+                        <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
+                    }
+                    @user.ToString()
+                </li>
+            }
+        }
+    </ul>
+    <label>All Awards: </label>
+    <ul class="list-group list-group-flush">
+        @{
+            var awards = AwardService.GetAll();
+            if (!awards.Any())
+            {
+                <li class="list-group-item">
+                    Awards is empty.
+                </li>
+            }
+            foreach (var award in awards)
+            {
+                <li class="list-group-item">
+                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(award.AwardImage))">
+                    @award.ToString()
+                </li>
+            }
+        }
+    </ul>
+    <form action="~/Pages/Users/RewardUser.cshtml" method="post">
+        <div>
+            <label>Select the user ID which you want to give an award: </label>
+            <input class="form-control" style="width:200px" type="text" name="UserID" id="UserID" />
+        </div>
+        <br />
+        <div>
+            <label>Select the award ID that you whant to give: </label>
+            <input class="form-control" style="width:200px" type="text" name="AwardId" id="AwardId" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+    <br />
+    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    <script>
+        $('#btn_exit').click(function () {
+            location.href = '/Pages/Users/Users';
+        });
+    </script>
+    <script>
+        $('#btn_signout').click(function () {
+            location.href = '/Pages/Login/SignOut';
+        });
+    </script>
+</body>
+</html>
