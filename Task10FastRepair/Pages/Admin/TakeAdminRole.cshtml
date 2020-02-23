@@ -1,5 +1,4 @@
 ﻿@using Task10FastRepair.Models;
-@using Task6;
 @{
     string login = null;
     string role = null;
@@ -9,7 +8,7 @@
     if (IsPost)
     {
         info = "Operation completed.";
-        MyRoleProvider.AddUserRole(login, role);
+        MyRoleProvider.TakeRole(login, "Admin");
     }
 }
 
@@ -18,7 +17,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Give Role</title>
+    <title>Take Admin Role</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.0.0.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
@@ -30,7 +29,7 @@
         }
     </style>
     <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-    <h1>Give Role</h1>
+    <h1>Take Admin Role</h1>
     @if (info != null)
     {
         <div class="alert alert-info">@info</div>
@@ -53,14 +52,10 @@
         }
     </ul>
     <br />
-    <form action="~/Pages/Admin/GiveRole.cshtml" method="post">
+    <form action="~/Pages/Admin/TakeAdminRole.cshtml" method="post">
         <div>
             <label>Login: </label>
             <input class="form-control" style="width:200px" type="text" name="Login" id="Login" />
-        </div>
-        <div>
-            <label>Role name: </label>
-            <input class="form-control" style="width:200px" type="text" name="Role" id="Role" />
         </div>
         <br />
         <button class="btn btn-primary" style="width:200px">Submit</button>

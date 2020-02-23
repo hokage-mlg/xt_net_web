@@ -82,7 +82,6 @@ namespace Task11.DAL
                         Password = (string)res["Password"],
                         Roles = new string[] { }
                     };
-
                     while ((string)res["Login"] == webUser.Login)
                     {
                         webUser.Roles = new string[] { (string)res["Name"] };
@@ -95,6 +94,19 @@ namespace Task11.DAL
                     usersWeb.Add(webUser);
                 }
                 return usersWeb;
+            }
+        }
+        public bool RemoveRole(string login, string role)
+        {
+            using (var connection = new SqlConnection(_con_str))
+            {
+                connection.Open();
+                var cmd = new SqlCommand("procedure_RemoveRole", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Login", login);
+                cmd.Parameters.AddWithValue("RoleName", role);
+                int res = cmd.ExecuteNonQuery();
+                return res != 0;
             }
         }
     }

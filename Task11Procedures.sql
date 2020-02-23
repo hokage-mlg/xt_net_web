@@ -155,3 +155,15 @@ as
 	join web_users_roles on WebUserId = Id
 	join roles on RoleId = roles.Id
 go
+
+create procedure [dbo].[procedure_RemoveRole]
+	@Login nvarchar(50),
+	@RoleName nvarchar(50)
+as
+	delete from web_users_roles
+	where 
+	WebUserId = 
+	(select Id from web_users where Login = @Login) and
+	RoleId = 
+	(select Id from roles where Name = @RoleName)
+go
