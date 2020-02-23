@@ -87,7 +87,22 @@
                     {
                         <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
                     }
-                    @user.ToString()
+                    @{
+                        @UserService.PrintUser(user)
+                        Task11.DAL.AwardDao praw = new Task11.DAL.AwardDao();
+                        var res = praw.GetAwardsByUserId(user.Id);
+                        var str = " Awards: ";
+                        var titles = "";
+                        if (res.Any())
+                        {
+                            @str
+                            foreach (var i in res)
+                            {
+                                titles = i.Title.ToString() + "; ";
+                                @titles
+                            }
+                        }
+                    }
                 </li>
             }
         }

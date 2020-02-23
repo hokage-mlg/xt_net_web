@@ -20,5 +20,17 @@ namespace Task6.Entities
         public IList<int> Users { get; } = new List<int>();
         public byte[] AwardImage { get; set; }
         public override string ToString() => $"ID: {Id}. Title: {Title}.";
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            var tmp = obj as Award;
+            if (tmp == null)
+                return false;
+            if (Id != tmp.Id ||
+                Title != tmp.Title)
+                return false;
+            return true;
+        }
     }
 }

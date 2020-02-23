@@ -251,6 +251,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Task11.DAL\Task11.DAL.csproj">
+      <Project>{af0b6e6e-2c91-4c53-8ee5-a2ca276fb775}</Project>
+      <Name>Task11.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Task6\Task6.BLL.Interfaces\Task6.BLL.Interfaces.csproj">
       <Project>{7523efd4-28b9-42de-a5d6-634730418708}</Project>
       <Name>Task6.BLL.Interfaces</Name>

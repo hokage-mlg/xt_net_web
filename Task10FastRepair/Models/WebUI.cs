@@ -4,7 +4,7 @@ using Task6.BLL.Interfaces;
 using Task6.Common;
 using Task6.Entities;
 using Task6.BLL;
-
+using Task11.DAL;
 namespace Task10FastRepair.Models
 {
     public static class WebUI
@@ -19,7 +19,7 @@ namespace Task10FastRepair.Models
         }
         public static IEnumerable<UserWeb> GetListUsers()
         {
-            var users = new Task6.DAL.UserWebDao();
+            var users = new UserWebDao();
             return users.GetAll();
         }
         public static string PrintWebUsers(UserWeb user) => $"Login:{user.Login}; Role:{user.Roles[0]}";
