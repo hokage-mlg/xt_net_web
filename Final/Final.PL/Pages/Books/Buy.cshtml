@@ -1,6 +1,8 @@
 ﻿@using Final.Ioc;
 @using Final.Entities;
 @using System.Web.Mvc;
+@using System.Web.Helpers;
+
 @{
     Page.Title = "BuyBook";
     Layout = "~/Layouts/_MainLayout.cshtml";
@@ -32,8 +34,7 @@
 {
     <div class="alert alert-info">Purchase added with ID: @purchaseId</div>
 }
-<form action="~/Pages/Books/Buy.cshtml" method="post" enctype="multipart/form-data">
-    <input type="hidden" value="@ViewBag.Id" name="Id"/>
+<form action="" method="post" enctype="multipart/form-data">
     <div>
         <label>Full name: </label>
         <input class="form-control" style="width:200px" type="text" name="FullName" id="FullName" />

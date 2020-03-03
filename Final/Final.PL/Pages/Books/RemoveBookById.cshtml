@@ -1,10 +1,9 @@
 ﻿@using Final.Ioc;
 @{
-    Page.Title = "Get Book By Id";
+    Page.Title = "Remove Book By Id";
     Layout = "~/Layouts/_MainLayout.cshtml";
     string errorMessage = null;
     int id = 0;
-    string info = null;
     if (IsPost)
     {
         if (!int.TryParse(Request["Id"], out id))
@@ -14,24 +13,24 @@
         else
         {
             errorMessage = null;
-            try
+            if (DependencyResolver.BookLogic.RemoveById(id))
             {
-                var book = DependencyResolver.BookLogic.GetById(id);
-                info = book.ToString();
-                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(book.BookImage))">
-                <div class="alert alert-info">@info</div>
+                <div class="alert alert-info">Operation was completed</div>
             }
-            catch
+            else
             {
                 Response.Redirect("~/404.cshtml");
             }
         }
     }
-    if (errorMessage != null)
+}
+<div class="main" style="padding-left:20px">
+    <h1>Remove Book By Id</h1>
+    @if (errorMessage != null)
     {
         <div class="alert alert-danger">@errorMessage</div>
     }
-    <form action="~/Pages/Admin/GetBookById.cshtml" method="post">
+    <form action="~/Pages/Books/RemoveBookById.cshtml" method="post">
         <div>
             <label>Id: </label>
             <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
@@ -39,5 +38,4 @@
         <br />
         <button class="btn btn-primary" style="width:200px">Submit</button>
     </form>
-}
-
+</div>

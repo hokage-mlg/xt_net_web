@@ -1,23 +1,26 @@
 ﻿@using Final.Ioc;
 @{
-    Page.Title = "Get Book By Title";
+    Page.Title = "Find By Title";
     Layout = "~/Layouts/_MainLayout.cshtml";
     string title = Request["Title"];
     string info = null;
     if (IsPost)
-    {   
-            try
-            {
-                var book = DependencyResolver.BookLogic.GetByTitle(title);
-                info = book.ToString();
-                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(book.BookImage))">
-                <div class="alert alert-info">@info</div>
-            }
-            catch
-            {
-                Response.Redirect("~/404.cshtml");
-            }  
-    }   
+    {
+        try
+        {
+            var book = DependencyResolver.BookLogic.GetByTitle(title);
+            info = book.ToString();
+            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(book.BookImage))">
+            <div class="alert alert-info">@info</div>
+        }
+        catch
+        {
+            Response.Redirect("~/404.cshtml");
+        }
+    }
+}
+<div class="main" style="padding-left:20px">
+    <h1>Find By Title</h1>
     <form action="~/Pages/Books/FindByTitle.cshtml" method="post">
         <div>
             <label>Title: </label>
@@ -26,4 +29,4 @@
         <br />
         <button class="btn btn-primary" style="width:200px">Submit</button>
     </form>
-}
+</div>

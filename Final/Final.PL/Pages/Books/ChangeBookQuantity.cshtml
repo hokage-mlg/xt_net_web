@@ -1,19 +1,19 @@
 ﻿@using Final.Ioc;
 @{
-    Page.Title = "Remove Book By Id";
-    Layout = "~/Layouts/_MainLayout.cshtml";
-    string errorMessage = null;
+    Page.Title = "Change Book Quantity";
+    Layout = "~/Layouts/_MainLayout.cshtml"; string errorMessage = null;
     int id = 0;
+    int count = 0;
     if (IsPost)
     {
-        if (!int.TryParse(Request["Id"], out id))
+        if (!int.TryParse(Request["Id"], out id) || !int.TryParse(Request["Count"], out count))
         {
             errorMessage = "Incorrect values!";
         }
         else
         {
             errorMessage = null;
-            if (DependencyResolver.BookLogic.RemoveById(id))
+            if (DependencyResolver.BookLogic.ChangeCount(id, count))
             {
                 <div class="alert alert-info">Operation was completed</div>
             }
@@ -23,16 +23,23 @@
             }
         }
     }
-    if (errorMessage != null)
+}
+<div class="main" style="padding-left:20px">
+    <h1>Change Book Quantity</h1>
+    @if (errorMessage != null)
     {
         <div class="alert alert-danger">@errorMessage</div>
     }
-    <form action="~/Pages/Admin/RemoveBookById.cshtml" method="post">
+    <form action="~/Pages/Books/ChangeBookQuantity.cshtml" method="post">
         <div>
             <label>Id: </label>
             <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
         </div>
+        <div>
+            <label>New count: </label>
+            <input class="form-control" style="width:200px" type="text" name="Count" id="Count" />
+        </div>
         <br />
         <button class="btn btn-primary" style="width:200px">Submit</button>
     </form>
-}
+</div>

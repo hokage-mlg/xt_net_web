@@ -4,6 +4,7 @@
     Layout = "~/Layouts/_MainLayout.cshtml"; string errorMessage = null;
     int id = 0;
     decimal price = 0;
+    <h1 style="padding-left:20px">Change Book Price</h1>
     if (IsPost)
     {
         if (!int.TryParse(Request["Id"], out id) || !decimal.TryParse(Request["Price"], out price))
@@ -13,9 +14,9 @@
         else
         {
             errorMessage = null;
-            if (DependencyResolver.BookLogic.ChangePrice(id,price))
+            if (DependencyResolver.BookLogic.ChangePrice(id, price))
             {
-                <div class="alert alert-info">Operation was completed</div>
+                <div class="alert alert-info" style="padding-left:20px">Operation was completed</div>
             }
             else
             {
@@ -23,11 +24,13 @@
             }
         }
     }
-    if (errorMessage != null)
+}
+<div class="main" style="padding-left:20px">
+    @if (errorMessage != null)
     {
         <div class="alert alert-danger">@errorMessage</div>
     }
-    <form action="~/Pages/Admin/ChangeBookPrice.cshtml" method="post">
+    <form action="~/Pages/Books/ChangeBookPrice.cshtml" method="post">
         <div>
             <label>Id: </label>
             <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
@@ -39,4 +42,4 @@
         <br />
         <button class="btn btn-primary" style="width:200px">Submit</button>
     </form>
-}
+</div>

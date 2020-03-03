@@ -1,5 +1,6 @@
 ﻿@using Final.PL;
 @using System.Web.Mvc;
+@using Final.PL.Controllers;
 <!DOCTYPE html>
 
 <html>
@@ -8,6 +9,7 @@
     <title>@Page.Title</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.0.0.js"></script>
+
     <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
@@ -44,7 +46,17 @@
                 <li class="nav-item active">
                     @if (User.IsInRole("Admin") || User.IsInRole("User"))
                     {
-                        <a class="nav-link" href="~/Pages/Account/Account.cshtml">Account <span class="sr-only">(current)</span></a>
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:#343a40">
+                                Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="~/Pages/Users/Account.cshtml">My account</a>
+                                <a class="dropdown-item" href="#">Change information</a>
+                                <a class="dropdown-item" href="#">Find purchase</a>
+                                <a class="dropdown-item" href="#">Cancel purchase</a>
+                            </div>
+                        </div>
                     }
                     @if (!User.IsInRole("Admin") && !User.IsInRole("User"))
                     {
@@ -52,16 +64,13 @@
                     }
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-                <li class="nav-item">
                     @if (User.IsInRole("Admin") || User.IsInRole("User"))
                     {
-                        <button id="btn_signout" class="btn btn-primary mt-2 mt-md-0" type="submit">Sign Out</button>
+                        <button id="btn_signout" class="btn btn-primary mt-2 mt-md-0" type="submit" style="margin-left:35px">Sign Out</button>
                     }
                     @if (!User.IsInRole("Admin") && !User.IsInRole("User"))
                     {
-                        <button id="btn_login" class="btn btn-primary mt-2 mt-md-0" type="submit">Login</button>
+                        <button id="btn_login" class="btn btn-primary mt-2 mt-md-0" type="submit" style="margin-left:35px">Login</button>
                     }
                 </li>
             </ul>
@@ -121,32 +130,32 @@
     </script>
     <script>
         $('#btn_get_by_id').click(function () {
-            location.href = '/Pages/Admin/GetBookById';
+            location.href = '/Pages/Books/GetBookById';
         });
     </script>
     <script>
         $('#btn_remove_by_id').click(function () {
-            location.href = '/Pages/Admin/RemoveBookById';
+            location.href = '/Pages/Books/RemoveBookById';
         });
     </script>
     <script>
         $('#btn_add_book').click(function () {
-            location.href = '/Pages/Admin/AddBook';
+            location.href = '/Pages/Books/AddBook';
         });
     </script>
     <script>
         $('#btn_change_count_by_id').click(function () {
-            location.href = '/Pages/Admin/ChangeBookQuantity';
+            location.href = '/Pages/Books/ChangeBookQuantity';
         });
     </script>
     <script>
         $('#btn_change_price_by_id').click(function () {
-            location.href = '/Pages/Admin/ChangeBookPrice';
+            location.href = '/Pages/Books/ChangeBookPrice';
         });
     </script>
     <script>
         $('#btn_show_all_purchases').click(function () {
-            location.href = '/Pages/Admin/ShowAllPurchases';
+            location.href = '/Pages/Purchases/ShowAllPurchases';
         });
     </script>
 </body>

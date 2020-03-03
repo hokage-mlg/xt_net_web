@@ -1,0 +1,25 @@
+﻿@using Final.Ioc;
+@{
+    Page.Title = "All purchases";
+    Layout = "~/Layouts/_MainLayout.cshtml";
+}
+<div class="main" style="padding-left:20px">
+    <h1>Purchases</h1>
+    <ul class="list-group list-group-flush">
+        @{
+            var purchases = DependencyResolver.PurchaseLogic.GetAll();
+            if (!purchases.Any())
+            {
+                <li class="list-group-item">
+                    purchases is empty.
+                </li>
+            }
+            foreach (var purchase in purchases)
+            {
+                <li class="list-group-item">
+                    @purchase.ToString()
+                </li>
+            }
+        }
+    </ul>
+</div>

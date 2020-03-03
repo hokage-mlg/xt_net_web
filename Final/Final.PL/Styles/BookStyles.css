@@ -1,0 +1,27 @@
+﻿body {
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    line-height: 1.1;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+}
+
+th {
+    padding: 10px;
+    border: 1px solid #000000;
+}
+
+td {
+    font-size: 0.8em;
+    padding: 5px 7px;
+    border: 1px solid #000000;
+}
+
+.first {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+}
