@@ -136,7 +136,7 @@ namespace Task11.DAL
                 var cmd = new SqlCommand("procedure_GiveAward", connect);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("UserId", userId);
-                cmd.Parameters.AddWithValue("AwardId", userId);
+                cmd.Parameters.AddWithValue("AwardId", awardId);
                 var res = cmd.ExecuteNonQuery();
             }
         }

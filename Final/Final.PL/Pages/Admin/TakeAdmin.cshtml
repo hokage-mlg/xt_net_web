@@ -1,0 +1,62 @@
+﻿@using Final.PL;
+@using Final.Ioc;
+@{
+    Page.Title = "Take Admin Role";
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    string login = null;
+    string role = null;
+    string info = null;
+    string error = null;
+    login = Request["Login"];
+    role = Request["Role"];
+    if (IsPost)
+    {
+        if (MyRoleProvider.TakeRole(login, "Admin"))
+        {
+            info = "Operation completed.";
+        }
+        else
+        {
+            error = "An error has occurred. The operation was not completed.";
+        }       
+    }
+}
+    <div class="main" style="padding-left:20px">
+        <h1>Take Admin Role</h1>
+        @if (info != null)
+        {
+            <div class="alert alert-info">@info</div>
+        }
+        @if (error != null)
+        {
+            <div class="alert alert-danger">@error</div>
+        }
+        <ul class="list-group list-group-flush" style="width:400px">
+            @{
+                var users = DependencyResolver.UserLogic.GetAll();
+                if (!users.Any())
+                {
+                    <li class="list-group-item">
+                        Users is empty.
+                    </li>
+                }
+                foreach (var user in users)
+                {
+                    <li class="list-group-item">
+                        Login:@user.Login;Role:@user.Roles[0]
+                    </li>
+                }
+            }
+        </ul>
+        <br />
+        <form action="~/Pages/Admin/TakeAdmin.cshtml" method="post" style="">
+            <div>
+                <label>Login: </label>
+                <input class="form-control" style="width:200px" type="text" name="Login" id="Login" />
+            </div>
+            <br />
+            <button class="btn btn-primary" style="width:200px">Submit</button>
+        </form>
+        <br />
+        <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
+    </div>

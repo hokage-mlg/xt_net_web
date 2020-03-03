@@ -1,0 +1,85 @@
+﻿@using Final.Ioc;
+@using Final.Entities;
+@{
+    Page.Title = "Remove Book By Id";
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    string bookId = null;
+    string title, author, genre;
+    int releaseDate, count;
+    decimal price;
+    if (IsPost)
+    {
+        try
+        {
+            author = Request["Author"];
+            title = Request["Title"];
+            genre = Request["Genre"];
+            releaseDate = Int32.Parse(Request["ReleaseDate"]);
+            count = Int32.Parse(Request["Count"]);
+            price = Decimal.Parse(Request["Price"]);
+            HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files[0] : null;
+            byte[] bytes = null;
+            if (file.ContentLength != 0)
+            {
+                bytes = new byte[file.ContentLength];
+                file.InputStream.Read(bytes, 0, bytes.Length);
+            }
+            else
+            {
+                bytes = File.ReadAllBytes(@"D:\Downloads\pic1.png");
+            }
+            var book = new Book()
+            {
+                Author = author,
+                Title = title,
+                Genre = genre,
+                BookImage = bytes,
+                ReleaseDate = releaseDate,
+                Price = price,
+                Count = count
+            };
+            DependencyResolver.BookLogic.Add(book);
+            bookId = book.Id.ToString();
+        }
+        catch
+        {
+            Response.Redirect("~/404.cshtml");
+        }
+    }
+}
+@if (bookId != null)
+{
+    <div class="alert alert-info">Book added with ID: @bookId</div>
+}
+<form action="~/Pages/Admin/AddBook.cshtml" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Author: </label>
+        <input class="form-control" style="width:200px" type="text" name="Author" id="Author" />
+    </div>
+    <div>
+        <label>Title: </label>
+        <input class="form-control" style="width:200px" type="text" name="Title" id="Title" />
+    </div>
+    <div>
+        <label>Genre: </label>
+        <input class="form-control" style="width:200px" type="text" name="Genre" id="Genre" />
+    </div>
+    <div>
+        <label for="image">Image:</label>
+        <input type="file" class="form-control" style="width:350px" name="BookImage" id="BookImage" accept=".png">
+    </div>
+    <div>
+        <label>Release date: </label>
+        <input class="form-control" style="width:200px" type="text" name="ReleaseDate" id="ReleaseDate" />
+    </div>
+    <div>
+        <label>Price: </label>
+        <input class="form-control" style="width:200px" type="text" name="Price" id="Price" />
+    </div>
+    <div>
+        <label>Count: </label>
+        <input class="form-control" style="width:200px" type="text" name="Count" id="Count" />
+    </div>
+    <br />
+    <button class="btn btn-primary" style="width:200px">Submit</button>
+</form>

@@ -1,0 +1,89 @@
+﻿@using Final.Ioc;
+@{
+    Page.Title = "All books";
+    Layout = "~/Layouts/_MainLayout.cshtml";
+}
+<h1>Books</h1>
+<table>
+    @{
+        var books = DependencyResolver.BookLogic.GetAll();
+        if (!books.Any())
+        {
+            <tr>
+                <td><h1>There is no books!</h1></td>
+            </tr>
+        }
+        foreach (var book in books)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <tr>
+                    <td style="border:none">
+                        Id:@book.Id
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td rowspan="6" class="first">
+                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                </td>
+                <td>Author:</td>
+                <td>@book.Author.ToString()</td>
+            </tr>
+            <tr>
+                <td>Title:</td>
+                <td>@book.Title.ToString()</td>
+            </tr>
+            <tr>
+                <td>Genre:</td>
+                <td>@book.Genre.ToString()</td>
+            </tr>
+            <tr>
+                <td>Release date:</td>
+                <td>@book.ReleaseDate.ToString()</td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td>@book.Price.ToString()</td>
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <td>@book.Count.ToString()</td>
+            </tr>
+            <tr>
+                <td style="border:none">
+                     <p><a href="~/Pages/Books/Buy/@book.Id">Buy</a></p>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<style>
+    body {
+        margin: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        line-height: 1.1;
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+    }
+
+    th {
+        padding: 10px;
+        border: 1px solid #000000;
+    }
+
+    td {
+        font-size: 0.8em;
+        padding: 5px 7px;
+        border: 1px solid #000000;
+    }
+
+    .first {
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>

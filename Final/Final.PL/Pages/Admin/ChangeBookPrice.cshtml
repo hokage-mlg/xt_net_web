@@ -1,0 +1,42 @@
+﻿@using Final.Ioc;
+@{
+    Page.Title = "Change Book Price";
+    Layout = "~/Layouts/_MainLayout.cshtml"; string errorMessage = null;
+    int id = 0;
+    decimal price = 0;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["Id"], out id) || !decimal.TryParse(Request["Price"], out price))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            if (DependencyResolver.BookLogic.ChangePrice(id,price))
+            {
+                <div class="alert alert-info">Operation was completed</div>
+            }
+            else
+            {
+                Response.Redirect("~/404.cshtml");
+            }
+        }
+    }
+    if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <form action="~/Pages/Admin/ChangeBookPrice.cshtml" method="post">
+        <div>
+            <label>Id: </label>
+            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+        </div>
+        <div>
+            <label>New price: </label>
+            <input class="form-control" style="width:200px" type="text" name="Price" id="Price" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+}

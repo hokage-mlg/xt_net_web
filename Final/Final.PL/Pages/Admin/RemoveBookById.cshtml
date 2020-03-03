@@ -1,0 +1,38 @@
+﻿@using Final.Ioc;
+@{
+    Page.Title = "Remove Book By Id";
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    string errorMessage = null;
+    int id = 0;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["Id"], out id))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            if (DependencyResolver.BookLogic.RemoveById(id))
+            {
+                <div class="alert alert-info">Operation was completed</div>
+            }
+            else
+            {
+                Response.Redirect("~/404.cshtml");
+            }
+        }
+    }
+    if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <form action="~/Pages/Admin/RemoveBookById.cshtml" method="post">
+        <div>
+            <label>Id: </label>
+            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+}

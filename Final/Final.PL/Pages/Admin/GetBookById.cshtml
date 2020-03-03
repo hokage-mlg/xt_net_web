@@ -1,0 +1,43 @@
+﻿@using Final.Ioc;
+@{
+    Page.Title = "Get Book By Id";
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    string errorMessage = null;
+    int id = 0;
+    string info = null;
+    if (IsPost)
+    {
+        if (!int.TryParse(Request["Id"], out id))
+        {
+            errorMessage = "Incorrect values!";
+        }
+        else
+        {
+            errorMessage = null;
+            try
+            {
+                var book = DependencyResolver.BookLogic.GetById(id);
+                info = book.ToString();
+                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                <div class="alert alert-info">@info</div>
+            }
+            catch
+            {
+                Response.Redirect("~/404.cshtml");
+            }
+        }
+    }
+    if (errorMessage != null)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <form action="~/Pages/Admin/GetBookById.cshtml" method="post">
+        <div>
+            <label>Id: </label>
+            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+}
+
