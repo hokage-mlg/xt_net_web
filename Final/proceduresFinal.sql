@@ -122,6 +122,20 @@ as
 	from books where Id=@Id
 go
 
+create procedure [dbo].[procedure_GetBookByAuthor]
+	@Author nvarchar(MAX)
+as
+	select Id, Author, Title, Genre, BookImage, ReleaseDate, Price, Quantity 
+	from books where Author=@Author
+go
+
+create procedure [dbo].[procedure_GetBookByGenre]
+	@Genre nvarchar(50)
+as
+	select Id, Author, Title, Genre, BookImage, ReleaseDate, Price, Quantity 
+	from books where Genre=@Genre
+go
+
 create procedure [dbo].[procedure_GetBookByTitle]
 	@Title nvarchar(MAX)
 as

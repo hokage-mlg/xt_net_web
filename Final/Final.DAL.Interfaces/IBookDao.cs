@@ -13,6 +13,8 @@ namespace Final.DAL.Interfaces
         Book GetById(int id);
         Book GetByTitle(string title);
         IEnumerable<Book> GetAll();
+        IEnumerable<Book> GetBooksByAuthor(string author);
+        IEnumerable<Book> GetBooksByGenre(string genre);
         bool RemoveById(int id);
         event Action<int> DeleteBook;
         void FilterByGenre(string genre);

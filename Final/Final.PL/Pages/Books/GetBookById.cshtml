@@ -1,8 +1,8 @@
 ﻿@using Final.Ioc;
+<h1 style="padding-left:20px">Get Book By Id</h1>
 @{
     Page.Title = "Get Book By Id";
     Layout = "~/Layouts/_MainLayout.cshtml";
-    <link href="~/Styles/BookStyles.css" rel="stylesheet" />
     string errorMessage = null;
     int id = 0;
     if (IsPost)
@@ -59,12 +59,11 @@
         }
     }
 }
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
 <div class="main" style="padding-left:20px">
-    <h1>Get Book By Id</h1>
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
     <form action="~/Pages/Books/GetBookById.cshtml" method="post">
         <div>
             <label>Id: </label>
@@ -74,4 +73,5 @@
         <button class="btn btn-primary" style="width:200px">Submit</button>
     </form>
 </div>
+<link href="~/Styles/BookStyles.css" rel="stylesheet" />
 

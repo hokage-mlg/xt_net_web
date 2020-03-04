@@ -2,9 +2,8 @@
 @{
     Page.Title = "All books";
     Layout = "~/Layouts/_MainLayout.cshtml";
-    <link href="~/Styles/BookStyles.css" rel="stylesheet" />
 }
-<h1>Books</h1>
+<h1 style="padding-left:20px">Books</h1>
 <table>
     @{
         var books = DependencyResolver.BookLogic.GetAll();
@@ -59,4 +58,6 @@
         }
     }
 </table>
+<link href="~/Styles/BookStyles.css" rel="stylesheet" />
+
 

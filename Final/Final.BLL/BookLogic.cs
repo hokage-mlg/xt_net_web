@@ -25,6 +25,9 @@ namespace Final.BLL
             _bookDao.FilterByGenre(genre);
         }
         public IEnumerable<Book> GetAll() => _bookDao.GetAll();
+
+        public IEnumerable<Book> GetBooksByAuthor(string author) => _bookDao.GetBooksByAuthor(author);
+        public IEnumerable<Book> GetBooksByGenre(string genre) => _bookDao.GetBooksByGenre(genre);
         public IEnumerable<Book> GetBooksByPurchaseId(int purchaseId) => _bookDao.GetBooksByPurchaseId(purchaseId);
         public Book GetById(int id) => _bookDao.GetById(id);
         public Book GetByTitle(string title) => _bookDao.GetByTitle(title);

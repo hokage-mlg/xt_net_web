@@ -1,4 +1,5 @@
 ﻿@using Final.Ioc;
+<h1 style="padding-left:20px">Change Book Quantity</h1>
 @{
     Page.Title = "Change Book Quantity";
     Layout = "~/Layouts/_MainLayout.cshtml"; string errorMessage = null;
@@ -24,12 +25,11 @@
         }
     }
 }
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
 <div class="main" style="padding-left:20px">
-    <h1>Change Book Quantity</h1>
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
     <form action="~/Pages/Books/ChangeBookQuantity.cshtml" method="post">
         <div>
             <label>Id: </label>

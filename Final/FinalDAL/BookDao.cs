@@ -102,6 +102,60 @@ namespace FinalDAL
                 return books;
             }
         }
+        public IEnumerable<Book> GetBooksByAuthor(string author)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                List<Book> books = new List<Book>();
+                connect.Open();
+                var cmd = new SqlCommand("procedure_GetBookByAuthor", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Author", author);
+                var res = cmd.ExecuteReader();
+                while (res.Read())
+                {
+                    books.Add(new Book
+                    {
+                        Id = (int)res["Id"],
+                        Author = (string)res["Author"],
+                        Title = (string)res["Title"],
+                        Genre = (string)res["Genre"],
+                        BookImage = Convert.FromBase64String((string)res["BookImage"]),
+                        ReleaseDate = (int)res["ReleaseDate"],
+                        Price = (decimal)res["Price"],
+                        Count = (int)res["Quantity"]
+                    });
+                }
+                return books;
+            }
+        }
+        public IEnumerable<Book> GetBooksByGenre(string genre)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                List<Book> books = new List<Book>();
+                connect.Open();
+                var cmd = new SqlCommand("procedure_GetBookByGenre", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Genre", genre);
+                var res = cmd.ExecuteReader();
+                while (res.Read())
+                {
+                    books.Add(new Book
+                    {
+                        Id = (int)res["Id"],
+                        Author = (string)res["Author"],
+                        Title = (string)res["Title"],
+                        Genre = (string)res["Genre"],
+                        BookImage = Convert.FromBase64String((string)res["BookImage"]),
+                        ReleaseDate = (int)res["ReleaseDate"],
+                        Price = (decimal)res["Price"],
+                        Count = (int)res["Quantity"]
+                    });
+                }
+                return books;
+            }
+        }
         public IEnumerable<Book> GetBooksByPurchaseId(int purchaseId)
         {
             using (var connect = new SqlConnection(_con_str))

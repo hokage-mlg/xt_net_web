@@ -25,11 +25,11 @@
         }
     }
 }
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
 <div class="main" style="padding-left:20px">
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
     <form action="~/Pages/Books/ChangeBookPrice.cshtml" method="post">
         <div>
             <label>Id: </label>

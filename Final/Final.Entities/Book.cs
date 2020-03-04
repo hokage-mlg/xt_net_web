@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Final.Entities
 {
-    public class Book
+    public class Book : IEquatable<Book>
     {
         public Book()
         {
@@ -26,5 +26,17 @@ namespace Final.Entities
         public IList<int> Purchases { get; } = new List<int>();
         public override string ToString() => $"Id: {Id}. Author: {Author}. " +
             $"Title: {Title}. Genre: {Genre}. Release date: {ReleaseDate}. Price:{Price}. Count:{Count}.";
+        public bool Equals(Book other)
+        {
+            if (Object.ReferenceEquals(other, null)) return false;
+            if (Object.ReferenceEquals(this, other)) return true;
+            return Author.Equals(other.Author) && Genre.Equals(other.Genre);
+        }
+        public override int GetHashCode()
+        {
+            int hashBookAuthor = Author == null ? 0 : Author.GetHashCode();
+            int hashBookGenre = Genre.GetHashCode();
+            return hashBookAuthor ^ hashBookGenre;
+        }
     }
 }

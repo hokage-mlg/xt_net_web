@@ -13,6 +13,8 @@ namespace Final.BLL.Interfaces
         Book GetById(int id);
         Book GetByTitle(string title);
         IEnumerable<Book> GetAll();
+        IEnumerable<Book> GetBooksByAuthor(string author);
+        IEnumerable<Book> GetBooksByGenre(string genre);
         bool RemoveById(int id);
         void FilterByGenre(string genre);
         void AddBookToPurchase(int bookId, int purchaseId);

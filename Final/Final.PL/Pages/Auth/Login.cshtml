@@ -19,22 +19,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Styles/AuthStyles.css" rel="stylesheet" />
     <title>Login</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-
 </head>
 <body>
-    <style>
-        .text-center {
-            width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: auto;
-        }
-    </style>
     @if (IsPost && !verifyResult)
     {
         <div id="my-alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin:auto;padding: 15px">
@@ -61,5 +48,17 @@
             location.href = '/Index';
         });
     </script>
+    <link href="~/Styles/AuthStyles.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <style>
+        .text-center {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
 </body>
 </html>

@@ -3,24 +3,53 @@
     Page.Title = "Find By Title";
     Layout = "~/Layouts/_MainLayout.cshtml";
     string title = Request["Title"];
-    string info = null;
-    if (IsPost)
+}
+<h1 style="padding-left:20px">Find By Title</h1>
+@if (IsPost)
+{
+    try
     {
-        try
-        {
-            var book = DependencyResolver.BookLogic.GetByTitle(title);
-            info = book.ToString();
-            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(book.BookImage))">
-            <div class="alert alert-info">@info</div>
-        }
-        catch
-        {
-            Response.Redirect("~/404.cshtml");
-        }
+        var book = DependencyResolver.BookLogic.GetByTitle(title);
+        <table>
+            <tr>
+                <td rowspan="7" class="first">
+                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                </td>
+                <td>Id:</td>
+                <td>@book.Id.ToString()</td>
+            </tr>
+            <tr>
+                <td>Author:</td>
+                <td>@book.Author.ToString()</td>
+            </tr>
+            <tr>
+                <td>Title:</td>
+                <td>@book.Title.ToString()</td>
+            </tr>
+            <tr>
+                <td>Genre:</td>
+                <td>@book.Genre.ToString()</td>
+            </tr>
+            <tr>
+                <td>Release date:</td>
+                <td>@book.ReleaseDate.ToString()</td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td>@book.Price.ToString()</td>
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <td>@book.Count.ToString()</td>
+            </tr>
+        </table>
+    }
+    catch
+    {
+        Response.Redirect("~/404.cshtml");
     }
 }
 <div class="main" style="padding-left:20px">
-    <h1>Find By Title</h1>
     <form action="~/Pages/Books/FindByTitle.cshtml" method="post">
         <div>
             <label>Title: </label>
@@ -30,3 +59,6 @@
         <button class="btn btn-primary" style="width:200px">Submit</button>
     </form>
 </div>
+<link href="~/Styles/BookStyles.css" rel="stylesheet" />
+
+

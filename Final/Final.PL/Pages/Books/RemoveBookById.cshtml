@@ -1,4 +1,5 @@
 ﻿@using Final.Ioc;
+<h1 style="padding-left:20px">Remove Book By Id</h1>
 @{
     Page.Title = "Remove Book By Id";
     Layout = "~/Layouts/_MainLayout.cshtml";
@@ -24,12 +25,11 @@
         }
     }
 }
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
 <div class="main" style="padding-left:20px">
-    <h1>Remove Book By Id</h1>
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
     <form action="~/Pages/Books/RemoveBookById.cshtml" method="post">
         <div>
             <label>Id: </label>
