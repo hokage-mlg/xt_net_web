@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Final.Entities;
 
 namespace Final.DAL.Interfaces
 {
     public interface IBookDao
     {
+        void AddBookToPurchase(int bookId, int purchaseId);
+        void RemoveBookFromPurchase(int bookId, int purchaseId);
         Book Add(Book book);
         Book GetById(int id);
         Book GetByTitle(string title);
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetBooksByAuthor(string author);
         IEnumerable<Book> GetBooksByGenre(string genre);
-        bool RemoveById(int id);
-        event Action<int> DeleteBook;
-        void FilterByGenre(string genre);
-        void AddBookToPurchase(int bookId, int purchaseId);
-        void RemoveBookFromPurchase(int bookId, int purchaseId);
-        void OnDeletePurchaseHandler(int purchaseId);
         IEnumerable<Book> GetBooksByPurchaseId(int purchaseId);
+        bool RemoveById(int id);
         bool ChangeCount(int bookId, int count);
         bool ChangePrice(int bookId, decimal price);
         bool Update(Book book);

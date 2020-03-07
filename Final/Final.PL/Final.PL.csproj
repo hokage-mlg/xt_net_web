@@ -140,7 +140,7 @@
     <Content Include="Index.cshtml" />
     <Content Include="Layouts\_MainLayout.cshtml" />
     <Content Include="Pages\Books\ShowAllBooks.cshtml" />
-    <Content Include="Pages\Books\BooksByGenres.cshtml" />
+    <Content Include="Pages\Books\GroupByGenres.cshtml" />
     <Content Include="Pages\Books\FindByTitle.cshtml" />
     <Content Include="Pages\Books\GroupByAuthor.cshtml" />
     <Content Include="Pages\Users\Account.cshtml" />
@@ -151,7 +151,16 @@
     <Content Include="Pages\Books\ChangeBookQuantity.cshtml" />
     <Content Include="Pages\Books\ChangeBookPrice.cshtml" />
     <Content Include="Pages\Purchases\ShowAllPurchases.cshtml" />
-    <Content Include="Pages\Books\BuyBook.cshtml" />
+    <Content Include="Pages\Purchases\CreatePurchase.cshtml" />
+    <Content Include="Pages\Purchases\FindPurchaseById.cshtml" />
+    <Content Include="Pages\Purchases\ChangeInfo.cshtml" />
+    <Content Include="Pages\Purchases\CancelPurchase.cshtml" />
+    <Content Include="Pages\Purchases\ChangeFullName.cshtml" />
+    <Content Include="Pages\Purchases\ChangePhoneNumber.cshtml" />
+    <Content Include="Pages\Purchases\ChangeAddress.cshtml" />
+    <Content Include="Pages\Users\ChangePassword.cshtml" />
+    <Content Include="Pages\Purchases\RemoveAll.cshtml" />
+    <Content Include="Pages\Purchases\CreatePurchaseByTitle.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -242,7 +251,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Styles\AuthStyles.css" />
-    <Content Include="Styles\BookStyles.css" />
+    <Content Include="Styles\BooksStyles.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -256,7 +265,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\MyRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

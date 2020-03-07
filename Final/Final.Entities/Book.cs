@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Final.Entities
 {
     public class Book : IEquatable<Book>
@@ -24,8 +20,6 @@ namespace Final.Entities
         public decimal Price { get; set; }
         public int Count { get; set; }
         public IList<int> Purchases { get; } = new List<int>();
-        public override string ToString() => $"Id: {Id}. Author: {Author}. " +
-            $"Title: {Title}. Genre: {Genre}. Release date: {ReleaseDate}. Price:{Price}. Count:{Count}.";
         public bool Equals(Book other)
         {
             if (Object.ReferenceEquals(other, null)) return false;
@@ -38,5 +32,7 @@ namespace Final.Entities
             int hashBookGenre = Genre.GetHashCode();
             return hashBookAuthor ^ hashBookGenre;
         }
+        public override string ToString() => $"Id: {Id}. Author: {Author}. " +
+            $"Title: {Title}. Genre: {Genre}. Release date: {ReleaseDate}. Price:{Price}. Count:{Count}.";
     }
 }

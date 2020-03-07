@@ -2,5 +2,69 @@
 @{
     Page.Title = "My profile";
     Layout = "~/Layouts/_MainLayout.cshtml";
-
+    var user = DependencyResolver.UserLogic.GetByLogin(User.Identity.Name);
+    var purchases = DependencyResolver.PurchaseLogic.GetPurchasesByUserId(user.Id);
+    <div class="main" style="padding-left:40px">
+        <h1>Welcome, @user.Login!</h1>
+        <button id="btn_change" class="btn btn-primary" style="position:center" onclick="location.href='/Pages/Users/ChangePassword.cshtml'">Change password</button>
+        <table>
+            <tr>
+                @if (!user.Purchases.Any())
+                {
+                    <td><h2>Your purchases is empty.</h2></td>
+                }
+                else
+                {
+                    <td><h2>Your purchases:</h2></td>
+                }
+            </tr>
+            @foreach (var purchase in purchases)
+            {
+                var books = DependencyResolver.BookLogic.GetBooksByPurchaseId(purchase.Id);
+                <tr>
+                    <td><b>Purchase info:</b>@purchase.ToString()</td>
+                </tr>
+                <tr>
+                    <td><b>Book:</b></td>
+                </tr>
+                foreach (var book in books)
+                {
+                    <tr>
+                        <td rowspan="7" class="first">
+                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                        </td>
+                        <td>Id:</td>
+                        <td>@book.Id.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td>Author:</td>
+                        <td>@book.Author.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td>Title:</td>
+                        <td>@book.Title.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td>Genre:</td>
+                        <td>@book.Genre.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td>Release date:</td>
+                        <td>@book.ReleaseDate.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td>@book.Price.ToString()</td>
+                    </tr>
+                    <tr>
+                        <td>Quantity:</td>
+                        <td>@book.Count.ToString()</td>
+                    </tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                }
+            }
+        </table>
+    </div>
 }
+<link href="~/Styles/BooksStyles.css" rel="stylesheet" />

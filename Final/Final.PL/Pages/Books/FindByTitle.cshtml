@@ -5,6 +5,18 @@
     string title = Request["Title"];
 }
 <h1 style="padding-left:20px">Find By Title</h1>
+<div class="main" style="padding-left:20px">
+    <form action="~/Pages/Books/FindByTitle.cshtml" method="post">
+        <div>
+            <label>Title: </label>
+            <input class="form-control" style="width:200px" type="text" name="Title" id="Title" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+</div>
+<br />
+<br />
 @if (IsPost)
 {
     try
@@ -17,6 +29,32 @@
                 </td>
                 <td>Id:</td>
                 <td>@book.Id.ToString()</td>
+                <td>
+                    @if (book.Count > 0)
+                    {
+                        <b style="font-size:large">
+                            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                            {
+                                <button id="btn_buy" class="btn btn-primary" style="position:center"
+                                        onclick="location.href='/Pages/Purchases/CreatePurchaseByTitle#bottom'">
+                                    Buy
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="~/Pages/Auth/Login.cshtml" style="color:black">
+                                    Buy
+                                </a>
+                            }
+                        </b>
+                    }
+                    else
+                    {
+                        <b style="font-size:large">
+                            Out of product
+                        </b>
+                    }
+                </td>
             </tr>
             <tr>
                 <td>Author:</td>
@@ -49,16 +87,4 @@
         Response.Redirect("~/404.cshtml");
     }
 }
-<div class="main" style="padding-left:20px">
-    <form action="~/Pages/Books/FindByTitle.cshtml" method="post">
-        <div>
-            <label>Title: </label>
-            <input class="form-control" style="width:200px" type="text" name="Title" id="Title" />
-        </div>
-        <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
-    </form>
-</div>
-<link href="~/Styles/BookStyles.css" rel="stylesheet" />
-
-
+<link href="~/Styles/BooksStyles.css" rel="stylesheet" />

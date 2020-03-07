@@ -4,60 +4,87 @@
     Layout = "~/Layouts/_MainLayout.cshtml";
 }
 <h1 style="padding-left:20px">Books</h1>
-<table>
-    @{
-        var books = DependencyResolver.BookLogic.GetAll();
-        if (!books.Any())
-        {
-            <tr>
-                <td><h1>There is no books!</h1></td>
-            </tr>
-        }
-        foreach (var book in books)
-        {
-            if (User.IsInRole("Admin"))
+<form method="post" enctype="multipart/form-data">
+    <table>
+        @{
+            var books = DependencyResolver.BookLogic.GetAll();
+            if (!books.Any())
             {
                 <tr>
-                    <td style="border:none">
-                        Id:@book.Id
-                    </td>
+                    <td><h1>There is no books!</h1></td>
                 </tr>
             }
-            <tr>
-                <td rowspan="6" class="first">
-                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
-                </td>
-                <td>Author:</td>
-                <td>@book.Author.ToString()</td>
-            </tr>
-            <tr>
-                <td>Title:</td>
-                <td>@book.Title.ToString()</td>
-            </tr>
-            <tr>
-                <td>Genre:</td>
-                <td>@book.Genre.ToString()</td>
-            </tr>
-            <tr>
-                <td>Release date:</td>
-                <td>@book.ReleaseDate.ToString()</td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td>@book.Price.ToString()</td>
-            </tr>
-            <tr>
-                <td>Quantity:</td>
-                <td>@book.Count.ToString()</td>
-            </tr>
-            <tr>
-                <td style="border:none">
-                    <p><a href="~/Pages/Books/Buy/@book.Id">Buy</a></p>
-                </td>
-            </tr>
+            foreach (var book in books)
+            {
+                <tr>
+                    <td rowspan="7" class="first">
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                    </td>
+                    <td>Id:</td>
+                    <td>@book.Id.ToString()</td>
+                    <td style="border:none;background:none">
+                        @if (book.Count > 0)
+                        {
+                            <b style="font-size:large">
+                                @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                {
+                                    <button id="btn_buy" class="btn btn-primary" style="position:center" onclick="location.href='#bottom'">Buy</button>
+                                }
+                                else
+                                {
+                                    <a href="~/Pages/Auth/Login.cshtml" style="color:black">
+                                        Buy
+                                    </a>
+                                }
+                            </b>
+                        }
+                        else
+                        {
+                            <b style="font-size:large">
+                                Out of product
+                            </b>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Author:</td>
+                    <td>@book.Author.ToString()</td>
+                </tr>
+                <tr>
+                    <td>Title:</td>
+                    <td>@book.Title.ToString()</td>
+                </tr>
+                <tr>
+                    <td>Genre:</td>
+                    <td>@book.Genre.ToString()</td>
+                </tr>
+                <tr>
+                    <td>Release date:</td>
+                    <td>@book.ReleaseDate.ToString()</td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td>@book.Price.ToString()</td>
+                </tr>
+                <tr>
+                    <td>Quantity:</td>
+                    <td>@book.Count.ToString()</td>
+                </tr>
+                <tr><td></td></tr>
+            }
         }
-    }
-</table>
-<link href="~/Styles/BookStyles.css" rel="stylesheet" />
-
-
+    </table>
+</form>
+<br />
+<br />
+@if (IsPost)
+{
+    @RenderPage("~/Pages/Purchases/CreatePurchase.cshtml")
+}
+<script>
+    $('#btn_buy').click(function () {
+        location.href = "bottom";
+    });
+</script>
+<p><a name="bottom"></a></p>
+<link href="~/Styles/BooksStyles.css" rel="stylesheet" />

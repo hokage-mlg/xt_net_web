@@ -1,13 +1,14 @@
 ﻿@using Final.Ioc;
 @{
     Page.Title = "Change Book Price";
-    Layout = "~/Layouts/_MainLayout.cshtml"; string errorMessage = null;
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    string errorMessage = null;
     int id = 0;
     decimal price = 0;
     <h1 style="padding-left:20px">Change Book Price</h1>
     if (IsPost)
     {
-        if (!int.TryParse(Request["Id"], out id) || !decimal.TryParse(Request["Price"], out price))
+        if (!int.TryParse(Request["Id"], out id) || !decimal.TryParse(Request["Price"], out price) || price <= 0)
         {
             errorMessage = "Incorrect values!";
         }

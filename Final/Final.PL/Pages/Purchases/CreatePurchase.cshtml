@@ -1,0 +1,67 @@
+﻿@using Final.Entities;
+@using Final.Ioc;
+@{
+    string purchaseId = null;
+    string fullName, phoneNumber, address;
+    int bookId = 0;
+    if (IsPost)
+    {
+        if (int.TryParse(Request["BookId"], out bookId))
+        {
+            try
+            {
+                fullName = Request["FullName"];
+                phoneNumber = Request["PhoneNumber"];
+                address = Request["Address"];
+                var purchase = new Purchase()
+                {
+                    FullName = fullName,
+                    PhoneNumber = phoneNumber,
+                    Address = address
+                };
+                DependencyResolver.PurchaseLogic.Add(purchase);
+                purchaseId = purchase.Id.ToString();
+                DependencyResolver.BookLogic.AddBookToPurchase(bookId, purchase.Id);
+                var userName = User.Identity.Name;
+                var user = DependencyResolver.UserLogic.GetByLogin(userName);
+                DependencyResolver.PurchaseLogic.AddPurchaseToUser(purchase.Id, user.Id);
+                var chosenBook = DependencyResolver.BookLogic.GetById(bookId);
+                DependencyResolver.BookLogic.ChangeCount(bookId, chosenBook.Count - 1);
+            }
+            catch
+            {
+                Response.Redirect("~/404.cshtml");
+            }
+        }
+    }
+}
+<h1 style="padding-left:40px">Create purchase</h1>
+@if (purchaseId != null)
+{
+    <div class="alert alert-info">Purchase added with ID: @purchaseId</div>
+}
+<p><a name="bottom"></a></p>
+<div class="main" style="padding-left:40px">
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <label>Confirm book Id: </label>
+            <input class="form-control" style="width:200px" type="text" name="BookId" id="BookId" />
+        </div>
+        <div>
+            <label>Full name: </label>
+            <input class="form-control" style="width:200px" type="text" name="FullName" id="FullName" />
+        </div>
+        <div>
+            <label>Phone number: </label>
+            <input class="form-control" style="width:200px" type="text" name="PhoneNumber" id="PhoneNumber" />
+        </div>
+        <div>
+            <label>Address: </label>
+            <input class="form-control" style="width:200px" type="text" name="Address" id="Address" />
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width:200px">Submit</button>
+    </form>
+</div>
+<br />
+<br />

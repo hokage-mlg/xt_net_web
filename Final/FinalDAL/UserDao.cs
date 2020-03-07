@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Final.DAL.Interfaces;
 using Final.Entities;
 
@@ -13,64 +10,55 @@ namespace FinalDAL
 {
     public class UserDao : IUserDao
     {
-        public event Action<int, int> RemovePurchase;
         private static string _con_str = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
-        public bool Add(User user)
+        public User GetById(int id)
         {
             using (var connect = new SqlConnection(_con_str))
             {
                 connect.Open();
-                var cmd = new SqlCommand("procedure_InsertUser", connect);
+                var cmd = new SqlCommand("procedure_GetUserById", connect);
                 cmd.CommandType = CommandType.StoredProcedure;
-                var LoginParam = new SqlParameter()
+                var idPar = new SqlParameter
                 {
-                    DbType = DbType.String,
-                    ParameterName = "@Login",
-                    Value = user.Login,
+                    ParameterName = "Id",
+                    Value = id
                 };
-                var PasswordParam = new SqlParameter()
+                cmd.Parameters.Add(idPar);
+                var res = cmd.ExecuteReader();
+                if (res.Read())
                 {
-                    DbType = DbType.String,
-                    ParameterName = "@Password",
-                    Value = user.Password,
-                };
-                var IdParam = new SqlParameter()
-                {
-                    DbType = DbType.Int32,
-                    ParameterName = "@Id",
-                    Value = user.Id,
-                };
-                cmd.Parameters.Add(LoginParam);
-                cmd.Parameters.Add(PasswordParam);
-                cmd.Parameters.Add(IdParam);
-                
-                
+                    return new User
+                    {
+                        Id = (int)res["Id"],
+                        Login = (string)res["Login"],
+                    };
+                }
+                return null;
             }
-            return true;
         }
-        public bool AddUserRole(string login, string role)
+        public User GetByLogin(string login)
         {
             using (var connect = new SqlConnection(_con_str))
             {
                 connect.Open();
-                var cmd = new SqlCommand("procedure_GiveRole", connect);
+                var cmd = new SqlCommand("procedure_GetUserByLogin", connect);
                 cmd.CommandType = CommandType.StoredProcedure;
-                var loginPar = new SqlParameter
+                var idPar = new SqlParameter
                 {
                     ParameterName = "Login",
-                    Value = login,
-                    SqlDbType = SqlDbType.NVarChar
+                    Value = login
                 };
-                var rolePar = new SqlParameter
+                cmd.Parameters.Add(idPar);
+                var res = cmd.ExecuteReader();
+                if (res.Read())
                 {
-                    ParameterName = "RoleName",
-                    Value = role,
-                    SqlDbType = SqlDbType.NVarChar
-                };
-                cmd.Parameters.Add(loginPar);
-                cmd.Parameters.Add(rolePar);
-                int res = cmd.ExecuteNonQuery();
-                return res != 0;
+                    return new User
+                    {
+                        Id = (int)res["Id"],
+                        Login = (string)res["Login"],
+                    };
+                }
+                return null;
             }
         }
         public IEnumerable<User> GetAll()
@@ -103,6 +91,83 @@ namespace FinalDAL
                     usersWeb.Add(user);
                 }
                 return usersWeb;
+            }
+        }
+        public IEnumerable<User> GetUsersByPurchaseId(int purchaseId)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                List<User> users = new List<User>();
+                connect.Open();
+                var cmd = new SqlCommand("procedure_GetUsersByPurchaseId", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Id", purchaseId);
+                var res = cmd.ExecuteReader();
+                while (res.Read())
+                {
+                    users.Add(new User
+                    {
+                        Id = (int)res["Id"],
+                        Login = (string)res["Login"]
+                    });
+                }
+                return users;
+            }
+        }
+        public bool Add(User user)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_InsertUser", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                var LoginParam = new SqlParameter()
+                {
+                    DbType = DbType.String,
+                    ParameterName = "@Login",
+                    Value = user.Login,
+                };
+                var PasswordParam = new SqlParameter()
+                {
+                    DbType = DbType.String,
+                    ParameterName = "@Password",
+                    Value = user.Password,
+                };
+                var IdParam = new SqlParameter()
+                {
+                    DbType = DbType.Int32,
+                    ParameterName = "@Id",
+                    Value = user.Id,
+                };
+                cmd.Parameters.Add(LoginParam);
+                cmd.Parameters.Add(PasswordParam);
+                cmd.Parameters.Add(IdParam);
+            }
+            return true;
+        }
+        public bool AddUserRole(string login, string role)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_GiveRole", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                var loginPar = new SqlParameter
+                {
+                    ParameterName = "Login",
+                    Value = login,
+                    SqlDbType = SqlDbType.NVarChar
+                };
+                var rolePar = new SqlParameter
+                {
+                    ParameterName = "RoleName",
+                    Value = role,
+                    SqlDbType = SqlDbType.NVarChar
+                };
+                cmd.Parameters.Add(loginPar);
+                cmd.Parameters.Add(rolePar);
+                int res = cmd.ExecuteNonQuery();
+                return res != 0;
             }
         }
         public bool RemoveUserRole(string login, string role)
@@ -150,31 +215,6 @@ namespace FinalDAL
                 return res != 0;
             }
         }
-        public User GetById(int id)
-        {
-            using (var connect = new SqlConnection(_con_str))
-            {
-                connect.Open();
-                var cmd = new SqlCommand("procedure_GetUserById", connect);
-                cmd.CommandType = CommandType.StoredProcedure;
-                var idPar = new SqlParameter
-                {
-                    ParameterName = "Id",
-                    Value = id
-                };
-                cmd.Parameters.Add(idPar);
-                var res = cmd.ExecuteReader();
-                if (res.Read())
-                {
-                    return new User
-                    {
-                        Id = (int)res["Id"],
-                        Login = (string)res["Login"],
-                    };
-                }
-                return null;
-            }
-        }
         public bool MakePurchase(int id, int purchaseId)
         {
             using (var connect = new SqlConnection(_con_str))
@@ -184,6 +224,19 @@ namespace FinalDAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("IdUser", id);
                 cmd.Parameters.AddWithValue("IdPurchase", purchaseId);
+                var res = cmd.ExecuteNonQuery();
+                return res != 0;
+            }
+        }
+        public bool ChangePassword(int userId, string password)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_ChangePassword", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Id", userId);
+                cmd.Parameters.AddWithValue("Password", password);
                 var res = cmd.ExecuteNonQuery();
                 return res != 0;
             }
@@ -217,11 +270,5 @@ namespace FinalDAL
                 return res != 0;
             }
         }
-        #region Not Implemented
-        public void OnDeletePurchaseHandler(int purchaseId)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
 }

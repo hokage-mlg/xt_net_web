@@ -2,12 +2,13 @@
 <h1 style="padding-left:20px">Change Book Quantity</h1>
 @{
     Page.Title = "Change Book Quantity";
-    Layout = "~/Layouts/_MainLayout.cshtml"; string errorMessage = null;
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    string errorMessage = null;
     int id = 0;
     int count = 0;
     if (IsPost)
     {
-        if (!int.TryParse(Request["Id"], out id) || !int.TryParse(Request["Count"], out count))
+        if (!int.TryParse(Request["Id"], out id) || !int.TryParse(Request["Count"], out count) || count < 0)
         {
             errorMessage = "Incorrect values!";
         }

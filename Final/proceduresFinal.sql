@@ -37,6 +37,14 @@ as
 	(select Id from roles where Name = @RoleName)
 go
 
+create procedure [dbo].[procedure_GetUsersByPurchaseId]
+	@Id int
+as
+	select Id, Login from users_purchases
+	join users on IdUser = Id 
+	where IdPurchase = @Id
+go
+
 create procedure [dbo].[procedure_MakePurchase]
 	@IdUser int,
 	@IdPurchase int
@@ -60,10 +68,26 @@ as
 	from users where Id=@Id
 go
 
+create procedure [dbo].[procedure_GetUserByLogin]
+	@Login nvarchar(50)
+as
+	select Id, Login 
+	from users where Login=@Login
+go
+
 create procedure [dbo].[procedure_RemoveUserById]
 	@Id int
 as
 	delete from users where Id = @Id
+go
+
+create procedure [dbo].[procedure_ChangePassword]
+	@Id int,
+	@Password nvarchar(50)
+as
+	update users
+	set Password=@Password
+	where Id=@Id
 go
 
 create procedure [dbo].[procedure_UpdateUser]
@@ -225,6 +249,33 @@ as
 	select Id, FullName,PhoneNumber, Address from users_purchases 
 	join purchases on IdPurchase = Id 
 	where IdUser = @Id
+go
+
+create procedure [dbo].[procedure_ChangeFullname]
+	@Id int,
+	@FullName nvarchar(MAX)
+as
+	update purchases
+	set FullName=@FullName
+	where Id=@Id
+go
+
+create procedure [dbo].[procedure_ChangePhoneNumber]
+	@Id int,
+	@PhoneNumber nvarchar(20)
+as
+	update purchases
+	set PhoneNumber=@PhoneNumber
+	where Id=@Id
+go
+
+create procedure [dbo].[procedure_ChangeAddress]
+	@Id int,
+	@Address nvarchar(MAX)
+as
+	update purchases
+	set Address=@Address
+	where Id=@Id
 go
 
 create procedure [dbo].[procedure_UpdatePurchase]

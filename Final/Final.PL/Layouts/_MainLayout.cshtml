@@ -1,32 +1,11 @@
-﻿@using Final.PL;
-@using System.Web.Mvc;
-@using Final.PL.Controllers;
-@using System.Web.Optimization;
+﻿@using System.Web.Optimization;
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@Page.Title</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    @Scripts.Render("~/scripts/jquery-1.10.2.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 </head>
 <body>
-    <style>
-        .container {
-            width: auto;
-            max-width: 680px;
-            padding: 0 15px;
-        }
-
-        .footer {
-            background-color: #757575;
-        }
-    </style>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand " href="~/Index.cshtml">Book Shop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +17,7 @@
                     <a class="nav-link" href="~/Pages/Books/ShowAllBooks.cshtml">All Books <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="~/Pages/Books/BooksByGenres.cshtml">Books By Genres <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="~/Pages/Books/GroupByGenres.cshtml">Group By Genres <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="~/Pages/Books/FindByTitle.cshtml">Find By Title <span class="sr-only">(current)</span></a>
@@ -55,9 +34,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="~/Pages/Users/Account.cshtml">My account</a>
-                                <a class="dropdown-item" href="#">Change information</a>
-                                <a class="dropdown-item" href="#">Find purchase</a>
-                                <a class="dropdown-item" href="#">Cancel purchase</a>
+                                <a class="dropdown-item" href="~/Pages/Purchases/ChangeInfo.cshtml">Change information</a>
+                                <a class="dropdown-item" href="~/Pages/Purchases/FindPurchaseById.cshtml">Find purchase</a>
+                                <a class="dropdown-item" href="~/Pages/Purchases/CancelPurchase.cshtml">Cancel purchase</a>
                             </div>
                         </div>
                     }
@@ -69,11 +48,17 @@
                 <li class="nav-item">
                     @if (User.IsInRole("Admin") || User.IsInRole("User"))
                     {
-                        <button id="btn_signout" class="btn btn-primary mt-2 mt-md-0" type="submit" style="margin-left:35px">Sign Out</button>
+                        <button id="btn_signout" class="btn btn-primary mt-2 mt-md-0" type="submit"
+                                style="margin-left:35px" onclick="location.href='/Pages/Auth/SignOut.cshtml'">
+                            Sign Out
+                        </button>
                     }
                     @if (!User.IsInRole("Admin") && !User.IsInRole("User"))
                     {
-                        <button id="btn_login" class="btn btn-primary mt-2 mt-md-0" type="submit" style="margin-left:35px">Login</button>
+                        <button id="btn_login" class="btn btn-primary mt-2 mt-md-0" type="submit"
+                                style="margin-left:35px" onclick="location.href='/Pages/Auth/Login.cshtml'">
+                            Login
+                        </button>
                     }
                 </li>
             </ul>
@@ -84,23 +69,46 @@
                 </form>
             }
         </div>
-
     </nav>
     @if (User.IsInRole("Admin"))
     {
         <div class="alert alert-dark" style="border:solid;border-color:dimgrey">
-            <button id="btn_give_role" class="btn btn-danger" style="width:200px">Give Admin Role</button>
-            <button id="btn_take_role" class="btn btn-danger" style="width:200px">Take Admin Role</button>
+            <button id="btn_give_role" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Admin/GiveAdmin.cshtml'">
+                Give Admin Role
+            </button>
+            <button id="btn_take_role" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Admin/TakeAdmin.cshtml'">
+                Take Admin Role
+            </button>
             <br />
             <br />
-            <button id="btn_add_book" class="btn btn-danger" style="width:200px">Add Book</button>
-            <button id="btn_get_by_id" class="btn btn-danger" style="width:200px">Get Book By Id</button>
-            <button id="btn_remove_by_id" class="btn btn-danger" style="width:200px">Remove Book By Id</button>
-            <button id="btn_change_count_by_id" class="btn btn-danger" style="width:200px">Change Book Quantity</button>
-            <button id="btn_change_price_by_id" class="btn btn-danger" style="width:200px">Change Book Price</button>
+            <button id="btn_add_book" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Books/AddBook.cshtml'">
+                Add Book
+            </button>
+            <button id="btn_get_by_id" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Books/GetBookById.cshtml'">
+                Get Book By Id
+            </button>
+            <button id="btn_remove_by_id" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Books/RemoveBookById.cshtml'">
+                Remove Book By Id
+            </button>
+            <button id="btn_change_count_by_id" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Books/ChangeBookQuantity.cshtml'">
+                Change Book Quantity
+            </button>
+            <button id="btn_change_price_by_id" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Books/ChangeBookPrice.cshtml'">
+                Change Book Price
+            </button>
             <br />
             <br />
-            <button id="btn_show_all_purchases" class="btn btn-danger" style="width:200px">Show All Purchases</button>
+            <button id="btn_show_all_purchases" class="btn btn-danger"
+                    style="width:200px" onclick="location.href='/Pages/Purchases/ShowAllPurchases.cshtml'">
+                Show All Purchases
+            </button>
         </div>
     }
     @RenderBody()
@@ -111,55 +119,22 @@
             <span class="text-muted">All rights reserved. Website Corp. &copy; 2020</span>
         </div>
     </footer>
-    <script>
-        $('#btn_login').click(function () {
-            location.href = '/Pages/Auth/Login';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Auth/SignOut';
-        });
-    </script>
-    <script>
-        $('#btn_give_role').click(function () {
-            location.href = '/Pages/Admin/GiveAdmin';
-        });
-    </script>
-    <script>
-        $('#btn_take_role').click(function () {
-            location.href = '/Pages/Admin/TakeAdmin';
-        });
-    </script>
-    <script>
-        $('#btn_get_by_id').click(function () {
-            location.href = '/Pages/Books/GetBookById';
-        });
-    </script>
-    <script>
-        $('#btn_remove_by_id').click(function () {
-            location.href = '/Pages/Books/RemoveBookById';
-        });
-    </script>
-    <script>
-        $('#btn_add_book').click(function () {
-            location.href = '/Pages/Books/AddBook';
-        });
-    </script>
-    <script>
-        $('#btn_change_count_by_id').click(function () {
-            location.href = '/Pages/Books/ChangeBookQuantity';
-        });
-    </script>
-    <script>
-        $('#btn_change_price_by_id').click(function () {
-            location.href = '/Pages/Books/ChangeBookPrice';
-        });
-    </script>
-    <script>
-        $('#btn_show_all_purchases').click(function () {
-            location.href = '/Pages/Purchases/ShowAllPurchases';
-        });
-    </script>
 </body>
 </html>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.0.0.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Scripts.Render("~/scripts/jquery-1.10.2.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+<style>
+    .container {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+    }
+
+    .footer {
+        background-color: #757575;
+    }
+</style>

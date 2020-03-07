@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Final.DAL.Interfaces;
 using Final.Entities;
 using System.Data;
@@ -13,8 +10,31 @@ namespace FinalDAL
 {
     public class BookDao : IBookDao
     {
-        public event Action<int> DeleteBook;
         private static string _con_str = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+        public void AddBookToPurchase(int bookId, int purchaseId)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_AddBookToPurchase", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("IdBook", bookId);
+                cmd.Parameters.AddWithValue("IdPurchase", purchaseId);
+                var res = cmd.ExecuteNonQuery();
+            }
+        }
+        public void RemoveBookFromPurchase(int bookId, int purchaseId)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_RemoveBookFromPurchase", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("IdBook", bookId);
+                cmd.Parameters.AddWithValue("IdPurchase", purchaseId);
+                var res = cmd.ExecuteNonQuery();
+            }
+        }
         public Book Add(Book book)
         {
             using (var connect = new SqlConnection(_con_str))
@@ -34,47 +54,57 @@ namespace FinalDAL
             }
             return book;
         }
-        public void AddBookToPurchase(int bookId, int purchaseId)
+        public Book GetById(int id)
         {
             using (var connect = new SqlConnection(_con_str))
             {
                 connect.Open();
-                var cmd = new SqlCommand("procedure_AddBookToPurchase", connect);
+                var cmd = new SqlCommand("procedure_GetBookById", connect);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("IdBook", bookId);
-                cmd.Parameters.AddWithValue("IdPurchase", purchaseId);
-                var res = cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@Id", id);
+                var res = cmd.ExecuteReader();
+                if (res.Read())
+                {
+                    return new Book
+                    {
+                        Id = (int)res["Id"],
+                        Author = (string)res["Author"],
+                        Title = (string)res["Title"],
+                        Genre = (string)res["Genre"],
+                        BookImage = Convert.FromBase64String((string)res["BookImage"]),
+                        ReleaseDate = (int)res["ReleaseDate"],
+                        Price = (decimal)res["Price"],
+                        Count = (int)res["Quantity"]
+                    };
+                }
+                return null;
             }
         }
-        public bool ChangeCount(int bookId, int count)
+        public Book GetByTitle(string title)
         {
             using (var connect = new SqlConnection(_con_str))
             {
                 connect.Open();
-                var cmd = new SqlCommand("procedure_ChangeQuantity", connect);
+                var cmd = new SqlCommand("procedure_GetBookByTitle", connect);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("Id", bookId);
-                cmd.Parameters.AddWithValue("Quantity", count);
-                var res = cmd.ExecuteNonQuery();
-                return res != 0;
+                cmd.Parameters.AddWithValue("@Title", title);
+                var res = cmd.ExecuteReader();
+                if (res.Read())
+                {
+                    return new Book
+                    {
+                        Id = (int)res["Id"],
+                        Author = (string)res["Author"],
+                        Title = (string)res["Title"],
+                        Genre = (string)res["Genre"],
+                        BookImage = Convert.FromBase64String((string)res["BookImage"]),
+                        ReleaseDate = (int)res["ReleaseDate"],
+                        Price = (decimal)res["Price"],
+                        Count = (int)res["Quantity"]
+                    };
+                }
+                return null;
             }
-        }
-        public bool ChangePrice(int bookId, decimal price)
-        {
-            using (var connect = new SqlConnection(_con_str))
-            {
-                connect.Open();
-                var cmd = new SqlCommand("procedure_ChangePrice", connect);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("Id", bookId);
-                cmd.Parameters.AddWithValue("Price", price);
-                var res = cmd.ExecuteNonQuery();
-                return res != 0;
-            }
-        }
-        public void FilterByGenre(string genre)
-        {
-            throw new NotImplementedException();
         }
         public IEnumerable<Book> GetAll()
         {
@@ -183,68 +213,30 @@ namespace FinalDAL
                 return books;
             }
         }
-        public Book GetById(int id)
+        public bool ChangeCount(int bookId, int count)
         {
             using (var connect = new SqlConnection(_con_str))
             {
                 connect.Open();
-                var cmd = new SqlCommand("procedure_GetBookById", connect);
+                var cmd = new SqlCommand("procedure_ChangeQuantity", connect);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", id);
-                var res = cmd.ExecuteReader();
-                if (res.Read())
-                {
-                    return new Book
-                    {
-                        Id = (int)res["Id"],
-                        Author = (string)res["Author"],
-                        Title = (string)res["Title"],
-                        Genre = (string)res["Genre"],
-                        BookImage = Convert.FromBase64String((string)res["BookImage"]),
-                        ReleaseDate = (int)res["ReleaseDate"],
-                        Price = (decimal)res["Price"],
-                        Count = (int)res["Quantity"]
-                    };
-                }
-                return null;
-            }
-        }
-        public Book GetByTitle(string title)
-        {
-            using (var connect = new SqlConnection(_con_str))
-            {
-                connect.Open();
-                var cmd = new SqlCommand("procedure_GetBookByTitle", connect);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Title", title);
-                var res = cmd.ExecuteReader();
-                if (res.Read())
-                {
-                    return new Book
-                    {
-                        Id = (int)res["Id"],
-                        Author = (string)res["Author"],
-                        Title = (string)res["Title"],
-                        Genre = (string)res["Genre"],
-                        BookImage = Convert.FromBase64String((string)res["BookImage"]),
-                        ReleaseDate = (int)res["ReleaseDate"],
-                        Price = (decimal)res["Price"],
-                        Count = (int)res["Quantity"]
-                    };
-                }
-                return null;
-            }
-        }
-        public void RemoveBookFromPurchase(int bookId, int purchaseId)
-        {
-            using (var connect = new SqlConnection(_con_str))
-            {
-                connect.Open();
-                var cmd = new SqlCommand("procedure_RemoveBookFromPurchase", connect);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("IdBook", bookId);
-                cmd.Parameters.AddWithValue("IdPurchase", purchaseId);
+                cmd.Parameters.AddWithValue("Id", bookId);
+                cmd.Parameters.AddWithValue("Quantity", count);
                 var res = cmd.ExecuteNonQuery();
+                return res != 0;
+            }
+        }
+        public bool ChangePrice(int bookId, decimal price)
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_ChangePrice", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Id", bookId);
+                cmd.Parameters.AddWithValue("Price", price);
+                var res = cmd.ExecuteNonQuery();
+                return res != 0;
             }
         }
         public bool RemoveById(int id)
@@ -277,11 +269,5 @@ namespace FinalDAL
                 return res != 0 ? true : false;
             }
         }
-        #region Not Implemented
-        public void OnDeletePurchaseHandler(int purchaseId)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
 }
