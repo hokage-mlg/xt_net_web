@@ -13,6 +13,7 @@
                 DependencyResolver.BookLogic.RemoveBookFromPurchase(book.Id, purchase.Id);
                 DependencyResolver.BookLogic.ChangeCount(book.Id, book.Count + 1);
             }
+            DependencyResolver.PurchaseLogic.RemoveById(purchase.Id);
         }
     }
     Response.Redirect("~/Pages/Purchases/ShowAllPurchases.cshtml");

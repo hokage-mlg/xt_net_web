@@ -17,13 +17,16 @@
                     <a class="nav-link" href="~/Pages/Books/ShowAllBooks.cshtml">All Books <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="~/Pages/Books/GroupByGenres.cshtml">Group By Genres <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="~/Pages/Books/FindById.cshtml">Find By Id <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="~/Pages/Books/FindByTitle.cshtml">Find By Title <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="~/Pages/Books/GroupByAuthor.cshtml">Group by Authors <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="~/Pages/Books/GroupByGenres.cshtml">Group By Genres <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     @if (User.IsInRole("Admin") || User.IsInRole("User"))
@@ -86,10 +89,6 @@
             <button id="btn_add_book" class="btn btn-danger"
                     style="width:200px" onclick="location.href='/Pages/Books/AddBook.cshtml'">
                 Add Book
-            </button>
-            <button id="btn_get_by_id" class="btn btn-danger"
-                    style="width:200px" onclick="location.href='/Pages/Books/GetBookById.cshtml'">
-                Get Book By Id
             </button>
             <button id="btn_remove_by_id" class="btn btn-danger"
                     style="width:200px" onclick="location.href='/Pages/Books/RemoveBookById.cshtml'">

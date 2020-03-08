@@ -5,11 +5,21 @@
     var user = DependencyResolver.UserLogic.GetByLogin(User.Identity.Name);
     var purchases = DependencyResolver.PurchaseLogic.GetPurchasesByUserId(user.Id);
     <div class="main" style="padding-left:40px">
-        <h1>Welcome, @user.Login!</h1>
-        <button id="btn_change" class="btn btn-primary" style="position:center" onclick="location.href='/Pages/Users/ChangePassword.cshtml'">Change password</button>
         <table>
             <tr>
-                @if (!user.Purchases.Any())
+                <td>
+                    <h1>Welcome, @user.Login!</h1>
+                </td>
+                <td>
+                    <button class="btn btn-secondary" style="margin-left:60px" onclick="location.href='/Pages/Users/ChangePassword.cshtml'">
+                        Change password
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                @if (!purchases.Any())
                 {
                     <td><h2>Your purchases is empty.</h2></td>
                 }

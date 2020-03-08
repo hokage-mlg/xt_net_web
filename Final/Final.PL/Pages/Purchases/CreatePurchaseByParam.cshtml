@@ -1,7 +1,9 @@
 ﻿@using Final.Entities;
 @using Final.Ioc;
+@using Final.Logger;
 @{
     Layout = "~/Layouts/_MainLayout.cshtml";
+    var logger = Logger.Log;
     string purchaseId = null;
     string fullName, phoneNumber, address;
     int bookId = 0;
@@ -29,39 +31,42 @@
                 var chosenBook = DependencyResolver.BookLogic.GetById(bookId);
                 DependencyResolver.BookLogic.ChangeCount(bookId, chosenBook.Count - 1);
             }
-            catch
+            catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 Response.Redirect("~/404.cshtml");
             }
+            Response.Redirect("~/Pages/Users/Account.cshtml");
         }
     }
 }
 <h1 style="padding-left:40px">Create purchase</h1>
 @if (purchaseId != null)
 {
-    <div class="alert alert-info">Purchase added with ID: @purchaseId</div>
+    <div class="alert alert-info" style="padding-left:40px">Purchase added with ID: @purchaseId</div>
 }
-<p><a name="bottom"></a></p>
 <div class="main" style="padding-left:40px">
     <form method="post" enctype="multipart/form-data">
         <div>
             <label>Confirm book Id: </label>
-            <input class="form-control" style="width:200px" type="text" name="BookId" id="BookId" />
+            <input class="form-control" style="width:200px" type="text" name="BookId" id="BookId" pattern="^[0-9]*$" required />
         </div>
         <div>
-            <label>Full name: </label>
-            <input class="form-control" style="width:200px" type="text" name="FullName" id="FullName" />
+            <label for="fullname">Fullname:</label><br />
+            <input id="fullname" type="text" class="form-control" style="width:200px" name="FullName"
+                   pattern="^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$" required>
         </div>
         <div>
-            <label>Phone number: </label>
-            <input class="form-control" style="width:200px" type="text" name="PhoneNumber" id="PhoneNumber" />
+            <label for="phonenum">Phone Number (format: (xxx)xxx-xxxx):</label><br />
+            <input id="phonenum" type="tel" class="form-control" style="width:200px" name="PhoneNumber"
+                   pattern="^[\\(]{0,1}([0-9]){3}[\\)]{0,1}[ ]?([^0-1]){1}([0-9]){2}[ ]?[-]?[ ]?([0-9]){4}[ ]*((x){0,1}([0-9]){1,5}){0,1}$" required>
         </div>
         <div>
-            <label>Address: </label>
-            <input class="form-control" style="width:200px" type="text" name="Address" id="Address" />
+            <label>Delivery address: </label>
+            <input class="form-control" style="width:200px" type="text" name="Address" id="Address" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:200px">Create</button>
     </form>
 </div>
 <br />

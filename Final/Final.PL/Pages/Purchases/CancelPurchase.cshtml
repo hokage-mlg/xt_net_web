@@ -1,17 +1,18 @@
 ﻿@using Final.Ioc;
+@using Final.Logger;
 @{
     Page.Title = "Cancel Purchase";
     Layout = "~/Layouts/_MainLayout.cshtml";
+    var logger = Logger.Log;
     int id = 0;
-    string errorMessage = null;
     string stop = null;
 }
-<h3 style="padding-left:40px">Cancel purchase</h3>
+<h1 style="padding-left:20px">Cancel purchase</h1>
 @if (IsPost)
 {
     if (!int.TryParse(Request["Id"], out id))
     {
-        errorMessage = "Please, input your purchase id.";
+        logger.Error("Invalid input format.");
     }
     else
     {
@@ -22,20 +23,20 @@
             stop = "false";
             if (id == purchase.Id)
             {
-
                 if (DependencyResolver.UserLogic.CancelPurchase(user.Id, purchase.Id))
                 {
-                    errorMessage = null;
                     var books = DependencyResolver.BookLogic.GetBooksByPurchaseId(purchase.Id);
                     foreach (var book in books)
                     {
                         DependencyResolver.BookLogic.RemoveBookFromPurchase(book.Id, purchase.Id);
                         DependencyResolver.BookLogic.ChangeCount(book.Id, book.Count + 1);
                     }
-                    <div class="alert alert-info" style="padding-left:40px">Operation was completed</div>
+                    DependencyResolver.PurchaseLogic.RemoveById(id);
+                    <div class="alert alert-info" style="padding-left:20px">Operation was completed</div>
                 }
                 else
                 {
+                    logger.Error("Invalid purchase id.");
                     Response.Redirect("~/404.cshtml");
                 }
                 stop = "true";
@@ -44,18 +45,18 @@
         }
     }
 }
-@if (errorMessage != null || stop != "true" || stop == "false")
+@if (stop != "true" || stop == "false")
 {
-    <div class="alert alert-light" style="padding-left:40px">Please, input correct values</div>
+    <div class="alert alert-light" style="padding-left:20px">Please, input correct values</div>
 }
-<div class="main" style="padding-left:40px">
+<div class="main" style="padding-left:20px">
     <form action="~/Pages/Purchases/CancelPurchase.cshtml" method="post">
         <div>
             <label>Purchase Id for cancel: </label>
-            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+            <input class="form-control" style="width:100px" type="text" name="Id" id="Id" pattern="^[0-9]*$" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:100px">Cancel</button>
     </form>
 </div>
 <br />

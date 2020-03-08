@@ -1,8 +1,10 @@
 ﻿@using Final.Ioc;
 @using Final.Entities;
+@using Final.Logger;
 @{
     Page.Title = "Add Book";
     Layout = "~/Layouts/_MainLayout.cshtml";
+    var logger = Logger.Log;
     string bookId = null;
     string title, author, genre;
     int releaseDate, count;
@@ -41,48 +43,49 @@
             DependencyResolver.BookLogic.Add(book);
             bookId = book.Id.ToString();
         }
-        catch
+        catch (Exception ex)
         {
+            logger.Error(ex.Message);
             Response.Redirect("~/404.cshtml");
         }
     }
 }
+<h1 style="padding-left:20px">Add Book</h1>
+@if (bookId != null)
+{
+    <div class="alert alert-info" style="padding-left:20px">Book added with ID: @bookId</div>
+}
 <div class="main" style="padding-left:20px">
-    <h1>Add Book</h1>
-    @if (bookId != null)
-    {
-        <div class="alert alert-info">Book added with ID: @bookId</div>
-    }
     <form action="~/Pages/Books/AddBook.cshtml" method="post" enctype="multipart/form-data">
         <div>
             <label>Author: </label>
-            <input class="form-control" style="width:200px" type="text" name="Author" id="Author" />
+            <input class="form-control" style="width:200px" type="text" name="Author" id="Author" required />
         </div>
         <div>
             <label>Title: </label>
-            <input class="form-control" style="width:200px" type="text" name="Title" id="Title" />
+            <input class="form-control" style="width:200px" type="text" name="Title" id="Title" required />
         </div>
         <div>
             <label>Genre: </label>
-            <input class="form-control" style="width:200px" type="text" name="Genre" id="Genre" />
+            <input class="form-control" style="width:200px" type="text" name="Genre" id="Genre" required />
         </div>
         <div>
             <label for="image">Image:</label>
-            <input type="file" class="form-control" style="width:350px" name="BookImage" id="BookImage" accept=".png">
+            <input type="file" class="form-control" style="width:350px" name="BookImage" id="BookImage" accept=".png" required>
         </div>
         <div>
             <label>Release date: </label>
-            <input class="form-control" style="width:200px" type="text" name="ReleaseDate" id="ReleaseDate" />
+            <input class="form-control" style="width:200px" type="text" name="ReleaseDate" id="ReleaseDate" pattern="^[0-9]*$" required />
         </div>
         <div>
             <label>Price: </label>
-            <input class="form-control" style="width:200px" type="text" name="Price" id="Price" />
+            <input class="form-control" style="width:200px" type="text" name="Price" id="Price" pattern="^[0-9]*$" required />
         </div>
         <div>
             <label>Count: </label>
-            <input class="form-control" style="width:200px" type="text" name="Count" id="Count" />
+            <input class="form-control" style="width:200px" type="text" name="Count" id="Count" pattern="^[0-9]*$" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:200px">Add</button>
     </form>
 </div>

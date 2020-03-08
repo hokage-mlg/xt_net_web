@@ -1,10 +1,12 @@
 ﻿@using Final.PL;
+@using Final.Logger;
 <!DOCTYPE html>
 @{
     string name = null, pass = null;
     name = Request["name"];
     pass = Request["pass"];
     bool verifyResult = false;
+    var logger = Logger.Log;
     if (IsPost)
     {
         verifyResult = MyRoleProvider.VerifyUser(name, pass);
@@ -23,6 +25,7 @@
 <body>
     @if (IsPost && !verifyResult)
     {
+        logger.Error("Incorrect login or password.");
         <div id="my-alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin:auto;padding: 15px">
             Incorrect login or password. Try again.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -5,7 +5,7 @@ using Final.DAL.Interfaces;
 using Final.Entities;
 using System.Data;
 using System.Data.SqlClient;
-
+using log4net;
 namespace FinalDAL
 {
     public class BookDao : IBookDao

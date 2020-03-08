@@ -1,15 +1,18 @@
 ﻿@using Final.Ioc;
-<h1 style="padding-left:20px">Change Book Quantity</h1>
+@using Final.Logger;
 @{
     Page.Title = "Change Book Quantity";
     Layout = "~/Layouts/_MainLayout.cshtml";
     string errorMessage = null;
+    var logger = Logger.Log;
     int id = 0;
     int count = 0;
+    <h1 style="padding-left:20px">Change Book Quantity</h1>
     if (IsPost)
     {
         if (!int.TryParse(Request["Id"], out id) || !int.TryParse(Request["Count"], out count) || count < 0)
         {
+            logger.Error("Invalid input format.");
             errorMessage = "Incorrect values!";
         }
         else
@@ -21,6 +24,7 @@
             }
             else
             {
+                logger.Error("Invalid book id.");
                 Response.Redirect("~/404.cshtml");
             }
         }
@@ -34,13 +38,13 @@
     <form action="~/Pages/Books/ChangeBookQuantity.cshtml" method="post">
         <div>
             <label>Id: </label>
-            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+            <input class="form-control" style="width:100px" type="text" name="Id" id="Id" pattern="^[0-9]*$" required />
         </div>
         <div>
             <label>New count: </label>
-            <input class="form-control" style="width:200px" type="text" name="Count" id="Count" />
+            <input class="form-control" style="width:100px" type="text" name="Count" id="Count" pattern="^[0-9]*$" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:100px">Change</button>
     </form>
 </div>

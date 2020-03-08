@@ -49,6 +49,9 @@
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\FinalDAL\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\FinalDAL\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\FinalDAL\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -144,7 +147,7 @@
     <Content Include="Pages\Books\FindByTitle.cshtml" />
     <Content Include="Pages\Books\GroupByAuthor.cshtml" />
     <Content Include="Pages\Users\Account.cshtml" />
-    <Content Include="Pages\Books\GetBookById.cshtml" />
+    <Content Include="Pages\Books\FindById.cshtml" />
     <Content Include="404.cshtml" />
     <Content Include="Pages\Books\RemoveBookById.cshtml" />
     <Content Include="Pages\Books\AddBook.cshtml" />
@@ -160,7 +163,7 @@
     <Content Include="Pages\Purchases\ChangeAddress.cshtml" />
     <Content Include="Pages\Users\ChangePassword.cshtml" />
     <Content Include="Pages\Purchases\RemoveAll.cshtml" />
-    <Content Include="Pages\Purchases\CreatePurchaseByTitle.cshtml" />
+    <Content Include="Pages\Purchases\CreatePurchaseByParam.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -305,6 +308,10 @@
     <ProjectReference Include="..\Final.Ioc\Final.Common.csproj">
       <Project>{4eacdcb7-d6d1-4d19-9e30-29b3a6819897}</Project>
       <Name>Final.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Final.Logger\Final.Logger.csproj">
+      <Project>{76a498a5-8801-43b3-8af8-5340465e130c}</Project>
+      <Name>Final.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\FinalDAL\Final.DAL.csproj">
       <Project>{1aedc705-a2ff-43f4-9655-6bdb0a6e3f6c}</Project>

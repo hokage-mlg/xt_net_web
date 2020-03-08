@@ -1,75 +1,86 @@
 ﻿@using Final.Ioc;
+@using Final.Logger;
 @{
     Page.Title = "All purchases";
     Layout = "~/Layouts/_MainLayout.cshtml";
+    var logger = Logger.Log;
 }
-    <div class="main" style="padding-left:20px">
-        <h1>Purchases</h1>
-        <button id="btn_login" class="btn btn-primary" type="submit"
-                style="margin-left:35px" onclick="location.href='/Pages/Purchases/RemoveAll'">
-            Remove all
-        </button>
-        <ul>
-            @{
-                var purchases = DependencyResolver.PurchaseLogic.GetAll();
-                if (!purchases.Any())
-                {
-                    <li>
-                        <h1>Purchases is empty.</h1>
-                    </li>
-                }
-                foreach (var purchase in purchases)
-                {
-                    <li class="list-unstyled">
-                        @{
-                            var users = Final.Ioc.DependencyResolver.UserLogic.GetUsersByPurchaseId(purchase.Id);
-                            var books = Final.Ioc.DependencyResolver.BookLogic.GetBooksByPurchaseId(purchase.Id);
-                            foreach (var user in users)
+<div class="main" style="padding-left:20px">
+    <table>
+        <tr>
+            <td>
+                <h1>Purchases</h1>
+            </td>
+            <td>
+                <button id="btn_login" button class="btn btn-secondary" style="margin-left:60px" type="submit"
+                        onclick="location.href='/Pages/Purchases/RemoveAll'">
+                    Remove all
+                </button>
+            </td>
+        </tr>
+    </table>
+    <ul>
+        @{
+            var purchases = DependencyResolver.PurchaseLogic.GetAll();
+            if (!purchases.Any())
+            {
+                logger.Info("List of purchases is empty.");
+                <li class="list-unstyled">
+                    <h1>Purchases is empty.</h1>
+                </li>
+            }
+            foreach (var purchase in purchases)
+            {
+                <li class="list-unstyled">
+                    @{
+                        var users = Final.Ioc.DependencyResolver.UserLogic.GetUsersByPurchaseId(purchase.Id);
+                        var books = Final.Ioc.DependencyResolver.BookLogic.GetBooksByPurchaseId(purchase.Id);
+                        foreach (var user in users)
+                        {
+                            <h2>User: @user.Login</h2>
+                            <p><b>Purchase:</b>@purchase.ToString()</p>
+                            foreach (var book in books)
                             {
-                                <h2>User: @user.Login</h2>
-                                <p><b>Purchase:</b>@purchase.ToString()</p>
-                                foreach (var book in books)
-                                {
-                                    <h3>Books</h3>
-                                    <table>
-                                        <tr>
-                                            <td rowspan="7" class="first">
-                                                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
-                                            </td>
-                                            <td>Id:</td>
-                                            <td>@book.Id.ToString()</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Author:</td>
-                                            <td>@book.Author.ToString()</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Title:</td>
-                                            <td>@book.Title.ToString()</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Genre:</td>
-                                            <td>@book.Genre.ToString()</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Release date:</td>
-                                            <td>@book.ReleaseDate.ToString()</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Price:</td>
-                                            <td>@book.Price.ToString()</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quantity:</td>
-                                            <td>@book.Count.ToString()</td>
-                                        </tr>
-                                    </table>
-                                }
+                                <h3>Books</h3>
+                                <table>
+                                    <tr>
+                                        <td rowspan="7" class="first">
+                                            <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                                        </td>
+                                        <td>Id:</td>
+                                        <td>@book.Id.ToString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Author:</td>
+                                        <td>@book.Author.ToString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Title:</td>
+                                        <td>@book.Title.ToString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Genre:</td>
+                                        <td>@book.Genre.ToString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Release date:</td>
+                                        <td>@book.ReleaseDate.ToString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price:</td>
+                                        <td>@book.Price.ToString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quantity:</td>
+                                        <td>@book.Count.ToString()</td>
+                                    </tr>
+                                </table>
                             }
                         }
-                    </li>
-                }
+                    }
+                </li>
             }
-        </ul>
-    </div>
+        }
+    </ul>
+</div>
 <link href="~/Styles/BooksStyles.css" rel="stylesheet" />

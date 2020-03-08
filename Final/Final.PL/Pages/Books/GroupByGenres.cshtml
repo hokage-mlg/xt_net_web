@@ -1,5 +1,6 @@
 ﻿@using Final.Ioc;
 @using System.Linq;
+@using Final.Logger;
 <table class="text" style="background:none">
     <tr>
         <td style="border:none">
@@ -8,7 +9,7 @@
             </h1>
         </td>
         <td style="border:none" class="rightcol">
-            <button class="btn btn-primary" type="button" data-toggle="collapse"
+            <button class="btn btn-info" type="button" data-toggle="collapse"
                     data-target="#collapseExample" aria-expanded="false"
                     aria-controls="collapseExample" style="margin-left: 35px">
                 Expand
@@ -19,17 +20,23 @@
 @{
     Page.Title = "Group By Genres";
     Layout = "~/Layouts/_MainLayout.cshtml";
-    var books = DependencyResolver.BookLogic.GetAll().Distinct();
+    var logger = Logger.Log;
+    var filteredBooks = DependencyResolver.BookLogic.GetAll()
+  .GroupBy(book => book.Genre)
+  .Select(group => group.First());
     <form action="~/Pages/Books/GroupByGenres.cshtml" method="post" enctype="multipart/form-data">
         <ul class="list-group list-group-flush">
             @{
-                if (!books.Any())
+                if (!filteredBooks.Any())
                 {
                     <li class="list-group-item">
-                        Users is empty.
+                        @{
+                            logger.Info("List of books is empty.");
+                        }
+                        List of books is empty.
                     </li>
                 }
-                foreach (var book in books)
+                foreach (var book in filteredBooks)
                 {
                     <li class="list-group-item">
                         <b>Genre: @book.Genre</b>
@@ -56,7 +63,10 @@
                                                             <b style="font-size:large">
                                                                 @if (User.IsInRole("Admin") || User.IsInRole("User"))
                                                                 {
-                                                                    <button id="btn_buy" class="btn btn-primary" style="position:center" onclick="location.href='#bottom'">Buy</button>
+                                                                    <button id="btn_buy" class="btn btn-success" style="position:center"
+                                                                            onclick="location.href='#bottom'">
+                                                                        Buy
+                                                                    </button>
                                                                 }
                                                                 else
                                                                 {

@@ -1,7 +1,9 @@
 ﻿@using Final.Ioc;
+@using Final.Logger;
 @{
     Page.Title = "Change Book Price";
     Layout = "~/Layouts/_MainLayout.cshtml";
+    var logger = Logger.Log;
     string errorMessage = null;
     int id = 0;
     decimal price = 0;
@@ -10,6 +12,7 @@
     {
         if (!int.TryParse(Request["Id"], out id) || !decimal.TryParse(Request["Price"], out price) || price <= 0)
         {
+            logger.Error("Invalid input format.");
             errorMessage = "Incorrect values!";
         }
         else
@@ -21,6 +24,7 @@
             }
             else
             {
+                logger.Error("Invalid book id.");
                 Response.Redirect("~/404.cshtml");
             }
         }
@@ -34,13 +38,13 @@
     <form action="~/Pages/Books/ChangeBookPrice.cshtml" method="post">
         <div>
             <label>Id: </label>
-            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+            <input class="form-control" style="width:100px" type="text" name="Id" id="Id" pattern="^[0-9]*$" required />
         </div>
         <div>
             <label>New price: </label>
-            <input class="form-control" style="width:200px" type="text" name="Price" id="Price" />
+            <input class="form-control" style="width:100px" type="text" name="Price" id="Price" pattern="^[0-9]*$" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:100px">Change</button>
     </form>
 </div>

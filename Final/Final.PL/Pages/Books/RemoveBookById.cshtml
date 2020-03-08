@@ -1,14 +1,17 @@
 ﻿@using Final.Ioc;
-<h1 style="padding-left:20px">Remove Book By Id</h1>
+@using Final.Logger;
 @{
     Page.Title = "Remove Book By Id";
     Layout = "~/Layouts/_MainLayout.cshtml";
+    var logger = Logger.Log;
     string errorMessage = null;
     int id = 0;
+    <h1 style="padding-left:20px">Remove Book By Id</h1>
     if (IsPost)
     {
         if (!int.TryParse(Request["Id"], out id))
         {
+            logger.Error("Invalid input format.");
             errorMessage = "Incorrect values!";
         }
         else
@@ -20,6 +23,7 @@
             }
             else
             {
+                logger.Error("Invalid book id.");
                 Response.Redirect("~/404.cshtml");
             }
         }
@@ -33,9 +37,9 @@
     <form action="~/Pages/Books/RemoveBookById.cshtml" method="post">
         <div>
             <label>Id: </label>
-            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+            <input class="form-control" style="width:100px" type="text" name="Id" id="Id" pattern="^[0-9]*$" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:100px">Remove</button>
     </form>
 </div>

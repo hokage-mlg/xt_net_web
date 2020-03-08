@@ -1,9 +1,10 @@
 ﻿@using Final.Ioc;
+@using Final.Logger;
 @{
     Page.Title = "Change Fullname";
+    var logger = Logger.Log;
     int id = 0;
-    string fullname = (string)Request["Fullname"];
-    string errorMessage = null;
+    string fullname = Request["Fullname"];
     string stop = null;
 }
 @RenderPage("~/Pages/Purchases/ChangeInfo.cshtml")
@@ -12,7 +13,7 @@
 {
     if (!int.TryParse(Request["Id"], out id))
     {
-        errorMessage = "Please, input your purchase id.";
+        logger.Error("Invalid input format.");
     }
     else
     {
@@ -25,11 +26,11 @@
             {
                 if (DependencyResolver.PurchaseLogic.ChangeFullname(id, fullname))
                 {
-                    errorMessage = null;
                     <div class="alert alert-info" style="padding-left:40px">Operation was completed</div>
                 }
                 else
                 {
+                    logger.Error("Invalid purchase id.");
                     Response.Redirect("~/404.cshtml");
                 }
                 stop = "true";
@@ -38,7 +39,7 @@
         }
     }
 }
-@if (errorMessage != null || stop != "true" || stop == "false")
+@if (stop != "true" || stop == "false")
 {
     <div class="alert alert-light" style="padding-left:40px">Please, input correct values</div>
 }
@@ -46,14 +47,14 @@
     <form action="~/Pages/Purchases/ChangeFullName.cshtml" method="post">
         <div>
             <label>Purchase Id for changes: </label>
-            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
+            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" pattern="^[0-9]*$" required />
         </div>
         <div>
             <label>New Fullname: </label>
-            <input class="form-control" style="width:200px" type="text" name="Fullname" id="Fullname" />
+            <input class="form-control" style="width:200px" type="text" name="Fullname" id="Fullname" pattern="^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$" required />
         </div>
         <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
+        <button class="btn btn-primary" style="width:200px">Change</button>
     </form>
 </div>
 <br />
