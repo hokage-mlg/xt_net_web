@@ -18,13 +18,13 @@
     </tr>
 </table>
 @{
-    Page.Title = "Group By Author";
+    Page.Title = "Group By Authors";
     Layout = "~/Layouts/_MainLayout.cshtml";
     var logger = Logger.Log;
     var filteredBooks = DependencyResolver.BookLogic.GetAll()
   .GroupBy(book => book.Author)
   .Select(group => group.First());
-    <form action="~/Pages/Books/GroupByAuthor.cshtml" method="post" enctype="multipart/form-data">
+    <form action="~/Pages/Books/GroupByAuthors.cshtml" method="post" enctype="multipart/form-data">
         <ul class="list-group list-group-flush">
             @{
                 if (!filteredBooks.Any())
@@ -51,14 +51,14 @@
                                                 ID: @sortBook.Id.ToString()
                                                 <tr>
                                                     <td rowspan="6" class="first">
-                                                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                                                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(sortBook.BookImage))">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Title:</td>
                                                     <td>@sortBook.Title.ToString()</td>
                                                     <td style="border:none;background:none">
-                                                        @if (book.Count > 0)
+                                                        @if (sortBook.Count > 0)
                                                         {
                                                             <b style="font-size:large">
                                                                 @if (User.IsInRole("Admin") || User.IsInRole("User"))

@@ -14,6 +14,7 @@ namespace Final.BLL.Interfaces
         bool ChangeFullname(int purchaseId, string fullname);
         bool ChangePhoneNumber(int purchaseId, string phoneNumber);
         bool ChangeAddress(int purchaseId, string address);
+        bool RemoveAll();
         bool RemoveById(int id);
         bool Update(Purchase purchase);
     }

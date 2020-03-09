@@ -12,6 +12,7 @@ namespace Final.DAL.Interfaces
         IEnumerable<Purchase> GetAll();
         IEnumerable<Purchase> GetPurchasesByUserId(int userId);
         bool RemoveById(int id);
+        bool RemoveAll();
         bool ChangeFullname(int purchaseId, string fullname);
         bool ChangePhoneNumber(int purchaseId, string phoneNumber);
         bool ChangeAddress(int purchaseId, string address);

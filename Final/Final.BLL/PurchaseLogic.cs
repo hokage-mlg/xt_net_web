@@ -25,6 +25,7 @@ namespace Final.BLL
         public bool ChangePhoneNumber(int purchaseId, string phoneNumber) => _purchaseDao.ChangePhoneNumber(purchaseId, phoneNumber);
         public bool ChangeAddress(int purchaseId, string address) => _purchaseDao.ChangeAddress(purchaseId, address);
         public bool RemoveById(int id) => _purchaseDao.RemoveById(id);
+        public bool RemoveAll() => _purchaseDao.RemoveAll();
         public bool Update(Purchase purchase) => _purchaseDao.Update(purchase);
     }
 }

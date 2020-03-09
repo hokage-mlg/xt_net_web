@@ -1,0 +1,67 @@
+[ERROR] 08 Mar 2020 11:06:52,376 | ASP._Page_Pages_Books_AddBook_cshtml | Execute | Входная строка имела неверный формат.
+[ERROR] 08 Mar 2020 11:20:24,817 | ASP._Page_Pages_Books_ChangeBookPrice_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 11:23:25,226 | ASP._Page_Pages_Books_ChangeBookPrice_cshtml | Execute | Invalid book id.
+[ERROR] 08 Mar 2020 11:25:52,495 | ASP._Page_Pages_Books_ChangeBookQuantity_cshtml | Execute | Invalid book id.
+[ERROR] 08 Mar 2020 11:26:15,998 | ASP._Page_Pages_Books_ChangeBookQuantity_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 11:29:01,632 | ASP._Page_Pages_Books_FindByTitle_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 11:56:17,975 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 12:42:50,761 | ASP._Page_Pages_Books_AddBook_cshtml | Execute | Входная строка имела неверный формат.
+[ERROR] 08 Mar 2020 13:01:24,682 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Book_Purchase_Book". Конфликт произошел в базе данных "Final", таблица "dbo.books", column 'Id'.
+Выполнение данной инструкции было прервано.
+[ERROR] 08 Mar 2020 13:01:50,268 | ASP._Page_Pages_Admin_GiveAdmin_cshtml | Execute | Role transfer error.
+[ERROR] 08 Mar 2020 13:02:11,511 | ASP._Page_Pages_Purchases_RemoveAll_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 13:03:11,776 | ASP._Page_Pages_Purchases_RemoveAll_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 13:05:18,595 | ASP._Page_Pages_Books_GetBookById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 13:05:30,242 | ASP._Page_Pages_Books_GetBookById_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 13:36:05,280 | ASP._Page_Pages_Purchases_FindPurchaseById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 14:02:20,434 | ASP._Page_Pages_Books_RemoveBookById_cshtml | Execute | Invalid book id.
+[ERROR] 08 Mar 2020 14:05:03,928 | ASP._Page_Pages_Books_RemoveBookById_cshtml | Execute | Invalid book id.
+[ERROR] 08 Mar 2020 14:23:27,271 | ASP._Page_Pages_Books_FindByTitle_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 14:35:01,948 | ASP._Page_Pages_Books_AddBook_cshtml | Execute | Входная строка имела неверный формат.
+[ERROR] 08 Mar 2020 17:41:01,295 | ASP._Page_Pages_Admin_TakeAdmin_cshtml | Execute | Role transfer error.
+[ERROR] 08 Mar 2020 17:46:53,134 | ASP._Page_Pages_Admin_TakeAdmin_cshtml | Execute | Role transfer error.
+[ERROR] 08 Mar 2020 19:13:01,547 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 19:14:05,537 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 19:15:25,692 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 19:19:09,211 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 19:19:51,526 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Поток находился в процессе прерывания.
+[ERROR] 08 Mar 2020 19:20:43,310 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Book_Purchase_Book". Конфликт произошел в базе данных "Final", таблица "dbo.books", column 'Id'.
+Выполнение данной инструкции было прервано.
+[ERROR] 08 Mar 2020 19:26:44,943 | ASP._Page_Pages_Purchases_CreatePurchase_cshtml | Execute | Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Book_Purchase_Book". Конфликт произошел в базе данных "Final", таблица "dbo.books", column 'Id'.
+Выполнение данной инструкции было прервано.
+[ERROR] 08 Mar 2020 19:35:51,876 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:37:38,785 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:37:40,952 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 19:38:59,368 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:39:03,829 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:39:06,221 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:40:26,467 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:41:27,109 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:41:48,763 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:43:45,707 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:43:49,920 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:43:56,467 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:45:30,073 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:46:02,842 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:46:05,376 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:48:21,618 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:48:23,757 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:48:43,382 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:48:45,627 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:50:07,098 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:50:15,364 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:50:57,093 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:51:39,536 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:53:52,909 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:54:02,794 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:54:39,761 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:54:43,678 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Invalid input format.
+[ERROR] 08 Mar 2020 19:55:08,597 | ASP._Page_Pages_Books_FindByTitle_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 19:55:18,835 | ASP._Page_Pages_Books_FindByTitle_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 19:58:00,726 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 08 Mar 2020 20:31:25,284 | ASP._Page_Pages_Books_FindByTitle_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[INFO] 08 Mar 2020 20:49:45,646 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 08 Mar 2020 20:51:30,499 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 08 Mar 2020 20:51:37,011 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 08 Mar 2020 20:55:53,500 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 08 Mar 2020 20:56:12,308 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.

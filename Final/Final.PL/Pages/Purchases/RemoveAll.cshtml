@@ -2,18 +2,18 @@
 @{
     var users = DependencyResolver.PurchaseLogic.GetAll();
     var purchases = DependencyResolver.PurchaseLogic.GetAll();
-    var books = DependencyResolver.BookLogic.GetAll();
     foreach (var user in users)
     {
         foreach (var purchase in purchases)
         {
             DependencyResolver.UserLogic.CancelPurchase(user.Id, purchase.Id);
+            var books = DependencyResolver.BookLogic.GetBooksByPurchaseId(purchase.Id);
             foreach (var book in books)
             {
                 DependencyResolver.BookLogic.RemoveBookFromPurchase(book.Id, purchase.Id);
                 DependencyResolver.BookLogic.ChangeCount(book.Id, book.Count + 1);
             }
-            DependencyResolver.PurchaseLogic.RemoveById(purchase.Id);
+            DependencyResolver.PurchaseLogic.RemoveAll();
         }
     }
     Response.Redirect("~/Pages/Purchases/ShowAllPurchases.cshtml");

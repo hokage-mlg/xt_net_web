@@ -168,6 +168,17 @@ namespace FinalDAL
                 return res != 0;
             }
         }
+        public bool RemoveAll()
+        {
+            using (var connect = new SqlConnection(_con_str))
+            {
+                connect.Open();
+                var cmd = new SqlCommand("procedure_RemoveAllPurchases", connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                var res = cmd.ExecuteNonQuery();
+                return res != 0;
+            }
+        }
         public bool Update(Purchase purchase)
         {
             using (var connect = new SqlConnection(_con_str))

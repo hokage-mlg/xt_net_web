@@ -133,15 +133,9 @@ namespace FinalDAL
                     ParameterName = "@Password",
                     Value = user.Password,
                 };
-                var IdParam = new SqlParameter()
-                {
-                    DbType = DbType.Int32,
-                    ParameterName = "@Id",
-                    Value = user.Id,
-                };
                 cmd.Parameters.Add(LoginParam);
                 cmd.Parameters.Add(PasswordParam);
-                cmd.Parameters.Add(IdParam);
+                cmd.ExecuteNonQuery();
             }
             return true;
         }

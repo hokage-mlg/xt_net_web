@@ -145,7 +145,7 @@
     <Content Include="Pages\Books\ShowAllBooks.cshtml" />
     <Content Include="Pages\Books\GroupByGenres.cshtml" />
     <Content Include="Pages\Books\FindByTitle.cshtml" />
-    <Content Include="Pages\Books\GroupByAuthor.cshtml" />
+    <Content Include="Pages\Books\GroupByAuthors.cshtml" />
     <Content Include="Pages\Users\Account.cshtml" />
     <Content Include="Pages\Books\FindById.cshtml" />
     <Content Include="404.cshtml" />

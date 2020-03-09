@@ -243,6 +243,13 @@ as
 	delete from purchases where Id = @Id
 go
 
+create procedure [dbo].[procedure_RemoveAllPurchases]
+as
+	delete from users_purchases
+	delete from books_purchases
+	delete from purchases
+go
+
 create procedure [dbo].[procedure_GetPurchasesByUserId]
 	@Id int
 as

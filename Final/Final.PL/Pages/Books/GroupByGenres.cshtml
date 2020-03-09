@@ -51,14 +51,14 @@
                                                 ID: @sortBook.Id.ToString()
                                                 <tr>
                                                     <td rowspan="6" class="first">
-                                                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(book.BookImage))">
+                                                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(sortBook.BookImage))">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Author:</td>
                                                     <td>@sortBook.Author.ToString()</td>
                                                     <td style="border:none;background:none">
-                                                        @if (book.Count > 0)
+                                                        @if (sortBook.Count > 0)
                                                         {
                                                             <b style="font-size:large">
                                                                 @if (User.IsInRole("Admin") || User.IsInRole("User"))
