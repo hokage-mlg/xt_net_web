@@ -1,73 +1,12 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Users</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
-        }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-    }
-    <h1>Users menu</h1>
-    <button id="btn_show_all" class="btn btn-primary" style="width:200px"> Show all users</button>
-    @if (User.IsInRole("Admin"))
-    {
-        <button id="btn_add" class="btn btn-primary" style="width:200px"> Add user</button>
-        <button id="btn_show" class="btn btn-primary" style="width:200px">Show user by ID</button>
-        <button id="btn_delete" class="btn btn-primary" style="width:200px">Delete user by ID</button>
-        <button id="btn_reward" class="btn btn-primary" style="width:200px"> Reward user</button>
-        <button id="btn_remove_reward" class="btn btn-primary" style="width:200px"> Remove reward</button>
-    }
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_add').click(function () {
-            location.href = '/Pages/Users/AddUser';
-        });
-    </script>
-    <script>
-        $('#btn_show').click(function () {
-            location.href = '/Pages/Users/ShowUser';
-        });
-    </script>
-    <script>
-        $('#btn_show_all').click(function () {
-            location.href = '/Pages/Users/ShowAll';
-        });
-    </script>
-    <script>
-        $('#btn_delete').click(function () {
-            location.href = '/Pages/Users/DeleteUser';
-        });
-    </script>
-    <script>
-        $('#btn_reward').click(function () {
-            location.href = '/Pages/Users/RewardUser';
-        });
-    </script>
-    <script>
-        $('#btn_remove_reward').click(function () {
-            location.href = '/Pages/Users/RemoveReward';
-        });
-    </script>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Index';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+﻿@{
+    Layout = "~/Pages/Layouts/_UsersLayout.cshtml";
+    Page.Title = "Users and Awards";
+}
+<div class="jumbotron" id="jumbo">
+    <h1 class="display-3">Users menu</h1>
+    <p class="lead">This is a web application that I made for Epam-XT.</p>
+    <hr>
+    <p>
+        In this menu you can make operations with users...
+    </p>
+</div>

@@ -17,5 +17,6 @@ namespace Task6.DAL.Interfaces
         void AddUserToAward(int awardId, int userId);
         void RemoveUserFromAward(int awardId, int userId);
         void OnDeleteUserHandler(int userId);
+        IEnumerable<Award> GetAwardsByUserId(int userId);
     }
 }

@@ -77,6 +77,10 @@ namespace Task6.DAL
                 award.Value.Users.Remove(userId);
             WriteAwards();
         }
+        public IEnumerable<Award> GetAwardsByUserId(int userId)
+        {
+            throw new NotImplementedException();
+        }
         ~AwardDao()
         {
             WriteAwards();

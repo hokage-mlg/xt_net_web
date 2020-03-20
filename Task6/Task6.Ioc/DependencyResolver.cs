@@ -13,20 +13,14 @@ namespace Task6.Common
 {
     public class DependencyResolver
     {
-        public static IUserDao UserDao { get; private set; }
-        public static IUserLogic UserLogic { get; private set; }
-        public static IAwardDao AwardDao { get; set; }
-        public static IAwardLogic AwardLogic { get; set; }
-        static DependencyResolver()
-        {
-            UserDao = new Task11.DAL.UserDao();
-            AwardDao = new Task11.DAL.AwardDao();
-            UserLogic = new UserLogic(UserDao);
-            AwardLogic = new AwardLogic(AwardDao);
-        }
-        private static IUserWebDao _userWebDao;
-        public static IUserWebDao UserWebDao => _userWebDao ?? (_userWebDao = new Task11.DAL.UserWebDao());
-        private static IUserWebLogic _userWebLogic;
-        public static IUserWebLogic UserWebLogic => _userWebLogic ?? (_userWebLogic = new UserWebLogic(UserWebDao));
+        private static IUserDao _userDao = new Task11.DAL.UserDao();
+        private static IAwardDao _awardDao = new Task11.DAL.AwardDao();
+        private static IUserWebDao _userWebDao = new Task11.DAL.UserWebDao();
+        private static IUserLogic _userLogic = new UserLogic(_userDao);
+        private static IAwardLogic _awardLogic = new AwardLogic(_awardDao);
+        private static IUserWebLogic _userWebLogic = new UserWebLogic(_userWebDao);
+        public static IUserLogic UserLogic => _userLogic;
+        public static IAwardLogic AwardLogic => _awardLogic;
+        public static IUserWebLogic UserWebLogic => _userWebLogic;
     }
 }

@@ -1,69 +1,13 @@
-﻿<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Menu</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
-        }
-    </style>
-    <div>
-        @if (User.IsInRole("Admin") || User.IsInRole("User"))
-        {
-            <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-        }
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="alert alert-light">
-                <button id="btn_give_role" class="btn btn-danger" style="width:200px">Give Admin role</button>
-                <button id="btn_take_role" class="btn btn-danger" style="width:200px">Take Admin role</button>
-            </div>
-        }
-    </div>
-    <h1>Menu</h1>
-    <button id="btn_user" class="btn btn-primary" style="width:200px">User mode</button>
-    @if (User.IsInRole("Admin"))
-    {
-        <button id="btn_award" class="btn btn-primary" style="width:200px">Award mode</button>
-    }
-    @if (!User.IsInRole("Admin") && !User.IsInRole("User"))
-    {
-        <button id="btn_login" class="btn btn-primary" style="width:200px">Login</button>
-    }
-    <script>
-        $('#btn_user').click(function () {
-            location.href = '/Pages/Users/Users';
-        });
-    </script>
-    <script>
-        $('#btn_award').click(function () {
-            location.href = '/Pages/Awards/Awards';
-        });
-    </script>
-    <script>
-        $('#btn_login').click(function () {
-            location.href = '/Pages/Login/Login';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-    <script>
-        $('#btn_give_role').click(function () {
-            location.href = '/Pages/Admin/GiveAdminRole';
-        });
-    </script>
-    <script>
-        $('#btn_take_role').click(function () {
-            location.href = '/Pages/Admin/TakeAdminRole';
-        });
-    </script>
-</body>
-</html>
+﻿@{
+    Layout = "~/Pages/Layouts/_MainLayout.cshtml";
+    Page.Title = "Users and Awards";
+}
+<div class="jumbotron" id="jumbo">
+    <h1 class="display-3">Users and Awards application</h1>
+    <p class="lead">This is a web application that I made for Epam-XT.</p>
+    <hr>
+    <p>
+        In this application, CRUD operations are implemented,
+        there are also roles for users that can be edited and so on.
+    </p>
+</div>

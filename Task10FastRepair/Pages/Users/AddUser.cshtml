@@ -1,5 +1,9 @@
-﻿@using Task6;
+﻿@using Task6.Common;
+@using Task6.Entities;
 @{
+    Layout = "~/Pages/Layouts/_UsersLayout.cshtml";
+    Page.Title = "Add User";
+    <h1 style="padding-left:20px">Add User</h1>
     string errorMessage = null;
     string userID = null;
     string name;
@@ -25,74 +29,44 @@
         else
         {
             errorMessage = null;
-            var user = new Task6.Entities.User()
+            try
             {
-                Name = name,
-                DateOfBirth = birth,
-                UserImage = bytes
-            };
-            Task10.Models.UserService.AddUser(user);
-            userID = user.Id.ToString();
+                var user = new User()
+                {
+                    Name = name,
+                    DateOfBirth = birth,
+                    UserImage = bytes
+                };
+                DependencyResolver.UserLogic.Add(user);
+                userID = user.Id.ToString();
+            }
+            catch
+            {
+                Response.Redirect("~/404.cshtml");
+            }
         }
     }
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Add User</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
-        }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-
-    }
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-    @if (userID != null)
-    {
-        <div class="alert alert-info">User added with ID: @userID</div>
-    }
-    <form action="~/Pages/Users/AddUser.cshtml" method="post" enctype="multipart/form-data">
-        <div>
-            <label>Name: </label>
-            <input class="form-control" style="width:200px" type="text" name="Name" id="Name" />
-        </div>
-        <div>
-            <label>Date of birth:</label>
-            <input class="form-control" style="width:200px" type="date" name="Birth" id="Birth" />
-        </div>
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" class="form-control" name="image" id="image" accept=".png">
-        </div>
-        <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
-    </form>
-    <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Pages/Users/Users';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+@if (userID != null)
+{
+    <div class="alert alert-info">User added with ID: @userID</div>
+}
+<form action="~/Pages/Users/AddUser.cshtml" method="post" enctype="multipart/form-data" style="padding-left:20px">
+    <div>
+        <label>Name: </label>
+        <input class="form-control" style="width:200px" type="text" name="Name" id="Name" required />
+    </div>
+    <div>
+        <label>Date of birth:</label>
+        <input class="form-control" style="width:200px" type="date" name="Birth" id="Birth" required />
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" class="form-control" name="image" id="image" style="width:300px" accept=".png">
+    </div>
+    <button class="btn btn-primary" style="width:200px">Submit</button>
+</form>

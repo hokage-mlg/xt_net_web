@@ -1,107 +1,79 @@
-﻿@using Task10FastRepair.Models;
-@using System.Web.Helpers;
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Show All Users</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
+﻿@using Task6.Common;
+@{
+    Layout = "~/Pages/Layouts/_UsersLayout.cshtml";
+    Page.Title = "Show All Users";
+    <h1 style="padding-left:20px">Show All Users</h1>
+}
+<ul class="list-group list-group-flush">
+    @{
+        var users = DependencyResolver.UserLogic.GetAll();
+        if (!users.Any())
+        {
+            <li class="list-group-item">
+                Users is empty.
+            </li>
         }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-    }
-    <ul class="list-group list-group-flush">
-        @{
-            var users = UserService.GetAll();
-            if (!users.Any())
+        if (User.IsInRole("User") || User.IsInRole("Admin"))
+        {
+            foreach (var user in users)
             {
+                byte[] byteImageArray = DependencyResolver.UserLogic.GetUserImage(user.Id);
                 <li class="list-group-item">
-                    Users is empty.
+                    @try
+                    {
+                        WebImage photo = new WebImage(byteImageArray);
+                        if (photo != null)
+                        {
+                            <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
+                        }
+                    }
+                    catch
+                    {
+                        <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
+                    }
+                    @{
+                        @user.ToString()
+                        var res = DependencyResolver.AwardLogic.GetAwardsByUserId(user.Id);
+                        var str = " Awards: ";
+                        var titles = "";
+                        if (res.Any())
+                        {
+                            @str
+                            foreach (var i in res)
+                            {
+                                titles = i.Title.ToString() + "; ";
+                                @titles
+                            }
+                        }
+                    }
                 </li>
             }
-            if (User.IsInRole("User") || User.IsInRole("Admin"))
+        }
+        else
+        {
+            foreach (var user in users)
             {
-                foreach (var user in users)
-                {
-                    byte[] byteImageArray = WebUI.GetUserImage(user.Id.ToString());
-                    <li class="list-group-item">
-                        @try
+                byte[] byteImageArray = DependencyResolver.UserLogic.GetUserImage(user.Id);
+                <li class="list-group-item">
+                    @try
+                    {
+                        WebImage photo = new WebImage(byteImageArray);
+                        if (photo != null)
                         {
-                            WebImage photo = new WebImage(byteImageArray);
-                            if (photo != null)
-                            {
-                                <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
-                            }
+                            <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
                         }
-                        catch
-                        {
-                            <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
-                        }
-                        @{
-                            @UserService.PrintUser(user)
-                            Task11.DAL.AwardDao praw = new Task11.DAL.AwardDao();
-                            var res = praw.GetAwardsByUserId(user.Id);
-                            var str = " Awards: ";
-                            var titles = "";
-                            if (res.Any())
-                            {
-                                @str
-                                foreach (var i in res)
-                                {
-                                    titles = i.Title.ToString() + "; ";
-                                    @titles
-                                }
-                            }
-                        }
-                    </li>
-                }
-            }
-            else
-            {
-                foreach (var user in users)
-                {
-                    byte[] byteImageArray = WebUI.GetUserImage(user.Id.ToString());
-                    <li class="list-group-item">
-                        @try
-                        {
-                            WebImage photo = new WebImage(byteImageArray);
-                            if (photo != null)
-                            {
-                                <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
-                            }
-                        }
-                        catch
-                        {
-                            <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
-                        }
-                        @UserService.PrintUser(user)
-                    </li>
-                }
+                    }
+                    catch
+                    {
+                        <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
+                    }
+                    @{
+                        var userInfo = $"Id:{user.Id}. Name:{user.Name}. DateOfBirth: {user.DateOfBirth.ToShortDateString()}. Age: {user.Age}.";
+                        @userInfo
+                    }
+                </li>
             }
         }
-    </ul>
-    <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Pages/Users/Users';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+    }
+</ul>
+<br />

@@ -1,5 +1,8 @@
-﻿@using Task10FastRepair.Models;
+﻿@using Task6.Common;
 @{
+    Layout = "~/Pages/Layouts/_UsersLayout.cshtml";
+    Page.Title = "Delete User";
+    <h1 style="padding-left:20px">Delete User</h1>
     string errorMessage = null;
     int id = 0;
     if (IsPost)
@@ -11,58 +14,26 @@
         else
         {
             errorMessage = null;
-            UserService.DeleteUser(id);
+            if (DependencyResolver.UserLogic.RemoveById(id))
+            {
+                <div class="alert alert-info">User with ID - @id is deleted.</div>
+            }
+            else
+            {
+                <div class="alert alert-danger">Invalid user ID.</div>
+            }
         }
     }
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete user</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
-        }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-    }
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-    @if (id != 0)
-    {
-        <div class="alert alert-info">User with ID - @id is deleted.</div>
-    }
-    <form action="~/Pages/Users/DeleteUser.cshtml" method="post">
-        <div>
-            <label>Id: </label>
-            <input class="form-control" style="width:200px" type="text" name="Id" id="Id" />
-        </div>
-        <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
-    </form>
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+<form action="~/Pages/Users/DeleteUser.cshtml" method="post" style="padding-left:20px">
+    <div>
+        <label>Id: </label>
+        <input class="form-control" style="width:200px" type="text" name="Id" id="Id" pattern="^[0-9]*$" required />
+    </div>
     <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Pages/Users/Users';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+    <button class="btn btn-primary" style="width:200px">Submit</button>
+</form>

@@ -1,6 +1,8 @@
-﻿@using Task10FastRepair.Models;
-@using Task6;
+﻿@using Task6.Common;
+@using Task10FastRepair.Models;
 @{
+    Layout = "~/Pages/Layouts/_MainLayout.cshtml";
+    Page.Title = "Give Admin Role";
     string login = null;
     string info = null;
     login = Request["Login"];
@@ -10,66 +12,37 @@
         MyRoleProvider.AddUserRole(login, "Admin");
     }
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Give Admin Role</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
+<h1 style="padding-left:20px">Give Admin Role</h1>
+@if (info != null)
+{
+    <div class="alert alert-info">@info</div>
+}
+<ul class="list-group list-group-flush">
+    @{
+        var users = DependencyResolver.UserWebLogic.GetAll();
+        if (!users.Any())
+        {
+            <li class="list-group-item">
+                Users is empty.
+            </li>
         }
-    </style>
-    <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-    <h1>Give Admin Role</h1>
-    @if (info != null)
-    {
-        <div class="alert alert-info">@info</div>
+        foreach (var user in users)
+        {
+            <li class="list-group-item">
+                @{
+                    var userInfo = $"Login:{user.Login}; Role:{user.Roles[0]}";
+                    @userInfo
+                }
+            </li>
+        }
     }
-    <ul class="list-group list-group-flush">
-        @{
-            var users = WebUI.GetListUsers();
-            if (!users.Any())
-            {
-                <li class="list-group-item">
-                    Users is empty.
-                </li>
-            }
-            foreach (var user in users)
-            {
-                <li class="list-group-item">
-                    @WebUI.PrintWebUsers(user);
-                </li>
-            }
-        }
-    </ul>
+</ul>
+<br />
+<form action="~/Pages/Admin/GiveAdminRole.cshtml" method="post" style="padding-left:20px">
+    <div>
+        <label>Login: </label>
+        <input class="form-control" style="width:200px" type="text" name="Login" id="Login" />
+    </div>
     <br />
-    <form action="~/Pages/Admin/GiveAdminRole.cshtml" method="post">
-        <div>
-            <label>Login: </label>
-            <input class="form-control" style="width:200px" type="text" name="Login" id="Login" />
-        </div>
-        <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
-    </form>
-    <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Index';
-        });
-    </script>
-</body>
-</html>
+    <button class="btn btn-primary" style="width:200px">Submit</button>
+</form>

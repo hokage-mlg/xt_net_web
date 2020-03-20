@@ -1,55 +1,24 @@
-﻿@using Task10FastRepair.Models;
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Show All Awards</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
+﻿@using Task6.Common;
+@{
+    Layout = "~/Pages/Layouts/_AwardsLayout.cshtml";
+    Page.Title = "Show All";
+    <h1 style="padding-left:20px">Show All</h1>
+}
+<ul class="list-group list-group-flush">
+    @{
+        var awards = DependencyResolver.AwardLogic.GetAll();
+        if (!awards.Any())
+        {
+            <li class="list-group-item">
+                Awards is empty.
+            </li>
         }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-
+        foreach (var award in awards)
+        {
+            <li class="list-group-item">
+                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(award.AwardImage))">
+                @award.ToString()
+            </li>
+        }
     }
-    <ul class="list-group list-group-flush">
-        @{
-            var awards = AwardService.GetAll();
-            if (!awards.Any())
-            {
-                <li class="list-group-item">
-                    Awards is empty.
-                </li>
-            }
-            foreach (var award in awards)
-            {
-                <li class="list-group-item">
-                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(award.AwardImage))">
-                    @award.ToString()
-                </li>
-            }
-        }
-    </ul>
-    <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Pages/Awards/Awards';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+</ul>

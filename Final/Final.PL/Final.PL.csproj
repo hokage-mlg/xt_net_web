@@ -141,7 +141,7 @@
     <Content Include="Pages\Admin\GiveAdmin.cshtml" />
     <Content Include="Pages\Admin\TakeAdmin.cshtml" />
     <Content Include="Index.cshtml" />
-    <Content Include="Layouts\_MainLayout.cshtml" />
+    <Content Include="Pages\Layouts\_MainLayout.cshtml" />
     <Content Include="Pages\Books\ShowAllBooks.cshtml" />
     <Content Include="Pages\Books\GroupByGenres.cshtml" />
     <Content Include="Pages\Books\FindByTitle.cshtml" />

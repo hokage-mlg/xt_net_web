@@ -1,177 +1,156 @@
-﻿@using Task10FastRepair.Models;
+﻿@using Task6.Common;
 @{
+    Layout = "~/Pages/Layouts/_UsersLayout.cshtml";
+    Page.Title = "Remove Reward";
+    <h1 style="padding-left:20px">Remove Reward</h1>
     string errorMessage = null;
-    int UserId = 0;
-    int AwardId = 0;
+    int userId = 0;
+    int awardId = 0;
     string status = null;
     bool flag = false;
-    string message = null;
+    var users = DependencyResolver.UserLogic.GetAll();
+    var awards = DependencyResolver.AwardLogic.GetAll();
     if (IsPost)
     {
-        if (!int.TryParse(Request["UserId"], out UserId) || !int.TryParse(Request["AwardId"], out AwardId))
+        if (!int.TryParse(Request["UserId"], out userId) || !int.TryParse(Request["AwardId"], out awardId))
         {
             errorMessage = "Incorrect values!";
         }
         else
         {
             errorMessage = null;
-            var user = UserService.ShowUser(UserId);
-            var award = UserService.ShowAward(AwardId);
-            status = UserService.TakeAwayAward(user.Id, award.Id);
-            message = "Operation completed.";
+            var user = DependencyResolver.UserLogic.GetById(userId);
+            var award = DependencyResolver.AwardLogic.GetById(awardId);
+            if (DependencyResolver.UserLogic.TakeAwayAward(userId, awardId))
+            {
+                status = $"The award with ID - {awardId} has been taken from user with ID - {userId}.";
+                <div class="alert alert-info">@status</div>
+            }
+            else
+            {
+                status = "Can't take award.";
+                <div class="alert alert-danger">@status</div>
+            }
             if (!bool.TryParse(Request["forall"], out flag))
             {
                 if (flag == true)
                 {
-                    UserService.RemoveFromAll(AwardId);
+                    foreach (var u in users)
+                    {
+                        if (DependencyResolver.UserLogic.TakeAwayAward(u.Id, award.Id))
+                        {
+                            DependencyResolver.AwardLogic.RemoveUserFromAward(award.Id, user.Id);
+                        }
+                    }
                 }
             }
         }
     }
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Remove Reward</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+<h3 style="padding-left:20px">All Users: </h3>
+<ul class="list-group list-group-flush">
+    @{
+        if (users == null)
+        {
+            <li class="list-group-item">
+                Users is empty.
+            </li>
         }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-
-    }
-    @if (errorMessage != null)
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-    @if (message != null)
-    {
-        <div class="alert alert-info">@message</div>
-    }
-    <label>All Users: </label>
-    <ul class="list-group list-group-flush">
-        @{
-            var users = UserService.GetAll();
-            if (users == null)
-            {
-                <li class="list-group-item">
-                    Users is empty.
-                </li>
-            }
-
-            foreach (var user in users)
-            {
-                byte[] byteImageArray = WebUI.GetUserImage(user.Id.ToString());
-
-                <li class="list-group-item">
-                    @try
+        foreach (var user in users)
+        {
+            byte[] byteImageArray = DependencyResolver.UserLogic.GetUserImage(user.Id);
+            <li class="list-group-item">
+                @try
+                {
+                    WebImage photo = new WebImage(byteImageArray);
+                    if (photo != null)
                     {
-                        WebImage photo = new WebImage(byteImageArray);
-                        if (photo != null)
+                        <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
+                    }
+                }
+                catch
+                {
+                    <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
+                }
+                @{
+                    @user.ToString()
+                    var res = DependencyResolver.AwardLogic.GetAwardsByUserId(user.Id);
+                    var str = " Awards: ";
+                    var titles = "";
+                    if (res.Any())
+                    {
+                        @str
+                        foreach (var i in res)
                         {
-                            <img width="40" height="40" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.UserImage))">
+                            titles = i.Title.ToString() + "; ";
+                            @titles
                         }
                     }
-                    catch
-                    {
-                        <img src="https://www.retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" width="100" height="100" alt="">
-                    }
-                    @{
-                        @UserService.PrintUser(user)
-                        Task11.DAL.AwardDao praw = new Task11.DAL.AwardDao();
-                        var res = praw.GetAwardsByUserId(user.Id);
-                        var str = " Awards: ";
-                        var titles = "";
-                        if (res.Any())
-                        {
-                            @str
-                            foreach (var i in res)
-                            {
-                                titles = i.Title.ToString() + "; ";
-                                @titles
-                            }
-                        }
-                    }
-                </li>
-            }
+                }
+            </li>
         }
-    </ul>
-    <label>All Awards: </label>
-    <ul class="list-group list-group-flush">
-        @{
-            var awards = AwardService.GetAll();
-            if (awards == null)
-            {
-                <li class="list-group-item">
-                    Awards is empty.
-                </li>
-            }
-            foreach (var award in awards)
-            {
-                <li class="list-group-item">
-                    <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(award.AwardImage))">
-                    @award.ToString()
-                </li>
-            }
+    }
+</ul>
+<h3 style="padding-left:20px">All Awards: </h3>
+<ul class="list-group list-group-flush">
+    @{
+        if (awards == null)
+        {
+            <li class="list-group-item">
+                Awards is empty.
+            </li>
         }
-    </ul>
-    <form action="~/Pages/Users/RemoveReward.cshtml" method="post">
-        <div>
-            <label>Select the user ID from which you want to take the award: </label>
-            <input class="form-control" style="width:200px" type="text" name="UserID" id="UserID" />
-        </div>
-        <br />
-        <div>
-            <label>Select the award ID that you whant to take: </label>
-            <input class="form-control" style="width:200px" type="text" name="AwardId" id="AwardId" />
-        </div>
-        <br />
-        <label for="forall"><input type="checkbox" id="forall" name="forall" value="" onchange="enableSubmission();" /> Delete for all Users?</label>
-        <br />
-        <button type="submit" id="submit" class="btn btn-info" style="width:200px">Submit</button>
-    </form>
+        foreach (var award in awards)
+        {
+            <li class="list-group-item">
+                <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(award.AwardImage))">
+                @award.ToString()
+            </li>
+        }
+    }
+</ul>
+<form action="~/Pages/Users/RemoveReward.cshtml" method="post" style="padding-left:20px">
+    <div>
+        <label>Select the user ID from which you want to take the award: </label>
+        <input class="form-control" style="width:200px" type="text" name="UserID" id="UserID" pattern="^[0-9]*$" required />
+    </div>
     <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
+    <div>
+        <label>Select the award ID that you whant to take: </label>
+        <input class="form-control" style="width:200px" type="text" name="AwardId" id="AwardId" pattern="^[0-9]*$" required />
+    </div>
+    <br />
+    <label for="forall"><input type="checkbox" id="forall" name="forall" value="" onchange="enableSubmission();" /> Delete for all Users?</label>
+    <br />
+    <button type="submit" id="submit" class="btn btn-info" style="width:200px">Submit</button>
+</form>
+<script>
         function enableSubmission() {
             @flag=!@flag
             @{
                 if (flag == true)
                 {
-                UserService.RemoveFromAll(AwardId);
+                foreach (var u in users)
+                    {
+                        if (DependencyResolver.UserLogic.TakeAwayAward(u.Id, awardId))
+                        {
+                            DependencyResolver.AwardLogic.RemoveUserFromAward(awardId, u.Id);
+                        }
+                    }
                 }
             }
         }
-    </script>
-    <script>
-        $("input[type=checkbox]").change(function () {
-            if ($(this).prop("checked")) {
-                $(this).val(true);
-            } else {
-                $(this).val(false);
-            }
-        });
-    </script>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Pages/Users/Users';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+</script>
+<script>
+    $("input[type=checkbox]").change(function () {
+        if ($(this).prop("checked")) {
+            $(this).val(true);
+        } else {
+            $(this).val(false);
+        }
+    });
+</script>

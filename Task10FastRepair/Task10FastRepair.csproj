@@ -136,8 +136,12 @@
     <Content Include="Pages\Users\RewardUser.cshtml" />
     <Content Include="Pages\Users\ShowAll.cshtml" />
     <Content Include="Pages\Users\ShowUser.cshtml" />
-    <Content Include="Pages\Users\Users.cshtml" />
+    <Content Include="Pages\Layouts\_UsersLayout.cshtml" />
     <Content Include="Pages\Admin\TakeAdminRole.cshtml" />
+    <Content Include="Pages\Layouts\_MainLayout.cshtml" />
+    <Content Include="Pages\Users\Users.cshtml" />
+    <Content Include="Pages\Layouts\_AwardsLayout.cshtml" />
+    <Content Include="404.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -214,6 +218,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Styles\AuthStyles.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -227,10 +232,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AwardService.cs" />
     <Compile Include="Models\MyRoleProvider.cs" />
-    <Compile Include="Models\UserService.cs" />
-    <Compile Include="Models\WebUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

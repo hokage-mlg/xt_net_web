@@ -1,0 +1,45 @@
+[INFO] 09 Mar 2020 12:00:40,293 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:00:54,203 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:37,912 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:37,921 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:37,921 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:41,672 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:41,674 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:41,674 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:53,214 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:53,215 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:14:53,216 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:26:38,451 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:26:42,052 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:26:44,140 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:29:20,735 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:29:23,153 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:29:24,338 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:29:48,768 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:29:52,992 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:30:41,163 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:36:20,575 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:37:00,456 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:38:08,214 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:39:36,399 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:40:30,621 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:46:38,784 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:47:51,003 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 12:48:59,985 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[ERROR] 09 Mar 2020 12:52:55,637 | ASP._Page_Pages_Users_ChangePassword_cshtml | Execute | Error. Passwords do not match.
+[ERROR] 09 Mar 2020 12:57:09,543 | ASP._Page_Pages_Auth_Login_cshtml | Execute | Incorrect login or password.
+[INFO] 09 Mar 2020 13:05:15,039 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 13:13:09,978 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 13:13:13,270 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 13:13:14,403 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 13:13:15,300 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 13:13:16,424 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[INFO] 09 Mar 2020 13:14:19,152 | ASP._Page_Pages_Books_ShowAllBooks_cshtml | Execute | List of books is empty.
+[INFO] 09 Mar 2020 13:15:01,744 | ASP._Page_Pages_Books_ShowAllBooks_cshtml | Execute | List of books is empty.
+[INFO] 09 Mar 2020 13:15:07,155 | ASP._Page_Pages_Books_ShowAllBooks_cshtml | Execute | List of books is empty.
+[INFO] 09 Mar 2020 13:15:11,626 | ASP._Page_Pages_Books_ShowAllBooks_cshtml | Execute | List of books is empty.
+[ERROR] 09 Mar 2020 14:37:37,338 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 09 Mar 2020 15:56:09,317 | ASP._Page_Pages_Books_FindById_cshtml | Execute | Ссылка на объект не указывает на экземпляр объекта.
+[ERROR] 09 Mar 2020 15:59:14,146 | ASP._Page_Pages_Books_ChangeBookQuantity_cshtml | Execute | Invalid book id.
+[INFO] 09 Mar 2020 16:00:27,894 | ASP._Page_Pages_Purchases_ShowAllPurchases_cshtml | Execute | List of purchases is empty.
+[ERROR] 09 Mar 2020 16:01:05,827 | ASP._Page_Pages_Users_ChangePassword_cshtml | Execute | Error. Passwords do not match.

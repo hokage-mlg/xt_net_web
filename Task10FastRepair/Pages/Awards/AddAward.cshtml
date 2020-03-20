@@ -1,5 +1,9 @@
-﻿@using Task10FastRepair.Models;
+﻿@using Task6.Common;
+@using Task6.Entities;
 @{
+    Layout = "~/Pages/Layouts/_AwardsLayout.cshtml";
+    Page.Title = "Add Award";
+    <h1 style="padding-left:20px">Add Award</h1>
     string awardId = null;
     string title;
     if (IsPost)
@@ -14,65 +18,38 @@
         }
         else
         {
-            bytes = File.ReadAllBytes(@"D:\Downloads\pic1.png");
+            var webClient = new System.Net.WebClient();
+            bytes = webClient.DownloadData("https://i.pinimg.com/236x/85/65/02/856502a5f264883834fb0707fa68b4f6.jpg");
         }
-        var award = new Task6.Entities.Award()
+        try
         {
-            Title = title,
-            AwardImage = bytes
-        };
-        AwardService.AddAward(award);
-        awardId = award.Id.ToString();
+            var award = new Award()
+            {
+                Title = title,
+                AwardImage = bytes
+            };
+            DependencyResolver.AwardLogic.Add(award);
+            awardId = award.Id.ToString();
+        }
+        catch
+        {
+            Response.Redirect("~/404.cshtml");
+        }
     }
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Add Award</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
-<body>
-    <style>
-        body {
-            background: #d1d1d1;
-        }
-    </style>
-    @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    {
-        <div class="alert alert-light">User: @User.Identity.Name <button id="btn_signout" class="btn btn-outline-dark" style="width:100px">Sign Out</button></div>
-    }
-    @if (awardId != null)
-    {
-        <div class="alert alert-info">Award added with ID: @awardId</div>
-    }
-    <form action="~/Pages/Awards/AddAward.cshtml" method="post" enctype="multipart/form-data">
-        <div>
-            <label>Title: </label>
-            <input class="form-control" style="width:200px" type="text" name="Title" id="Title" />
-        </div>
-        <div>
-            <label for="image">Image</label>
-            <input type="file" class="form-control" name="image" id="image" accept=".png">
-        </div>
-        <br />
-        <button class="btn btn-primary" style="width:200px">Submit</button>
-    </form>
+@if (awardId != null)
+{
+    <div class="alert alert-info">Award added with ID: @awardId</div>
+}
+<form action="~/Pages/Awards/AddAward.cshtml" method="post" enctype="multipart/form-data" style="padding-left:20px">
+    <div>
+        <label>Title: </label>
+        <input class="form-control" style="width:200px" type="text" name="Title" id="Title" required />
+    </div>
+    <div>
+        <label for="image">Image</label>
+        <input type="file" class="form-control" name="image" id="image" style="width:300px" accept=".png">
+    </div>
     <br />
-    <button id="btn_exit" class="btn btn-primary" style="width:200px">Exit</button>
-    <script>
-        $('#btn_exit').click(function () {
-            location.href = '/Pages/Awards/Awards';
-        });
-    </script>
-    <script>
-        $('#btn_signout').click(function () {
-            location.href = '/Pages/Login/SignOut';
-        });
-    </script>
-</body>
-</html>
+    <button class="btn btn-primary" style="width:200px">Submit</button>
+</form>
